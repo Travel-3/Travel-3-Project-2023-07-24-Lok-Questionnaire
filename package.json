@@ -21,7 +21,6 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "framer-motion": "^10.13.0",
-    "husky": "^8.0.3",
     "next": "13.4.12",
     "prettier": "^3.0.0",
     "react": "18.2.0",
