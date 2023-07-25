@@ -13,7 +13,6 @@ const ResultPage = () => {
     <Flex direction="column" align="center" mt="8">
       <Heading mb="4">Result</Heading>
       <Text fontSize="xl">{resultText}</Text>
-      {/* You can add more elements to display additional information */}
     </Flex>
   );
 };

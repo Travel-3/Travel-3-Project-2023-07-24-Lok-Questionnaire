@@ -1,5 +1,5 @@
 // pages/questionnaire.js
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, Heading } from "@chakra-ui/react";
 import QuestionCard from "../components/QuestionCard";
 import ProgressIndicator from "../components/ProgressIndicator";
@@ -31,16 +31,9 @@ const QuestionnairePage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState<any>({});
 
-  const handleNextQuestion = (selectedOption: any) => {
-    setAnswers((prevAnswers: any) => ({
-      ...prevAnswers,
-      [currentQuestion]: selectedOption,
-    }));
-
-    // Move to the next question or calculate the result if all questions are answered
-    if (currentQuestion < MAX_QUESTIONS) {
-      setCurrentQuestion((prevQuestion) => prevQuestion + 1);
-    } else {
+  useEffect(() => {
+    console.log(currentQuestion, MAX_QUESTIONS);
+    if (currentQuestion > MAX_QUESTIONS) {
       // Calculate the result
       let totalScore = 0;
       for (let i = 1; i <= MAX_QUESTIONS; i++) {
@@ -59,6 +52,24 @@ const QuestionnairePage = () => {
 
       router.push(`/result?score=${totalScore}`);
     }
+  }, [currentQuestion]);
+
+  const handleNextQuestion = (selectedOption: any) => {
+    setAnswers((prevAnswers: any) => ({
+      ...prevAnswers,
+      [currentQuestion]: selectedOption,
+    }));
+
+    // Move to the next question or calculate the result if all questions are answered
+    if (currentQuestion <= MAX_QUESTIONS) {
+      setCurrentQuestion((prevQuestion) => prevQuestion + 1);
+    }
+  };
+
+  const handlePrevQuestion = () => {
+    if (currentQuestion > 1) {
+      setCurrentQuestion((prevQuestion) => prevQuestion - 1);
+    }
   };
 
   return (
@@ -74,6 +85,8 @@ const QuestionnairePage = () => {
             question={questionsData[currentQuestion - 1].question}
             options={questionsData[currentQuestion - 1].options}
             onNext={handleNextQuestion}
+            onPrev={handlePrevQuestion}
+            currentQuestion={currentQuestion}
           />
         </>
       ) : (

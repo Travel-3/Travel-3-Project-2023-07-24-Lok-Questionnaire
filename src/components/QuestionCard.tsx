@@ -19,10 +19,12 @@ interface QuestionCardProps {
   question: string;
   options: Option[];
   onNext: (selectedOption: string) => void;
+  onPrev: () => void;
+  currentQuestion: number;
 }
 
 const QuestionCard = (props: QuestionCardProps) => {
-  const { question, options, onNext } = props;
+  const { question, options, onNext, onPrev, currentQuestion } = props;
   const [selectedOption, setSelectedOption] = useState<any>(null);
 
   const handleOptionChange = (value: string) => {
@@ -47,6 +49,11 @@ const QuestionCard = (props: QuestionCardProps) => {
           ))}
         </Stack>
       </RadioGroup>
+      {currentQuestion > 1 && ( // <-- add this
+        <Button mt="4" mr={4} colorScheme="teal" onClick={onPrev}>
+          Prev
+        </Button>
+      )}
       <Button
         mt="4"
         colorScheme="teal"
