@@ -1,5 +1,5 @@
 // components/QuestionCard.tsx
-import React, { useState } from "react";
+import React from "react";
 import { Text, Stack, Button, useRadioGroup } from "@chakra-ui/react";
 import RadioCard from "./RadioCard";
 
@@ -12,27 +12,17 @@ interface QuestionCardProps {
   question: string;
   options: Option[];
   onNext: (selectedOption: string) => void;
-  onPrev: () => void;
   currentQuestion: number;
 }
 
 const QuestionCard = (props: QuestionCardProps) => {
-  const { question, options, onNext, onPrev, currentQuestion } = props;
-  const [selectedOption, setSelectedOption] = useState<any>(null);
+  const { question, options, onNext, currentQuestion } = props;
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "framework",
     defaultValue: "react",
-    onChange: console.log,
+    onChange: (value: string) => onNext(value),
   });
-
-  const handleOptionChange = (value: string) => {
-    setSelectedOption(value);
-  };
-
-  const handleNext = () => {
-    onNext(selectedOption!);
-  };
 
   return (
     <Stack justifyContent={"center"} textAlign={"center"}>
@@ -44,7 +34,7 @@ const QuestionCard = (props: QuestionCardProps) => {
       </Text>
       <Stack spacing="4">
         {options.map((option) => {
-          const radio = getRadioProps({ option });
+          const radio = getRadioProps({ value: option.value });
           return (
             <RadioCard key={option.value} {...radio}>
               {option.label}
@@ -52,28 +42,6 @@ const QuestionCard = (props: QuestionCardProps) => {
           );
         })}
       </Stack>
-      {/* <RadioGroup onChange={handleOptionChange} value={selectedOption}>
-        <Stack spacing="2">
-          {options.map((option) => (
-            <Radio key={option.value} value={option.value}>
-              {option.label}
-            </Radio>
-          ))}
-        </Stack>
-      </RadioGroup> */}
-      {currentQuestion > 1 && ( // <-- add this
-        <Button mt="4" mr={4} colorScheme="teal" onClick={onPrev}>
-          Prev
-        </Button>
-      )}
-      <Button
-        mt="4"
-        colorScheme="teal"
-        disabled={!selectedOption}
-        onClick={handleNext}
-      >
-        Next
-      </Button>
     </Stack>
   );
 };

@@ -4,10 +4,8 @@ import { useRouter } from "next/router";
 
 const ResultPage = () => {
   const router = useRouter();
-  const { score } = router.query; // Get the score from the query parameter
-
-  // Convert the score to a meaningful result or display additional information
-  const resultText = `Your total score is: ${score}`;
+  const { score, name } = router.query;
+  const resultText = `${name}, your total score is: ${score}`;
 
   return (
     <Flex direction="column" align="center" mt="8">

@@ -1,8 +1,6 @@
-// pages/questionnaire.js
 import { useEffect, useState } from "react";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, Input, Button, Stack, Text } from "@chakra-ui/react";
 import QuestionCard from "../components/QuestionCard";
-import ProgressIndicator from "../components/ProgressIndicator";
 import { useRouter } from "next/router";
 
 const questionsData = [
@@ -30,12 +28,12 @@ const QuestionnairePage = () => {
   const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState<any>({});
+  const [totalScore, setTotalScore] = useState(null);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    console.log(currentQuestion, MAX_QUESTIONS);
-    if (currentQuestion > MAX_QUESTIONS) {
-      // Calculate the result
-      let totalScore = 0;
+    if (currentQuestion > MAX_QUESTIONS && totalScore === null) {
+      let score = 0;
       for (let i = 1; i <= MAX_QUESTIONS; i++) {
         const selectedValue = answers[i];
         const question = questionsData[i - 1];
@@ -43,14 +41,11 @@ const QuestionnairePage = () => {
           (option) => option.value === selectedValue,
         );
         if (selectedOption) {
-          totalScore += selectedOption.score;
+          score += selectedOption.score;
         }
       }
 
-      // Display the result (you can redirect the user to the result page or show it here)
-      console.log("Total Score:", totalScore);
-
-      router.push(`/result?score=${totalScore}`);
+      setTotalScore(score);
     }
   }, [currentQuestion]);
 
@@ -60,36 +55,51 @@ const QuestionnairePage = () => {
       [currentQuestion]: selectedOption,
     }));
 
-    // Move to the next question or calculate the result if all questions are answered
-    if (currentQuestion <= MAX_QUESTIONS) {
-      setCurrentQuestion((prevQuestion) => prevQuestion + 1);
-    }
-  };
-
-  const handlePrevQuestion = () => {
-    if (currentQuestion > 1) {
-      setCurrentQuestion((prevQuestion) => prevQuestion - 1);
-    }
+    setCurrentQuestion((prevQuestion) => prevQuestion + 1);
   };
 
   return (
-    <Flex direction="column" align="center" p="8">
+    <Flex direction="column" align="center" p="8" justify={"center"}>
       {currentQuestion <= questionsData.length ? (
         <>
-          {/* <ProgressIndicator
-            currentQuestion={currentQuestion}
-            totalQuestions={questionsData.length}
-          /> */}
           <QuestionCard
             question={questionsData[currentQuestion - 1].question}
             options={questionsData[currentQuestion - 1].options}
             onNext={handleNextQuestion}
-            onPrev={handlePrevQuestion}
             currentQuestion={currentQuestion}
           />
         </>
       ) : (
-        <Heading>Your questionnaire is complete!</Heading>
+        <Stack spacing="2" align="center">
+          <Text fontSize="4xl" fontWeight="bold">
+            測驗完成
+          </Text>
+          <Text>輸入你的名字</Text>
+          <Input
+            value={userName}
+            onChange={(event) => setUserName(event.target.value)}
+            placeholder="Your name"
+            mb="4"
+            w={"full"}
+          />
+          <Button
+            w={"full"}
+            bgColor={"lightgrey"}
+            borderRadius="md"
+            color={"black"}
+            _active={{
+              bg: "gray.600",
+              borderColor: "gray.600",
+            }}
+            onClick={() => {
+              if (userName) {
+                router.push(`/result?score=${totalScore}&name=${userName}`);
+              }
+            }}
+          >
+            生成貓貓
+          </Button>
+        </Stack>
       )}
     </Flex>
   );
