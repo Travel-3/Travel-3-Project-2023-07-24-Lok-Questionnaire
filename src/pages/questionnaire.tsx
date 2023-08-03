@@ -73,14 +73,13 @@ const QuestionnairePage = () => {
   };
 
   return (
-    <Flex direction="column" align="center" mt="8">
-      <Heading mb="4">Psychological Test Questionnaire</Heading>
+    <Flex direction="column" align="center" p="8">
       {currentQuestion <= questionsData.length ? (
         <>
-          <ProgressIndicator
+          {/* <ProgressIndicator
             currentQuestion={currentQuestion}
             totalQuestions={questionsData.length}
-          />
+          /> */}
           <QuestionCard
             question={questionsData[currentQuestion - 1].question}
             options={questionsData[currentQuestion - 1].options}

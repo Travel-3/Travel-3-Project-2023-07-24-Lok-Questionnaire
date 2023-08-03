@@ -10,10 +10,13 @@ interface ProgressIndicatorProps {
 const ProgressIndicator = (props: ProgressIndicatorProps) => {
   const { currentQuestion, totalQuestions } = props;
   return (
-    <Box p="4" mb="4" borderWidth="1px" borderRadius="md">
-      <Text>
-        Question {currentQuestion} of {totalQuestions}
+    <Box mb="4">
+      <Text fontWeight={"bold"} fontSize={"4xl"}>
+        Q {currentQuestion}
       </Text>
+      {/* <Text>
+        Question {currentQuestion} of {totalQuestions}
+      </Text> */}
     </Box>
   );
 };
