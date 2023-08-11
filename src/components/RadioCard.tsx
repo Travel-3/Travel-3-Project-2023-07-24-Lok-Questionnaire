@@ -12,20 +12,15 @@ function RadioCard(props) {
   const checkbox = getRadioProps();
 
   return (
-    <Box as="label">
+    <Box as="label" w={"100%"}>
       <input {...input} />
       <Box
+        w={"100%"}
         {...checkbox}
         cursor="pointer"
-        bgColor={"lightgrey"}
+        bgColor={"black"}
         borderRadius="md"
-        _checked={{
-          bg: "gray.600",
-          borderColor: "gray.600",
-        }}
-        _focus={{
-          boxShadow: "outline",
-        }}
+        color={"white"}
         px={5}
         py={3}
       >

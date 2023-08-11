@@ -25,18 +25,18 @@ const QuestionCard = (props: QuestionCardProps) => {
   });
 
   return (
-    <Stack justifyContent={"center"} textAlign={"center"}>
+    <Stack justifyContent={"center"} textAlign={"center"} w={"100%"}>
       <Text fontSize={"4xl"} fontWeight={"bold"}>
         Q{currentQuestion}
       </Text>
       <Text size="lg" mb="4">
         {question}
       </Text>
-      <Stack spacing="4">
+      <Stack spacing="4" w={"100%"}>
         {options.map((option) => {
           const radio = getRadioProps({ value: option.value });
           return (
-            <RadioCard key={option.value} {...radio}>
+            <RadioCard w={"100%"} key={option.value} {...radio}>
               {option.label}
             </RadioCard>
           );

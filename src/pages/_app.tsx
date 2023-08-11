@@ -1,11 +1,53 @@
 // pages/_app.js
-import { ChakraProvider } from "@chakra-ui/react";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import {
+  Box,
+  ChakraProvider,
+  Flex,
+  Spacer,
+  Stack,
+  extendTheme,
+} from "@chakra-ui/react";
 import { AppProps } from "next/app";
+
+const theme = extendTheme({
+  fonts: {
+    body: '"Work Sans", "Noto Sans TC", sans-serif',
+    heading: '"Work Sans", "Noto Sans TC", sans-serif',
+  },
+  textStyles: {
+    chinese: {
+      fontFamily: '"Work Sans", sans-serif',
+    },
+    english: {
+      fontFamily: '"Noto Sans TC", sans-serif',
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
+    <ChakraProvider theme={theme}>
+      <Box
+        bgImage={"/assets/images/background.png"}
+        bgSize={"cover"}
+        bgRepeat={"repeat-y"}
+        minH={"100vh"}
+      >
+        <Stack
+          minH={"100vh"}
+          bgGradient={
+            "linear(transparent 0%, transparent 80%, rgba(219,79,51,0.5) 90%, rgba(219,79,51,0.7) 95%, rgba(219,79,51,0.9) 100%, rgba(219,79,51,1) 100%)"
+          }
+          spacing={0}
+        >
+          <Header />
+          <Component {...pageProps} />
+          <Spacer />
+          <Footer />
+        </Stack>
+      </Box>
     </ChakraProvider>
   );
 }

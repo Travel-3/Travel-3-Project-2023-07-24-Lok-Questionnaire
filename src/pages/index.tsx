@@ -7,33 +7,57 @@ import {
   Spacer,
   Stack,
   Text,
+  Image,
 } from "@chakra-ui/react";
+import ReactCurvedText from "react-curved-text";
 
 export default function Home() {
   return (
     <>
       <Container maxW={"container.xl"}>
-        <Stack p={8} minH={"100vh"}>
-          <Stack justifyContent={"center"} textAlign={"center"}>
-            <Icon mb={2} fontSize={"6xl"} w={"full"} />
-            <Text fontWeight={"bold"} fontSize={"4xl"}>
-              澳門設計週2023
+        <Stack p={8}>
+          <Stack
+            justifyContent={"center"}
+            textAlign={"center"}
+            spacing={0}
+            mb={16}
+          >
+            <ReactCurvedText
+              width={300}
+              height={40}
+              cx={150}
+              cy={50}
+              rx={100}
+              ry={30}
+              startOffset={13}
+              reversed={true}
+              text="發掘你不為人知的"
+              textProps={{ style: { fontSize: 24 } }}
+            />
+            <Text mb={8} fontSize={"4xl"}>
+              性格面具
             </Text>
-            <Text fontWeight={"semibold"}>#城市的關鍵字</Text>
+            <Image
+              w={"100%"}
+              objectFit={"contain"}
+              src="/assets/images/2023logo.png"
+              alt="logo"
+            />
           </Stack>
           <Spacer />
-          <Stack mb={24} justifyContent={"center"} textAlign={"center"}>
-            <Text fontSize={"5xl"}>#測出你的</Text>
-            <Text fontSize={"5xl"}>特種兵貓貓</Text>
+          <Stack justifyContent={"center"} textAlign={"center"} spacing={0}>
+            <Text fontSize={"lg"}>一起來看看隱藏</Text>
+            <Text fontSize={"lg"}>在你心中的貓貓性格吧！</Text>
           </Stack>
           <Spacer />
           <Stack justifyContent={"center"} textAlign={"center"}>
             <Button
               as={Link}
+              color={"white"}
               border={"none"}
               variant="outline"
               href="/questionnaire"
-              bgColor={"lightgrey"}
+              bgColor={"black"}
               size="lg"
               w="80%"
               mx={"auto"}
@@ -43,7 +67,6 @@ export default function Home() {
             >
               START
             </Button>
-            <Text fontWeight={"semibold"}>Technical support by Travel 3</Text>
           </Stack>
         </Stack>
       </Container>

@@ -5,19 +5,98 @@ import { useRouter } from "next/router";
 
 const questionsData = [
   {
-    question: "Question 1: How often do you feel stressed?",
+    question: "一天當中，哪一個時間段讓你覺得最舒服?",
     options: [
-      { value: "rarely", label: "Rarely", score: 1 },
-      { value: "sometimes", label: "Sometimes", score: 2 },
-      { value: "often", label: "Often", score: 3 },
+      { value: "q1a", label: "A. 早上", score: 2 },
+      { value: "q1b", label: "B. 下午或黃昏", score: 4 },
+      { value: "q1c", label: "C. 深夜", score: 6 },
     ],
   },
   {
-    question: "Question 2: How do you handle stress?",
+    question: "辦公室/休息時，你喜歡的坐姿是?",
     options: [
-      { value: "ignore", label: "Ignore it", score: 1 },
-      { value: "seek-support", label: "Seek support from others", score: 2 },
-      { value: "exercise", label: "Engage in physical exercise", score: 3 },
+      { value: "q2a", label: "A. 兩腳交叉", score: 4 },
+      { value: "q2b", label: "B. 膝蓋併攏", score: 6 },
+      { value: "q2c", label: "C. 伸直雙腿", score: 2 },
+      { value: "q2d", label: "D. 一腿蜷縮在身下", score: 1 },
+    ],
+  },
+  {
+    question: "當你刷到很好笑的視頻時候，你會?",
+    options: [
+      { value: "q3a", label: "A. 開懷大笑", score: 6 },
+      { value: "q3b", label: "B. 輕聲捂嘴笑", score: 3 },
+      { value: "q3c", label: "C. 強忍不發出聲音笑", score: 4 },
+      { value: "q3d", label: "D. 羞怯地微笑", score: 5 },
+    ],
+  },
+  {
+    question: "在你專注工作/學習時，突然有人打斷你",
+    options: [
+      { value: "q4a", label: "A. 生氣，並給臉色對方看", score: 2 },
+      { value: "q4b", label: "B. 詢問對方什麼事情，歡迎對方", score: 6 },
+      { value: "q4c", label: "C. 在上述兩端之間", score: 4 },
+    ],
+  },
+  {
+    question: "你喜歡的睡覺姿勢?",
+    options: [
+      { value: "q5a", label: "A. 把頭枕在手臂上", score: 2 },
+      { value: "q5b", label: "B. 平躺", score: 7 },
+      { value: "q5c", label: "C. 側躺", score: 4 },
+      { value: "q5d", label: "D. 俯躺", score: 6 },
+      { value: "q5e", label: "E. 被子蓋過頭", score: 1 },
+    ],
+  },
+  {
+    question: "你的夢境中經常出現以下哪一種?",
+    options: [
+      { value: "q6a", label: "A. 身體突然墜落", score: 4 },
+      { value: "q6b", label: "B. 打架/掙扎", score: 2 },
+      { value: "q6c", label: "C. 找東西/人", score: 3 },
+      { value: "q6d", label: "D. 飛", score: 5 },
+      { value: "q6e", label: "E. 不太會做夢", score: 6 },
+      { value: "q6f", label: "F. 讓你感到開心的夢", score: 1 },
+    ],
+  },
+  {
+    question: "當你去參加派對或聚會時，你會?",
+    options: [
+      { value: "q7a", label: "A. 找認識的人", score: 4 },
+      { value: "q7b", label: "B. 靜靜地坐在一旁", score: 2 },
+      { value: "q7c", label: "C. 周圍結識新朋友", score: 6 },
+    ],
+  },
+  {
+    question: "與人聊天時，你習慣?",
+    options: [
+      { value: "q8a", label: "A. 手臂交叉", score: 4 },
+      { value: "q8b", label: "B. 兩手緊握", score: 2 },
+      { value: "q8c", label: "C. 手放在臀部", score: 5 },
+      { value: "q8d", label: "D. 觸碰著對方", score: 7 },
+      { value: "q8e", label: "E. 用手整理頭髮/摸下巴或耳朵", score: 6 },
+    ],
+  },
+  {
+    question: "你的走路方式?",
+    options: [
+      { value: "q9a", label: "A. 慢慢地", score: 1 },
+      { value: "q9b", label: "B. 低著頭", score: 2 },
+      { value: "q9c", label: "C. 仰著頭", score: 7 },
+      { value: "q9d", label: "D. 大步快步走", score: 6 },
+      { value: "q9e", label: "E. 小步快步走", score: 4 },
+    ],
+  },
+  {
+    question: "選擇你喜歡的顏色?",
+    options: [
+      { value: "q10a", label: "A. 紅/橘色", score: 6 },
+      { value: "q10b", label: "B. 黑色", score: 7 },
+      { value: "q10c", label: "C. 黃色/淺藍色", score: 5 },
+      { value: "q10d", label: "D. 綠色", score: 4 },
+      { value: "q10e", label: "E. 深藍色/紫色", score: 3 },
+      { value: "q10f", label: "F. 白色", score: 2 },
+      { value: "q10g", label: "G. 棕/灰色", score: 1 },
     ],
   },
 ];
@@ -71,33 +150,40 @@ const QuestionnairePage = () => {
         </>
       ) : (
         <Stack spacing="2" align="center">
-          <Text fontSize="4xl" fontWeight="bold">
+          <Text mb={8} fontSize="4xl">
             測驗完成
           </Text>
-          <Text>輸入你的名字</Text>
+          <Text mb={8} fontSize={"lg"}>
+            輸入你的名字
+          </Text>
           <Input
+            bgColor={"white"}
             value={userName}
             onChange={(event) => setUserName(event.target.value)}
-            placeholder="Your name"
             mb="4"
             w={"full"}
+            border={"1px"}
+            borderColor={"black"}
+            fontSize={"xl"}
+            size={"lg"}
           />
           <Button
             w={"full"}
-            bgColor={"lightgrey"}
+            bgColor={"black"}
             borderRadius="md"
-            color={"black"}
+            color={"white"}
             _active={{
-              bg: "gray.600",
-              borderColor: "gray.600",
+              bg: "black",
+              borderColor: "black",
             }}
             onClick={() => {
               if (userName) {
                 router.push(`/result?score=${totalScore}&name=${userName}`);
               }
             }}
+            size={"lg"}
           >
-            生成貓貓
+            生成你的貓貓
           </Button>
         </Stack>
       )}
