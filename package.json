@@ -26,6 +26,7 @@
     "file-saver": "^2.0.5",
     "framer-motion": "^10.13.0",
     "html-to-image": "^1.11.11",
+    "husky": "^8.0.3",
     "mini-css-extract-plugin": "^2.7.6",
     "next": "13.4.12",
     "prettier": "^3.0.0",
@@ -35,7 +36,5 @@
     "react-icons": "^4.10.1",
     "typescript": "5.1.6"
   },
-  "devDependencies": {
-    "husky": "^8.0.3"
-  }
+  "devDependencies": {}
 }
