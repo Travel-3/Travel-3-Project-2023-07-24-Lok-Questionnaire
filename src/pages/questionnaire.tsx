@@ -107,11 +107,11 @@ const QuestionnairePage = () => {
   const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState<any>({});
-  const [totalScore, setTotalScore] = useState(null);
+  const [totalScore, setTotalScore] = useState(0);
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    if (currentQuestion > MAX_QUESTIONS && totalScore === null) {
+    if (currentQuestion > MAX_QUESTIONS && totalScore === 0) {
       let score = 0;
       for (let i = 1; i <= MAX_QUESTIONS; i++) {
         const selectedValue = answers[i];
@@ -126,6 +126,7 @@ const QuestionnairePage = () => {
 
       setTotalScore(score);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion]);
 
   const handleNextQuestion = (selectedOption: any) => {

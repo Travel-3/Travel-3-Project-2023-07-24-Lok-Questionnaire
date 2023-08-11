@@ -1,11 +1,6 @@
-import { Box, RadioProps, useRadio } from "@chakra-ui/react";
+import { Box, useRadio } from "@chakra-ui/react";
 
-// interface RadioCardProps extends RadioProps {
-//   getInputProps: any
-//   getRadioProps: any
-// }
-
-function RadioCard(props) {
+function RadioCard(props: any) {
   const { getInputProps, getRadioProps } = useRadio(props);
 
   const input = getInputProps();

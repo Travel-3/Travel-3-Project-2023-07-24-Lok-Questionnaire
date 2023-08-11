@@ -173,7 +173,7 @@ const ResultPage = () => {
               p={4}
               pb={0}
               align="center"
-              spacing={2}
+              spacing={1}
               bgColor={"transparent"}
               bgGradient={
                 "linear(transparent 0%, transparent 80%, rgba(219,79,51,0.5) 90%, rgba(219,79,51,0.7) 95%, rgba(219,79,51,0.9) 100%, rgba(219,79,51,1) 100%)"
@@ -249,6 +249,7 @@ const ResultPage = () => {
                 objectFit={"contain"}
                 src="assets/images/2023logo.png"
                 alt="logo"
+                mb={2}
               />
             </Stack>
             <Text textAlign={"center"} bgColor={"transparent"} color={"black"}>

@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <Stack p={2} w={"100vw"} justifyContent={"center"} alignItems={"center"}>
-        {router.pathname == "/result" || router.pathname == "" ? null : (
+        {router.pathname == "/result" || router.pathname == "/" ? null : (
           <Image
             boxSize={48}
             objectFit={"contain"}
