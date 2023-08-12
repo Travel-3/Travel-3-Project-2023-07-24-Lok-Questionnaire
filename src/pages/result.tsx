@@ -117,40 +117,51 @@ const ResultPage = () => {
 
   const downloadImage = async () => {
     setIsGeneratingImage(true);
-    const node: any = document.getElementById("resultCard");
-    await toJpeg(node, { quality: 1 })
-      .then(function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-      })
-      .catch(function (error) {
-        console.error("oops, something went wrong!", error);
-      });
-    await toJpeg(node, { quality: 1 })
-      .then(function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-      })
-      .catch(function (error) {
-        console.error("oops, something went wrong!", error);
-      });
-    await toJpeg(node, { quality: 1 })
-      .then(function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-      })
-      .catch(function (error) {
-        console.error("oops, something went wrong!", error);
-      });
-    await toJpeg(node, { quality: 1 })
-      .then(function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-        saveAs(dataUrl, "result");
-      })
-      .catch(function (error) {
-        console.error("oops, something went wrong!", error);
-      });
+    const buildImage = async () => {
+      const node: any = document.getElementById("resultCard");
+      const url = await toJpeg(node, { quality: 1 })
+        .then(function (dataUrl) {
+          var img = new Image();
+          img.src = dataUrl;
+          return dataUrl;
+        })
+        .catch(function (error) {
+          console.error("oops, something went wrong!", error);
+        });
+      return url;
+    };
+    await buildImage();
+    await buildImage();
+    await buildImage();
+
+    const result: any = await buildImage();
+
+    saveAs(result, "result");
+    // await toJpeg(node, { quality: 1 })
+    //   .then(function (dataUrl) {
+    //     var img = new Image()
+    //     img.src = dataUrl
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error)
+    //   })
+    // await toJpeg(node, { quality: 1 })
+    //   .then(function (dataUrl) {
+    //     var img = new Image()
+    //     img.src = dataUrl
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error)
+    //   })
+    // await toJpeg(node, { quality: 1 })
+    //   .then(function (dataUrl) {
+    //     var img = new Image()
+    //     img.src = dataUrl
+    //     saveAs(dataUrl, 'result')
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error)
+    //   })
     setIsGeneratingImage(false);
   };
 
