@@ -135,6 +135,10 @@ const ResultPage = () => {
     await buildImage();
     await buildImage();
     await buildImage();
+    await buildImage();
+    await buildImage();
+    await buildImage();
+    await buildImage();
 
     const result: any = await buildImage();
 
@@ -178,13 +182,7 @@ const ResultPage = () => {
               </Text>
             ))}
           </HStack>
-          <Stack
-            spacing={0}
-            // bgImage={"/assets/images/background.png"}
-            // bgSize={"cover"}
-            position={"relative"}
-            overflow={"hidden"}
-          >
+          <Stack spacing={0} position={"relative"} overflow={"hidden"}>
             <Stack
               p={4}
               pb={0}
@@ -194,6 +192,7 @@ const ResultPage = () => {
               bgGradient={
                 "linear(transparent 0%, transparent 80%, rgba(219,79,51,0.5) 90%, rgba(219,79,51,0.7) 95%, rgba(219,79,51,0.9) 100%, rgba(219,79,51,1) 100%)"
               }
+              zIndex={10}
             >
               <HStack
                 zIndex={10}
