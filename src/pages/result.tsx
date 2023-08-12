@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { toPng } from "html-to-image";
+import { toJpeg } from "html-to-image";
+import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 
@@ -116,11 +117,12 @@ const ResultPage = () => {
 
   const downloadImage = () => {
     const node: any = document.getElementById("resultCard");
-    toPng(node, { quality: 1 })
+    domtoimage
+      .toPng(node, { quality: 2 })
       .then(function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
-        saveAs(dataUrl, "result.png");
+        saveAs(dataUrl, "result");
       })
       .catch(function (error) {
         console.error("oops, something went wrong!", error);
@@ -168,6 +170,8 @@ const ResultPage = () => {
             spacing={0}
             bgImage={"/assets/images/background.png"}
             bgSize={"cover"}
+            position={"relative"}
+            overflow={"hidden"}
           >
             <Stack
               p={4}
