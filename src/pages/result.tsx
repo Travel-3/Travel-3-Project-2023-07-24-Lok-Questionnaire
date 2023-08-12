@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { toJpeg } from "html-to-image";
+import { toJpeg, toPng } from "html-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 
@@ -115,38 +115,31 @@ const ResultPage = () => {
     };
   }
 
-  const downloadImage = async () => {
+  const handleDownloadImage = async () => {
     setIsGeneratingImage(true);
+
     const buildImage = async () => {
       const node: any = document.getElementById("resultCard");
-      const url = await toJpeg(node, { quality: 1 })
-        .then(function (dataUrl) {
-          var img = new Image();
-          img.src = dataUrl;
-          return dataUrl;
-        })
-        .catch(function (error) {
-          console.error("oops, something went wrong!", error);
-        });
-      return url;
+      const minDataLength = 2000000;
+      const maxAttempts = 10;
+
+      let dataUrl = await toPng(node);
+      let i = 1;
+
+      while (dataUrl.length < minDataLength && i < maxAttempts) {
+        dataUrl = await toPng(node);
+        i++;
+      }
+
+      return dataUrl;
     };
-    await buildImage();
-    await buildImage();
-    await buildImage();
-    await buildImage();
-    await buildImage();
-    await buildImage();
-    await buildImage();
-    await buildImage();
-    await buildImage();
 
-    const result: any = await buildImage();
-
+    const result = await buildImage();
     saveAs(result, "result");
     setIsGeneratingImage(false);
   };
 
-  const longPressEvent = useLongPress(downloadImage, 1000);
+  const longPressEvent = useLongPress(handleDownloadImage, 700);
 
   return (
     <>
@@ -281,7 +274,7 @@ const ResultPage = () => {
               color={"black"}
               zIndex={10}
             >
-              09.11→09.22澳門設計週2023奥你相約！
+              09.11→09.22澳門設計週2023與你相約！
             </Text>
             <Img
               position={"absolute"}
@@ -353,7 +346,7 @@ const ResultPage = () => {
         <HStack spacing={4} w={"full"} mb={8}>
           <Button
             flex={1}
-            onClick={downloadImage}
+            onClick={handleDownloadImage}
             bgColor={"black"}
             color={"white"}
             _hover={{
