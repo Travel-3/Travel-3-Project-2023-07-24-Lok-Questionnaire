@@ -78,9 +78,7 @@ const ResultPage = () => {
 
   const result = resultData.results.find(({ score_range }) => {
     const [min, max] = score_range.split("-");
-    return (
-      numericalScore >= Number(min) && numericalScore <= Number(max || min)
-    );
+    return numericalScore >= Number(min) && numericalScore <= Number(max || 64);
   });
 
   function useLongPress(callback = () => {}, ms = 300) {
@@ -121,7 +119,7 @@ const ResultPage = () => {
     const buildImage = async () => {
       const node: any = document.getElementById("resultCard");
       const minDataLength = 2000000;
-      const maxAttempts = 10;
+      const maxAttempts = 20;
 
       let dataUrl = await toPng(node);
       let i = 1;
