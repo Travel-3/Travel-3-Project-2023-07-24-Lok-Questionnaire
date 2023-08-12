@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { toJpeg, toPng, toSvg } from "html-to-image";
+import { toJpeg } from "html-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 
@@ -121,11 +121,11 @@ const ResultPage = () => {
       const minDataLength = 2000000;
       const maxAttempts = 30;
 
-      let dataUrl = await toSvg(node);
+      let dataUrl = await toJpeg(node);
       let i = 1;
 
       while (dataUrl.length < minDataLength && i < maxAttempts) {
-        dataUrl = await toSvg(node);
+        dataUrl = await toJpeg(node);
         i++;
       }
 
