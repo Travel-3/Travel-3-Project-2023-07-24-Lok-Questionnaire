@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { toJpeg, toPng } from "html-to-image";
+import { toJpeg, toPng, toSvg } from "html-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 
@@ -119,13 +119,13 @@ const ResultPage = () => {
     const buildImage = async () => {
       const node: any = document.getElementById("resultCard");
       const minDataLength = 2000000;
-      const maxAttempts = 20;
+      const maxAttempts = 30;
 
-      let dataUrl = await toPng(node);
+      let dataUrl = await toSvg(node);
       let i = 1;
 
       while (dataUrl.length < minDataLength && i < maxAttempts) {
-        dataUrl = await toPng(node);
+        dataUrl = await toSvg(node);
         i++;
       }
 
