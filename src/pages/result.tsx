@@ -5,7 +5,8 @@ import {
   Flex,
   HStack,
   Icon,
-  Image as Img,
+  // Image as Img,
+  Img,
   Link,
   Spacer,
   Stack,
@@ -17,6 +18,7 @@ import { toJpeg } from "html-to-image";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 const resultData = {
   results: [
@@ -118,7 +120,7 @@ const ResultPage = () => {
   // const downloadImage = () => {
   //   const node: any = document.getElementById("resultCard");
   //   domtoimage
-  //     .toPng(node, { quality: 2 })
+  //     .toPng(node, { quality: 1 })
   //     .then(function (dataUrl) {
   //       var img = new Image();
   //       img.src = dataUrl;
@@ -173,10 +175,9 @@ const ResultPage = () => {
             ))}
           </HStack>
           <Stack
-            w={"full"}
             spacing={0}
-            bgImage={"/assets/images/background.png"}
-            bgSize={"cover"}
+            // bgImage={"/assets/images/background.png"}
+            // bgSize={"cover"}
             position={"relative"}
             overflow={"hidden"}
           >
@@ -191,6 +192,7 @@ const ResultPage = () => {
               }
             >
               <HStack
+                zIndex={10}
                 width={"full"}
                 spacing={2}
                 justifyContent={"center"}
@@ -217,10 +219,11 @@ const ResultPage = () => {
                   </Text>
                 </Stack>
               </HStack>
-              <Text mb={2} fontSize={"md"} color={"black"}>
+              <Text zIndex={10} mb={2} fontSize={"md"} color={"black"}>
                 {result?.description}
               </Text>
               <Text
+                zIndex={10}
                 fontSize={"md"}
                 px={4}
                 textAlign={"center"}
@@ -230,6 +233,7 @@ const ResultPage = () => {
                 你的隱藏面具
               </Text>
               <Text
+                zIndex={10}
                 fontSize={"2xl"}
                 fontWeight={"bold"}
                 px={4}
@@ -243,6 +247,7 @@ const ResultPage = () => {
                 textAlign={"center"}
                 color={"white"}
                 bgColor={"black"}
+                zIndex={10}
               >
                 建議你的設計週路線
               </Text>
@@ -251,21 +256,39 @@ const ResultPage = () => {
                 fontWeight={"bold"}
                 px={4}
                 textAlign={"center"}
+                zIndex={10}
               >
                 {result?.recommended_route}
               </Text>
-              <Text fontSize={"md"}>{result?.recommendation}</Text>
+              <Text fontSize={"md"} zIndex={10}>
+                {result?.recommendation}
+              </Text>
               <Img
                 boxSize={32}
                 objectFit={"contain"}
                 src="assets/images/2023logo.png"
                 alt="logo"
                 mb={2}
+                zIndex={10}
               />
             </Stack>
-            <Text textAlign={"center"} bgColor={"transparent"} color={"black"}>
+            <Text
+              textAlign={"center"}
+              bgColor={"transparent"}
+              color={"black"}
+              zIndex={10}
+            >
               09.11→09.22澳門設計週2023奥你相約！
             </Text>
+            <Img
+              position={"absolute"}
+              zIndex={0}
+              width={"100%"}
+              height={"100%"}
+              src={"/assets/images/background.png"}
+              objectFit={"cover"}
+              alt="background"
+            />
           </Stack>
         </Stack>
         <Text textAlign={"center"} color={"white"}>
