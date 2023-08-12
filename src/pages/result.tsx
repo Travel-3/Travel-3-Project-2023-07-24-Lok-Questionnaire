@@ -138,6 +138,14 @@ const ResultPage = () => {
       .then(function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+    await toJpeg(node, { quality: 1 })
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
         saveAs(dataUrl, "result");
       })
       .catch(function (error) {
