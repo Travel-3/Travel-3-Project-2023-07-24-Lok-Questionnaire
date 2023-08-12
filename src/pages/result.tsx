@@ -115,18 +115,25 @@ const ResultPage = () => {
     };
   }
 
+  // const downloadImage = () => {
+  //   const node: any = document.getElementById("resultCard");
+  //   domtoimage
+  //     .toPng(node, { quality: 2 })
+  //     .then(function (dataUrl) {
+  //       var img = new Image();
+  //       img.src = dataUrl;
+  //       saveAs(dataUrl, "result");
+  //     })
+  //     .catch(function (error) {
+  //       console.error("oops, something went wrong!", error);
+  //     });
+  // };
+
   const downloadImage = () => {
     const node: any = document.getElementById("resultCard");
-    domtoimage
-      .toPng(node, { quality: 2 })
-      .then(function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-        saveAs(dataUrl, "result");
-      })
-      .catch(function (error) {
-        console.error("oops, something went wrong!", error);
-      });
+    domtoimage.toBlob(node).then(function (blob) {
+      saveAs(blob, "result.png");
+    });
   };
 
   const longPressEvent = useLongPress(downloadImage, 1000);
