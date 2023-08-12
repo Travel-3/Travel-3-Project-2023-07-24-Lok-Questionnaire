@@ -5,7 +5,6 @@ import {
   Flex,
   HStack,
   Icon,
-  // Image as Img,
   Img,
   Link,
   Spacer,
@@ -15,10 +14,8 @@ import {
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { toJpeg } from "html-to-image";
-import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 
 const resultData = {
   results: [
@@ -76,6 +73,7 @@ const resultData = {
 const ResultPage = () => {
   const router = useRouter();
   const { score, name } = router.query;
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const numericalScore = Number(score);
 
   const result = resultData.results.find(({ score_range }) => {
@@ -117,25 +115,35 @@ const ResultPage = () => {
     };
   }
 
-  // const downloadImage = () => {
-  //   const node: any = document.getElementById("resultCard");
-  //   domtoimage
-  //     .toPng(node, { quality: 1 })
-  //     .then(function (dataUrl) {
-  //       var img = new Image();
-  //       img.src = dataUrl;
-  //       saveAs(dataUrl, "result");
-  //     })
-  //     .catch(function (error) {
-  //       console.error("oops, something went wrong!", error);
-  //     });
-  // };
-
-  const downloadImage = () => {
+  const downloadImage = async () => {
+    setIsGeneratingImage(true);
     const node: any = document.getElementById("resultCard");
-    domtoimage.toBlob(node).then(function (blob) {
-      saveAs(blob, "result.png");
-    });
+    await toJpeg(node, { quality: 1 })
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+    await toJpeg(node, { quality: 1 })
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+    await toJpeg(node, { quality: 1 })
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        saveAs(dataUrl, "result");
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+    setIsGeneratingImage(false);
   };
 
   const longPressEvent = useLongPress(downloadImage, 1000);
@@ -340,7 +348,7 @@ const ResultPage = () => {
         <Button
           bgColor={"black"}
           color={"white"}
-          _active={{
+          _hover={{
             bg: "black",
             color: "white",
           }}
@@ -353,10 +361,11 @@ const ResultPage = () => {
             onClick={downloadImage}
             bgColor={"black"}
             color={"white"}
-            _active={{
+            _hover={{
               bg: "black",
               color: "white",
             }}
+            isLoading={isGeneratingImage}
           >
             存儲結果
           </Button>
@@ -364,7 +373,7 @@ const ResultPage = () => {
             flex={1}
             bgColor={"black"}
             color={"white"}
-            _active={{
+            _hover={{
               bg: "black",
               color: "white",
             }}
