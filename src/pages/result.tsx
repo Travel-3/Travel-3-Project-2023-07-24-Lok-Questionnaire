@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { toJpeg } from "html-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
+import Loading from "@/components/Loading";
 
 const resultData = {
   results: [
@@ -74,6 +75,7 @@ const ResultPage = () => {
   const router = useRouter();
   const { score, name } = router.query;
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
+  const [imageDataUrl, setImageDataUrl] = useState("");
   const numericalScore = Number(score);
 
   const result = resultData.results.find(({ score_range }) => {
@@ -113,185 +115,228 @@ const ResultPage = () => {
     };
   }
 
+  const buildImage = async () => {
+    const node: any = document.getElementById("resultCard");
+    const minDataLength = 50000000;
+    const maxAttempts = 30;
+
+    let dataUrl = await toJpeg(node);
+    let i = 1;
+
+    while (dataUrl.length < minDataLength && i < maxAttempts) {
+      dataUrl = await toJpeg(node);
+      i++;
+    }
+
+    setIsGeneratingImage(false);
+    setImageDataUrl(dataUrl);
+
+    return dataUrl;
+  };
+
   const handleDownloadImage = async () => {
     setIsGeneratingImage(true);
-
-    const buildImage = async () => {
-      const node: any = document.getElementById("resultCard");
-      const minDataLength = 2000000;
-      const maxAttempts = 30;
-
-      let dataUrl = await toJpeg(node);
-      let i = 1;
-
-      while (dataUrl.length < minDataLength && i < maxAttempts) {
-        dataUrl = await toJpeg(node);
-        i++;
-      }
-
-      return dataUrl;
-    };
-
-    const result = await buildImage();
-    saveAs(result, "result");
+    saveAs(imageDataUrl, "result");
     setIsGeneratingImage(false);
   };
+
+  useEffect(() => {
+    if (router.query.score && router.query.name) {
+      buildImage();
+    }
+  }, [router]);
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
 
   return (
     <>
-      <Box
-        p={2}
-        bgColor={"black"}
-        minHeight={"100vh"}
-        id="resultCard"
-        mb={0}
-        {...longPressEvent}
-      >
-        <Stack px={2} py={4} align="center" spacing={2}>
-          <Text color={"white"} fontSize={"lg"}>
-            發掘你不為人知的貓貓性格
-          </Text>
-          <Text fontSize={"3xl"} color={"#DB4F33"}>
-            {result?.mask}
-          </Text>
-          <HStack mb={4}>
-            {result?.keywords.map((keyword) => (
-              <Text
-                key={keyword}
-                fontSize={"sm"}
-                color={"white"}
-                bgColor={"transparent"}
-                border={"1px"}
-                borderColor={"white"}
-                borderRadius={"md"}
-                py={1}
-                px={4}
-              >
-                {keyword}
-              </Text>
-            ))}
-          </HStack>
-          <Stack spacing={0} position={"relative"} overflow={"hidden"}>
-            <Stack
-              p={4}
-              pb={0}
-              align="center"
-              spacing={1}
-              bgColor={"transparent"}
-              bgGradient={
-                "linear(transparent 0%, transparent 80%, rgba(219,79,51,0.5) 90%, rgba(219,79,51,0.7) 95%, rgba(219,79,51,0.9) 100%, rgba(219,79,51,1) 100%)"
-              }
-              zIndex={10}
+      {imageDataUrl === "" ? (
+        <Flex
+          zIndex={100}
+          position={"fixed"}
+          top={0}
+          left={0}
+          w={"100vw"}
+          h={"100vh"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          bgColor={"black"}
+        >
+          <Loading />
+        </Flex>
+      ) : null}
+      {imageDataUrl === "" ? (
+        <Box
+          p={2}
+          bgColor={"black"}
+          minHeight={"100vh"}
+          id="resultCard"
+          mb={0}
+          {...longPressEvent}
+        >
+          <Stack w={"full"} px={2} py={4} align="center" spacing={2}>
+            <Text
+              w={"full"}
+              textAlign={"center"}
+              color={"white"}
+              fontSize={"lg"}
             >
-              <HStack
+              發掘你不為人知的貓貓性格
+            </Text>
+            <Text
+              w={"full"}
+              textAlign={"center"}
+              fontSize={"3xl"}
+              color={"red"}
+            >
+              {result?.mask}
+            </Text>
+            <HStack mb={4}>
+              {result?.keywords.map((keyword) => (
+                <Text
+                  key={keyword}
+                  fontSize={"sm"}
+                  color={"white"}
+                  bgColor={"transparent"}
+                  border={"1px"}
+                  borderColor={"white"}
+                  borderRadius={"md"}
+                  py={1}
+                  px={4}
+                >
+                  {keyword}
+                </Text>
+              ))}
+            </HStack>
+            <Stack spacing={0} position={"relative"} overflow={"hidden"}>
+              <Stack
+                p={4}
+                pb={0}
+                align="center"
+                spacing={1}
+                bgColor={"transparent"}
+                bgGradient={
+                  "linear(transparent 0%, transparent 80%, rgba(255,0,0,0.5) 90%, rgba(255,0,0,0.7) 95%, rgba(255,0,0,0.9) 100%, rgba(255,0,0,1) 100%)"
+                }
                 zIndex={10}
-                width={"full"}
-                spacing={2}
-                justifyContent={"center"}
-                alignItems={"start"}
               >
-                <Box width={"45%"}>
-                  <Img
-                    width={"auto"}
-                    height={"auto"}
-                    src={result?.image}
-                    objectFit={"cover"}
-                    alt={name?.toString()}
-                  />
-                </Box>
-                <Stack width={"55%"} spacing={0}>
-                  <Text fontSize={"2xl"} fontWeight={"bold"}>
-                    名字
-                  </Text>
-                  <Text>{name}</Text>
-                  <Spacer />
-                  <Text fontWeight={"bold"}>人格隱藏度</Text>
-                  <Text fontSize={"5xl"} top={-2}>
-                    {result?.personality_hidden}
-                  </Text>
-                </Stack>
-              </HStack>
-              <Text zIndex={10} mb={2} fontSize={"md"} color={"black"}>
-                {result?.description}
-              </Text>
+                <HStack
+                  zIndex={10}
+                  width={"full"}
+                  spacing={2}
+                  justifyContent={"center"}
+                  alignItems={"start"}
+                >
+                  <Box width={"45%"}>
+                    <Img
+                      width={"auto"}
+                      height={"auto"}
+                      src={result?.image}
+                      objectFit={"cover"}
+                      alt={name?.toString()}
+                    />
+                  </Box>
+                  <Stack width={"55%"} spacing={0}>
+                    <Text fontSize={"2xl"} fontWeight={"bold"}>
+                      名字
+                    </Text>
+                    <Text>{name}</Text>
+                    <Spacer />
+                    <Text fontWeight={"bold"}>人格隱藏度</Text>
+                    <Text fontSize={"5xl"} top={-2}>
+                      {result?.personality_hidden}
+                    </Text>
+                  </Stack>
+                </HStack>
+                <Text zIndex={10} mb={2} fontSize={"md"} color={"black"}>
+                  {result?.description}
+                </Text>
+                <Text
+                  zIndex={10}
+                  fontSize={"md"}
+                  px={4}
+                  textAlign={"center"}
+                  color={"white"}
+                  bgColor={"black"}
+                >
+                  你的隱藏面具
+                </Text>
+                <Text
+                  w={"full"}
+                  zIndex={10}
+                  fontSize={"2xl"}
+                  fontWeight={"bold"}
+                  px={4}
+                  textAlign={"center"}
+                >
+                  {result?.hidden_mask}
+                </Text>
+                <Text
+                  fontSize={"md"}
+                  px={4}
+                  textAlign={"center"}
+                  color={"white"}
+                  bgColor={"black"}
+                  zIndex={10}
+                >
+                  建議你的設計週路線
+                </Text>
+                <Text
+                  w={"full"}
+                  fontSize={"2xl"}
+                  fontWeight={"bold"}
+                  px={4}
+                  textAlign={"center"}
+                  zIndex={10}
+                >
+                  {result?.recommended_route}
+                </Text>
+                <Text
+                  w={"full"}
+                  textAlign={"center"}
+                  fontSize={"md"}
+                  zIndex={10}
+                >
+                  {result?.recommendation}
+                </Text>
+                <Img
+                  boxSize={32}
+                  objectFit={"contain"}
+                  src="assets/images/2023logo.png"
+                  alt="logo"
+                  mb={2}
+                  zIndex={10}
+                />
+              </Stack>
               <Text
-                zIndex={10}
-                fontSize={"md"}
-                px={4}
                 textAlign={"center"}
-                color={"white"}
-                bgColor={"black"}
-              >
-                你的隱藏面具
-              </Text>
-              <Text
-                zIndex={10}
-                fontSize={"2xl"}
-                fontWeight={"bold"}
-                px={4}
-                textAlign={"center"}
-              >
-                {result?.hidden_mask}
-              </Text>
-              <Text
-                fontSize={"md"}
-                px={4}
-                textAlign={"center"}
-                color={"white"}
-                bgColor={"black"}
+                bgColor={"transparent"}
+                color={"black"}
                 zIndex={10}
               >
-                建議你的設計週路線
-              </Text>
-              <Text
-                fontSize={"2xl"}
-                fontWeight={"bold"}
-                px={4}
-                textAlign={"center"}
-                zIndex={10}
-              >
-                {result?.recommended_route}
-              </Text>
-              <Text fontSize={"md"} zIndex={10}>
-                {result?.recommendation}
+                09.11→09.22澳門設計週2023與你相約！
               </Text>
               <Img
-                boxSize={32}
-                objectFit={"contain"}
-                src="assets/images/2023logo.png"
-                alt="logo"
-                mb={2}
-                zIndex={10}
+                position={"absolute"}
+                zIndex={0}
+                width={"100%"}
+                height={"100%"}
+                src={"/assets/images/background.png"}
+                objectFit={"cover"}
+                alt="background"
               />
             </Stack>
-            <Text
-              textAlign={"center"}
-              bgColor={"transparent"}
-              color={"black"}
-              zIndex={10}
-            >
-              09.11→09.22澳門設計週2023與你相約！
-            </Text>
-            <Img
-              position={"absolute"}
-              zIndex={0}
-              width={"100%"}
-              height={"100%"}
-              src={"/assets/images/background.png"}
-              objectFit={"cover"}
-              alt="background"
-            />
           </Stack>
-        </Stack>
-        <Text textAlign={"center"} color={"white"}>
-          Character designed by Early Cloud Design
-        </Text>
-      </Box>
+          <Text textAlign={"center"} color={"white"}>
+            Character designed by Early Cloud Design
+          </Text>
+        </Box>
+      ) : (
+        <Img src={imageDataUrl} alt="result" />
+      )}
       <Flex
         h={8}
-        bgColor={"#DB4F33"}
+        bgColor={"red"}
         color={"white"}
         justify={"center"}
         align={"center"}
@@ -330,6 +375,7 @@ const ResultPage = () => {
           長按上方圖片存儲並分享
         </Text>
       </Flex>
+      {/* {imageDataUrl ? <Img src={imageDataUrl} alt="result" /> : null} */}
       <Stack p={8} spacing={4}>
         <Button
           bgColor={"black"}

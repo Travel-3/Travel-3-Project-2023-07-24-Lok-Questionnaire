@@ -17,23 +17,26 @@ export default function Home() {
       <Container maxW={"container.xl"}>
         <Stack p={8}>
           <Stack
+            width={"100%"}
             justifyContent={"center"}
             textAlign={"center"}
             spacing={0}
             mb={16}
           >
-            <ReactCurvedText
-              width={300}
-              height={40}
-              cx={150}
-              cy={50}
-              rx={100}
-              ry={30}
-              startOffset={13}
-              reversed={true}
-              text="發掘你不為人知的"
-              textProps={{ style: { fontSize: 24 } }}
-            />
+            <Flex w={"100%"} justifyContent={"center"} alignItems={"center"}>
+              <ReactCurvedText
+                width={300}
+                height={40}
+                cx={150}
+                cy={50}
+                rx={100}
+                ry={30}
+                startOffset={13}
+                reversed={true}
+                text="發掘你不為人知的"
+                textProps={{ style: { fontSize: 24 } }}
+              />
+            </Flex>
             <Text mb={8} fontSize={"4xl"}>
               性格面具
             </Text>
