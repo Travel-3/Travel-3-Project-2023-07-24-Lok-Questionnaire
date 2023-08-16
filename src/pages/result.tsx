@@ -116,13 +116,13 @@ const ResultPage = () => {
   }
 
   const buildImage = async () => {
-    const scale = 2;
+    const scale = 3;
     const node: any = document.getElementById("resultCard");
     const minDataLength = 2000000;
     const maxAttempts = 3;
 
     // let dataUrl = await toJpeg(node)
-    let dataUrl = await domtoimage.toPng(node, {
+    let dataUrl = await domtoimage.toJpeg(node, {
       quality: 1,
       width: node.clientWidth * scale,
       height: node.clientHeight * scale,
@@ -135,7 +135,7 @@ const ResultPage = () => {
 
     while (dataUrl.length < minDataLength && i < maxAttempts) {
       // dataUrl = await toJpeg(node)
-      dataUrl = await domtoimage.toPng(node, {
+      dataUrl = await domtoimage.toJpeg(node, {
         quality: 1,
         width: node.clientWidth * scale,
         height: node.clientHeight * scale,
