@@ -117,9 +117,10 @@ const ResultPage = () => {
 
   const buildImage = async () => {
     const scale = 3;
+
     const node: any = document.getElementById("resultCard");
     const minDataLength = 2000000;
-    const maxAttempts = 3;
+    const maxAttempts = 5;
 
     // let dataUrl = await toJpeg(node)
     let dataUrl = await domtoimage.toJpeg(node, {
