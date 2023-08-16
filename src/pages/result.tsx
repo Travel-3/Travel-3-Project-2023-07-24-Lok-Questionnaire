@@ -17,6 +17,7 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
+import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 const resultData = {
   results: [
@@ -28,7 +29,7 @@ const resultData = {
       description:
         "你擁有近乎強迫症般的追求完美，行事謹慎小心，外表堅強，內心有時缺乏自信，做事情挑剔，不容許自己犯一點點的錯誤。人前搞笑開心果，人後習慣獨自舔傷口。社交場上歡脫熱略，繁華散盡，徒留清醒。表要熱衷於身處喧嘩，實際上內心冷淡抽離。",
       keywords: ["#外熱內冷", "#追求完美", "#孤獨患者"],
-      recommended_route: "設計愛好者路線",
+      recommended_route: "#設計愛好者路線",
       recommendation: "追求完美的你一定對身邊的一切美好設計充滿期待",
       image: "assets/images/wave.png",
     },
@@ -38,10 +39,10 @@ const resultData = {
       hidden_mask: "#冷漠面具",
       personality_hidden: "59%",
       description:
-        "你的內心有著很強的控制欲望，對於周圍的環境相 當敏感。你不太輕易和別人成為朋友，但一旦成為朋友則非常忠誠，而且更渴望對方也能夠同樣的態度來重視你。",
+        "你的內心有著很強的控制欲望，對於周圍的環境相當敏感。你不太輕易和別人成為朋友，但一旦成為朋友則非常忠誠，而且更渴望對方也能夠同樣的態度來重視你。",
       keywords: ["#高冷莫測", "#直覺敏銳", "#敏感纖細"],
-      recommended_route: "設計專業路線",
-      recommendation: "保持敏銳，汲取靈感;享受孤獨，傾聽內心深處需求",
+      recommended_route: "#設計專業路線",
+      recommendation: "保持敏銳，汲取靈感；享受孤獨，傾聽內心",
       image: "assets/images/joshua.png",
     },
     {
@@ -52,7 +53,7 @@ const resultData = {
       description:
         "為人謙遜，但同時有自己的主見，能夠理解他人，懂得照顧他人的感受，不容許別人的侵犯。有著很強的自我控制力，下決心做的事情一定會成功。喜歡交朋友，人際關係處理的不錯，常常是朋友圈裡最值得信賴的人物。",
       keywords: ["#平易近人", "#陽光率性", "#值得信賴"],
-      recommended_route: "經營者路線",
+      recommended_route: "#經營者路線",
       recommendation: "獨具慧眼的你定能從設計關鍵字中發掘商機",
       image: "assets/images/brad.png",
     },
@@ -64,7 +65,7 @@ const resultData = {
       description:
         "你的性格屬於愛冒險的人，通常大腦的思維非常活躍，是天生的領袖!喜歡嘗試新鮮的事情，常常不按套路出牌，語不驚人誓不罷休;決策果敢而堅決，不易受他人影響。",
       keywords: ["#千人千面", "#敢於冒險", "#人間清醒"],
-      recommended_route: "設計週全路線",
+      recommended_route: "#設計週全路線",
       recommendation: "敢於冒險的你，注定要嘗試一切嶄新的事物",
       image: "assets/images/bruce.png",
     },
@@ -119,11 +120,11 @@ const ResultPage = () => {
     const scale = 2;
 
     const node: any = document.getElementById("resultCard");
-    const minDataLength = 2000000;
-    const maxAttempts = 10;
+    const minDataLength = 50000000;
+    const maxAttempts = 5;
 
     // let dataUrl = await toJpeg(node)
-    let dataUrl = await domtoimage.toJpeg(node, {
+    let dataUrl = await domtoimage.toPng(node, {
       quality: 1,
       width: node.clientWidth * scale,
       height: node.clientHeight * scale,
@@ -136,7 +137,7 @@ const ResultPage = () => {
 
     while (dataUrl.length < minDataLength && i < maxAttempts) {
       // dataUrl = await toJpeg(node)
-      dataUrl = await domtoimage.toJpeg(node, {
+      dataUrl = await domtoimage.toPng(node, {
         quality: 1,
         width: node.clientWidth * scale,
         height: node.clientHeight * scale,
@@ -186,15 +187,8 @@ const ResultPage = () => {
         </Flex>
       ) : null}
       {imageDataUrl === "" ? (
-        <Box
-          p={2}
-          bgColor={"black"}
-          minHeight={"100vh"}
-          id="resultCard"
-          mb={0}
-          {...longPressEvent}
-        >
-          <Stack w={"full"} px={2} py={4} align="center" spacing={2}>
+        <Box p={2} bgColor={"black"} id="resultCard" mb={0} {...longPressEvent}>
+          <Stack w={"full"} p={2} align="center" spacing={2}>
             <Text
               w={"full"}
               textAlign={"center"}
@@ -236,7 +230,7 @@ const ResultPage = () => {
                 spacing={1}
                 bgColor={"transparent"}
                 bgGradient={
-                  "linear(transparent 0%, transparent 80%, rgba(255,0,0,0.5) 90%, rgba(255,0,0,0.7) 95%, rgba(255,0,0,0.9) 100%, rgba(255,0,0,1) 100%)"
+                  "linear(transparent 0%, transparent calc(100% - 50px), rgba(255,0,0,0.3) calc(100% - 25px), rgba(255,0,0,0.6) calc(100% - 12.5px), rgba(255,0,0,0.8) calc(100% - 6.25px), rgba(255,0,0,1) 100%)"
                 }
                 zIndex={10}
               >
@@ -257,13 +251,12 @@ const ResultPage = () => {
                     />
                   </Box>
                   <Stack width={"55%"} spacing={0}>
-                    <Text fontSize={"2xl"} fontWeight={"bold"}>
-                      名字
+                    <Text mb={3} fontSize={"3xl"}>
+                      {name}
                     </Text>
-                    <Text>{name}</Text>
                     <Spacer />
-                    <Text fontWeight={"bold"}>人格隱藏度</Text>
-                    <Text fontSize={"5xl"} top={-2}>
+                    <Text mb={-4}>人格隱藏度</Text>
+                    <Text py={0} fontSize={"6xl"}>
                       {result?.personality_hidden}
                     </Text>
                   </Stack>
@@ -273,7 +266,7 @@ const ResultPage = () => {
                 </Text>
                 <Text
                   zIndex={10}
-                  fontSize={"md"}
+                  fontSize={"sm"}
                   px={4}
                   textAlign={"center"}
                   color={"white"}
@@ -292,7 +285,7 @@ const ResultPage = () => {
                   {result?.hidden_mask}
                 </Text>
                 <Text
-                  fontSize={"md"}
+                  fontSize={"sm"}
                   px={4}
                   textAlign={"center"}
                   color={"white"}
@@ -333,8 +326,10 @@ const ResultPage = () => {
                 bgColor={"transparent"}
                 color={"black"}
                 zIndex={10}
+                fontSize={"md"}
+                m={1}
               >
-                09.11→09.22澳門設計週2023與你相約！
+                <Img src={"/assets/images/event_date.png"} alt="event_date" />
               </Text>
               <Img
                 position={"absolute"}
@@ -347,9 +342,11 @@ const ResultPage = () => {
               />
             </Stack>
           </Stack>
-          <Text textAlign={"center"} color={"white"}>
-            Character designed by Early Cloud Design
-          </Text>
+          <Flex justifyContent={"center"} alignItems={"center"}>
+            <Text textAlign={"center"} color={"white"}>
+              Character designed by Early Cloud Design
+            </Text>
+          </Flex>
         </Box>
       ) : (
         <Img src={imageDataUrl} alt="result" objectFit={"contain"} />
@@ -442,7 +439,7 @@ const ResultPage = () => {
           alignItems={"center"}
           fontSize={"2xl"}
         >
-          <Text fontSize={"lg"}>官方社交平合：</Text>
+          <Text fontSize={"lg"}>官方社交平台：</Text>
           <Link href="https://www.facebook.com/macaodesignweek" mr={2}>
             <Icon fontSize={"3xl"} fontWeight={"bold"} as={FaFacebookF}></Icon>
           </Link>

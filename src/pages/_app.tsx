@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Stack
           minH={"100vh"}
           bgGradient={
-            "linear(transparent 0%, transparent 80%, rgba(255,0,0,0.5) 90%, rgba(255,0,0,0.7) 95%, rgba(255,0,0,0.9) 100%, rgba(255,0,0,1) 100%)"
+            "linear(transparent 0%, transparent calc(100% - 100px), rgba(255,0,0,0.3) calc(100% - 50px), rgba(255,0,0,0.6) calc(100% - 25px), rgba(255,0,0,0.8) calc(100% - 12.5px), rgba(255,0,0,1) 100%)"
           }
           spacing={0}
         >

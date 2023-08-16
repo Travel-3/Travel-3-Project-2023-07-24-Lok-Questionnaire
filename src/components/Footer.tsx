@@ -1,4 +1,4 @@
-import { Flex, Image, Stack, Text } from "@chakra-ui/react";
+import { Flex, Image, Img, Stack, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 // components/Footer.tsx
@@ -15,10 +15,11 @@ const Footer = () => {
             alt="logo"
           />
         )}
-        <Text mb={2} textAlign={"center"}>
+        <Text zIndex={10} mb={2} textAlign={"center"}>
           Powered by Travel3
         </Text>
       </Stack>
+      {/* <Img zIndex={1} position={'absolute'} bottom={0} left={0} height={'100px'} objectFit={"cover"} src="/assets/images/bgGradient.png" alt="bgGradient" /> */}
     </>
   );
 };
