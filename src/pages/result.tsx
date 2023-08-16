@@ -120,7 +120,7 @@ const ResultPage = () => {
 
     const node: any = document.getElementById("resultCard");
     const minDataLength = 2000000;
-    const maxAttempts = 5;
+    const maxAttempts = 10;
 
     // let dataUrl = await toJpeg(node)
     let dataUrl = await domtoimage.toJpeg(node, {
