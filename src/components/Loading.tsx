@@ -37,7 +37,6 @@ function Loading() {
         </HStack>
         <Img
           src={"/assets/images/travel_buddies.gif"}
-          // src="/assets/images/wave.png"
           boxSize={"24"}
           objectFit={"cover"}
           alt="Loading"

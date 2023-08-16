@@ -19,7 +19,6 @@ const Footer = () => {
           Powered by Travel3
         </Text>
       </Stack>
-      {/* <Img zIndex={1} position={'absolute'} bottom={0} left={0} height={'100px'} objectFit={"cover"} src="/assets/images/bgGradient.png" alt="bgGradient" /> */}
     </>
   );
 };

@@ -120,10 +120,9 @@ const ResultPage = () => {
     const scale = 2;
 
     const node: any = document.getElementById("resultCard");
-    const minDataLength = 50000000;
+    const minDataLength = 2000000;
     const maxAttempts = 5;
 
-    // let dataUrl = await toJpeg(node)
     let dataUrl = await domtoimage.toPng(node, {
       quality: 1,
       width: node.clientWidth * scale,
@@ -136,7 +135,6 @@ const ResultPage = () => {
     let i = 1;
 
     while (dataUrl.length < minDataLength && i < maxAttempts) {
-      // dataUrl = await toJpeg(node)
       dataUrl = await domtoimage.toPng(node, {
         quality: 1,
         width: node.clientWidth * scale,
