@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { toJpeg } from "html-to-image";
+import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
@@ -116,15 +116,34 @@ const ResultPage = () => {
   }
 
   const buildImage = async () => {
+    const scale = 2;
     const node: any = document.getElementById("resultCard");
     const minDataLength = 2000000;
-    const maxAttempts = 5;
+    const maxAttempts = 3;
 
-    let dataUrl = await toJpeg(node);
+    // let dataUrl = await toJpeg(node)
+    let dataUrl = await domtoimage.toPng(node, {
+      quality: 1,
+      width: node.clientWidth * scale,
+      height: node.clientHeight * scale,
+      style: {
+        transform: "scale(" + scale + ")",
+        transformOrigin: "top left",
+      },
+    });
     let i = 1;
 
     while (dataUrl.length < minDataLength && i < maxAttempts) {
-      dataUrl = await toJpeg(node);
+      // dataUrl = await toJpeg(node)
+      dataUrl = await domtoimage.toPng(node, {
+        quality: 1,
+        width: node.clientWidth * scale,
+        height: node.clientHeight * scale,
+        style: {
+          transform: "scale(" + scale + ")",
+          transformOrigin: "top left",
+        },
+      });
       i++;
     }
 
@@ -332,7 +351,7 @@ const ResultPage = () => {
           </Text>
         </Box>
       ) : (
-        <Img src={imageDataUrl} alt="result" />
+        <Img src={imageDataUrl} alt="result" objectFit={"contain"} />
       )}
       <Flex
         h={8}
