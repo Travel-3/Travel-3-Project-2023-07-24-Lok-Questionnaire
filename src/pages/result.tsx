@@ -120,8 +120,8 @@ const ResultPage = () => {
     const scale = 2;
 
     const node: any = document.getElementById("resultCard");
-    const minDataLength = 2000000;
-    const maxAttempts = 5;
+    const minDataLength = 50000000;
+    const maxAttempts = 3;
 
     let dataUrl = await domtoimage.toPng(node, {
       quality: 1,
