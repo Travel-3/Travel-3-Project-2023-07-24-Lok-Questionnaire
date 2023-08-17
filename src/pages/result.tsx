@@ -17,7 +17,6 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
-import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 const resultData = {
   results: [
@@ -121,7 +120,7 @@ const ResultPage = () => {
 
     const node: any = document.getElementById("resultCard");
     const minDataLength = 50000000;
-    const maxAttempts = 3;
+    const maxAttempts = 5;
 
     let dataUrl = await domtoimage.toPng(node, {
       quality: 1,
