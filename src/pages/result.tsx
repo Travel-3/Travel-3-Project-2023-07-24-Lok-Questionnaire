@@ -17,6 +17,7 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
+import { getPlatform } from "@/utils/utils";
 
 const resultData = {
   results: [
@@ -76,12 +77,17 @@ const ResultPage = () => {
   const { score, name } = router.query;
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [imageDataUrl, setImageDataUrl] = useState("");
+  const [platform, setPlatform] = useState("unknown");
   const numericalScore = Number(score);
 
   const result = resultData.results.find(({ score_range }) => {
     const [min, max] = score_range.split("-");
     return numericalScore >= Number(min) && numericalScore <= Number(max || 64);
   });
+
+  useEffect(() => {
+    setPlatform(getPlatform());
+  }, []);
 
   function useLongPress(callback = () => {}, ms = 300) {
     const [startLongPress, setStartLongPress] = useState(false);
@@ -120,7 +126,7 @@ const ResultPage = () => {
 
     const node: any = document.getElementById("resultCard");
     const minDataLength = 50000000;
-    const maxAttempts = 5;
+    const maxAttempts = platform === "iOS" ? 20 : 2;
 
     let dataUrl = await domtoimage.toPng(node, {
       quality: 1,
@@ -159,10 +165,10 @@ const ResultPage = () => {
   };
 
   useEffect(() => {
-    if (router.query.score && router.query.name) {
+    if (router.query.score && router.query.name && platform !== "unknown") {
       buildImage();
     }
-  }, [router]);
+  }, [router, platform]);
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
 
