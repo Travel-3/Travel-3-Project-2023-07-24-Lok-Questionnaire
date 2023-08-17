@@ -126,7 +126,7 @@ const ResultPage = () => {
 
     const node: any = document.getElementById("resultCard");
     const minDataLength = 100000000;
-    const maxAttempts = platform === "iOS" ? 20 : 2;
+    const maxAttempts = platform === "iOS" ? 30 : 2;
 
     let dataUrl = await domtoimage.toPng(node, {
       quality: 1,
