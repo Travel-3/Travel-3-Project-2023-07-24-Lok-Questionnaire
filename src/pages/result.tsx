@@ -23,7 +23,7 @@ const resultData = {
   results: [
     {
       score_range: "21-30",
-      mask: "孤獨完美主義者浪頭",
+      mask: "孤獨完美主義者<b>浪頭</b>",
       hidden_mask: "#小丑面具",
       personality_hidden: "37%",
       description:
@@ -35,7 +35,7 @@ const resultData = {
     },
     {
       score_range: "31-40",
-      mask: "高冷莫測的毛山",
+      mask: "高冷莫測的<b>毛山</b>",
       hidden_mask: "#冷漠面具",
       personality_hidden: "59%",
       description:
@@ -47,7 +47,7 @@ const resultData = {
     },
     {
       score_range: "41-50",
-      mask: "陽光率性的阿布",
+      mask: "陽光率性的<b>阿布</b>",
       hidden_mask: "#沒有面具",
       personality_hidden: "0%",
       description:
@@ -59,7 +59,7 @@ const resultData = {
     },
     {
       score_range: "51",
-      mask: "不按套路的變臉人布魯斯",
+      mask: "不按套路的變臉人<b>布魯斯</b>",
       hidden_mask: "#千人千面",
       personality_hidden: "101%",
       description:
@@ -200,9 +200,8 @@ const ResultPage = () => {
               textAlign={"center"}
               fontSize={"3xl"}
               color={"red"}
-            >
-              {result?.mask}
-            </Text>
+              dangerouslySetInnerHTML={{ __html: result?.mask as string }}
+            />
             <HStack mb={4}>
               {result?.keywords.map((keyword) => (
                 <Text
