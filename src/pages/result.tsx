@@ -241,7 +241,7 @@ const ResultPage = () => {
               發掘你不為人知的貓貓性格
             </Text>
             <Text
-              mb={2}
+              mb={4}
               w={"full"}
               textAlign={"center"}
               fontSize={"30px"}
@@ -261,9 +261,8 @@ const ResultPage = () => {
                   alignItems={"center"}
                 >
                   <Text
-                    border={"1px"}
-                    borderColor={"white"}
-                    borderRadius={"md"}
+                    py={2}
+                    mt={-4}
                     textAlign={"center"}
                     fontSize={"14px"}
                     color={"white"}
@@ -410,7 +409,7 @@ const ResultPage = () => {
             </Stack>
           </Stack>
           <Flex justifyContent={"center"} alignItems={"center"}>
-            <Text textAlign={"center"} color={"white"}>
+            <Text mt={-4} py={1} textAlign={"center"} color={"white"}>
               Character designed by Early Cloud Design
             </Text>
           </Flex>
