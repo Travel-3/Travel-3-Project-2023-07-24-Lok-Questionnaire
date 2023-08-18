@@ -261,6 +261,9 @@ const ResultPage = () => {
                   alignItems={"center"}
                 >
                   <Text
+                    border={"1px"}
+                    borderColor={"white"}
+                    borderRadius={"md"}
                     textAlign={"center"}
                     fontSize={"14px"}
                     color={"white"}
@@ -279,7 +282,7 @@ const ResultPage = () => {
               bgImage={"/assets/images/background.png"}
             >
               <Stack
-                p={'10px'}
+                p={"10px"}
                 pb={0}
                 align="center"
                 spacing={1}
