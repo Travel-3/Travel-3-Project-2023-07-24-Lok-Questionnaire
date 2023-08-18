@@ -1,4 +1,4 @@
-import { Box, HStack, Img, Spacer, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Img, Spacer, Stack, Text } from "@chakra-ui/react";
 import Footer from "./Footer";
 
 function Loading() {
@@ -35,12 +35,16 @@ function Loading() {
             alt="logo"
           />
         </HStack>
-        <Img
+        <Image
           src={"/assets/images/travel_buddies.gif"}
           boxSize={"24"}
           objectFit={"cover"}
           alt="Loading"
           mb={4}
+          fallbackSrc={"/assets/images/travel_buddies.gif"}
+          onLoad={() => {
+            console.log("Travel Buddies GIF loaded!");
+          }}
         />
         <Text
           width={"fill"}

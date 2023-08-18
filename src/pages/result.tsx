@@ -5,7 +5,7 @@ import {
   Flex,
   HStack,
   Icon,
-  Img,
+  Image as Img,
   Link,
   Spacer,
   Stack,
@@ -249,7 +249,11 @@ const ResultPage = () => {
                       height={"auto"}
                       src={result?.image}
                       objectFit={"cover"}
+                      fallbackSrc={result?.image}
                       alt={name?.toString()}
+                      onLoad={() => {
+                        console.log("result?.image loaded");
+                      }}
                     />
                   </Box>
                   <Stack width={"55%"} spacing={0}>
@@ -318,6 +322,10 @@ const ResultPage = () => {
                   boxSize={32}
                   objectFit={"contain"}
                   src="assets/images/2023logo.png"
+                  fallbackSrc="assets/images/2023logo.png"
+                  onLoad={() => {
+                    console.log("2023logo loaded");
+                  }}
                   alt="logo"
                   mb={2}
                   zIndex={10}
@@ -331,7 +339,14 @@ const ResultPage = () => {
                 fontSize={"md"}
                 m={1}
               >
-                <Img src={"/assets/images/event_date.png"} alt="event_date" />
+                <Img
+                  src={"/assets/images/event_date.png"}
+                  fallbackSrc={"/assets/images/event_date.png"}
+                  onLoad={() => {
+                    console.log("event_date loaded");
+                  }}
+                  alt="event_date"
+                />
               </Text>
               <Img
                 position={"absolute"}
@@ -339,6 +354,10 @@ const ResultPage = () => {
                 width={"100%"}
                 height={"100%"}
                 src={"/assets/images/background.png"}
+                fallbackSrc="/assets/images/background.png"
+                onLoad={() => {
+                  console.log("background loaded");
+                }}
                 objectFit={"cover"}
                 alt="background"
               />
