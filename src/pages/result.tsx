@@ -125,6 +125,7 @@ const ResultPage = () => {
     const scale = 2;
 
     const node: any = document.getElementById("resultCard");
+    const resultImage: any = document.getElementById("resultImage");
     const minDataLength = 100000000;
     const maxAttempts = platform === "iOS" ? 30 : 2;
 
@@ -245,15 +246,13 @@ const ResultPage = () => {
                 >
                   <Box width={"45%"}>
                     <Img
+                      id="resultImage"
                       width={"auto"}
                       height={"auto"}
                       src={result?.image}
                       objectFit={"cover"}
                       fallbackSrc={result?.image}
                       alt={name?.toString()}
-                      onLoad={() => {
-                        console.log("result?.image loaded");
-                      }}
                     />
                   </Box>
                   <Stack width={"55%"} spacing={0}>
@@ -323,9 +322,6 @@ const ResultPage = () => {
                   objectFit={"contain"}
                   src="assets/images/2023logo.png"
                   fallbackSrc="assets/images/2023logo.png"
-                  onLoad={() => {
-                    console.log("2023logo loaded");
-                  }}
                   alt="logo"
                   mb={2}
                   zIndex={10}
@@ -342,9 +338,6 @@ const ResultPage = () => {
                 <Img
                   src={"/assets/images/event_date.png"}
                   fallbackSrc={"/assets/images/event_date.png"}
-                  onLoad={() => {
-                    console.log("event_date loaded");
-                  }}
                   alt="event_date"
                 />
               </Text>
@@ -355,11 +348,9 @@ const ResultPage = () => {
                 height={"100%"}
                 src={"/assets/images/background.png"}
                 fallbackSrc="/assets/images/background.png"
-                onLoad={() => {
-                  console.log("background loaded");
-                }}
                 objectFit={"cover"}
                 alt="background"
+                fetchPriority="high"
               />
             </Stack>
           </Stack>
