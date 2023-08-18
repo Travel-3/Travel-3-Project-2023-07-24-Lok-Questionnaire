@@ -122,14 +122,13 @@ const ResultPage = () => {
   }
 
   const buildImage = async () => {
-    const scale = 2;
+    const scale = 1;
 
     const node: any = document.getElementById("resultCard");
-    const resultImage: any = document.getElementById("resultImage");
     const minDataLength = 100000000;
     const maxAttempts = platform === "iOS" ? 30 : 2;
 
-    let dataUrl = await domtoimage.toPng(node, {
+    let dataUrl = await domtoimage.toSvg(node, {
       quality: 1,
       width: node.clientWidth * scale,
       height: node.clientHeight * scale,
@@ -141,7 +140,7 @@ const ResultPage = () => {
     let i = 1;
 
     while (dataUrl.length < minDataLength && i < maxAttempts) {
-      dataUrl = await domtoimage.toPng(node, {
+      dataUrl = await domtoimage.toSvg(node, {
         quality: 1,
         width: node.clientWidth * scale,
         height: node.clientHeight * scale,
