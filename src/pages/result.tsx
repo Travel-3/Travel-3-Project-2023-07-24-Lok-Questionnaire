@@ -279,7 +279,7 @@ const ResultPage = () => {
               bgImage={"/assets/images/background.png"}
             >
               <Stack
-                p={4}
+                p={'10px'}
                 pb={0}
                 align="center"
                 spacing={1}
