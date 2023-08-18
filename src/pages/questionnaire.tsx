@@ -109,6 +109,28 @@ const QuestionnairePage = () => {
   const [answers, setAnswers] = useState<any>({});
   const [totalScore, setTotalScore] = useState(0);
   const [userName, setUserName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isValid, setIsValid] = useState(false);
+
+  const handleGenerateClick = () => {
+    // Reset validation states
+    setIsValid(true);
+    setErrorMessage("");
+
+    if (!userName) {
+      setIsValid(false);
+      setErrorMessage("名字不能為空！");
+      return;
+    }
+
+    if (userName.length > 10) {
+      setIsValid(false);
+      setErrorMessage("名字不能超過10個字符！");
+      return;
+    }
+
+    router.push(`/result?score=${totalScore}&name=${userName}`);
+  };
 
   useEffect(() => {
     if (currentQuestion > MAX_QUESTIONS && totalScore === 0) {
@@ -161,14 +183,19 @@ const QuestionnairePage = () => {
             bgColor={"white"}
             value={userName}
             onChange={(event) => setUserName(event.target.value)}
-            mb="4"
             w={"full"}
             border={"1px"}
             borderColor={"black"}
             fontSize={"xl"}
             size={"lg"}
           />
+          {!isValid && (
+            <Text w={"full"} float={"left"} fontSize={"sm"} color="red">
+              {errorMessage}
+            </Text>
+          )}
           <Button
+            mt={4}
             w={"full"}
             bgColor={"black"}
             borderRadius="md"
@@ -177,11 +204,12 @@ const QuestionnairePage = () => {
               bg: "black",
               borderColor: "black",
             }}
-            onClick={() => {
-              if (userName) {
-                router.push(`/result?score=${totalScore}&name=${userName}`);
-              }
-            }}
+            // onClick={() => {
+            //   if (userName) {
+            //     router.push(`/result?score=${totalScore}&name=${userName}`);
+            //   }
+            // }}
+            onClick={handleGenerateClick}
             size={"lg"}
           >
             生成你的貓貓
