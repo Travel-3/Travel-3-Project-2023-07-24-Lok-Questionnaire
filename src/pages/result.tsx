@@ -323,12 +323,14 @@ const ResultPage = () => {
                   {result?.description}
                 </Text>
                 <Text
+                  h={"34px"}
                   zIndex={10}
                   fontSize={"14px"}
                   px={4}
                   textAlign={"center"}
                   color={"white"}
                   bgColor={"black"}
+                  mb={2}
                 >
                   你的隱藏面具
                 </Text>
@@ -339,16 +341,21 @@ const ResultPage = () => {
                   fontWeight={"bold"}
                   px={4}
                   textAlign={"center"}
+                  mt={-4}
+                  mb={2}
                 >
                   {result?.hidden_mask}
                 </Text>
                 <Text
+                  h={"34px"}
                   fontSize={"14px"}
                   px={4}
+                  boxSizing="border-box"
                   textAlign={"center"}
                   color={"white"}
                   bgColor={"black"}
                   zIndex={10}
+                  mb={2}
                 >
                   建議你的設計週路線
                 </Text>
@@ -359,6 +366,7 @@ const ResultPage = () => {
                   px={4}
                   textAlign={"center"}
                   zIndex={10}
+                  mt={-4}
                 >
                   {result?.recommended_route}
                 </Text>
@@ -367,6 +375,7 @@ const ResultPage = () => {
                   textAlign={"center"}
                   fontSize={"md"}
                   zIndex={10}
+                  mb={4}
                 >
                   {result?.recommendation}
                 </Text>
