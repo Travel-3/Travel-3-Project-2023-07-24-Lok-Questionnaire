@@ -79,9 +79,8 @@ const ResultPage = () => {
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [imageDataUrl, setImageDataUrl] = useState("");
   const [platform, setPlatform] = useState("unknown");
-  const [nodeH, setNodeH] = useState(0);
   const numericalScore = Number(score);
-  const scale = 2;
+  const scale = 3;
 
   const result = resultData.results.find(({ score_range }) => {
     const [min, max] = score_range.split("-");
@@ -144,10 +143,6 @@ const ResultPage = () => {
 
   const buildImage = () => {
     const node: any = document.getElementById("resultCard");
-    const resultDetailsCardNode: any =
-      document.getElementById("resultDetailsCard");
-    setNodeH(resultDetailsCardNode.clientHeight);
-    console.log(resultDetailsCardNode.clientHeight);
     let dataUrl = "";
 
     setTimeout(() => {
@@ -279,7 +274,8 @@ const ResultPage = () => {
               spacing={0}
               position={"relative"}
               overflow={"hidden"}
-              backgroundImage={'/assets/images/background.png'}
+              bgImage={"/assets/images/background.png"}
+              bgSize={"cover"}
             >
               <Stack
                 p={"10px"}
@@ -288,7 +284,9 @@ const ResultPage = () => {
                 spacing={1}
                 bgColor={"transparent"}
                 bgImage={"/assets/images/bgGradient.png"}
-                bgGradient={`linear(transparent 0px, transparent calc(${nodeH}px - ${50}px), rgba(255,0,0,0.3) calc(${nodeH}px - ${25}px), rgba(255,0,0,0.6) calc(${nodeH}px - ${12.5}px), rgba(255,0,0,0.8) calc(${nodeH}px - ${6.25}px), rgba(255,0,0,1) ${nodeH}px)`}
+                bgPosition={"bottom"}
+                bgSize={"contain"}
+                bgRepeat={"no-repeat"}
                 zIndex={10}
               >
                 <HStack
@@ -390,11 +388,11 @@ const ResultPage = () => {
               </Stack>
               <Text
                 textAlign={"center"}
-                bgColor={"transparent"}
+                bgColor={"white"}
                 color={"black"}
                 zIndex={10}
                 fontSize={"md"}
-                m={1}
+                p={1}
               >
                 <Img src={"/assets/images/event_date.png"} alt="event_date" />
               </Text>
