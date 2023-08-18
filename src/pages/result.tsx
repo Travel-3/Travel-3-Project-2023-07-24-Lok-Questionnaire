@@ -18,6 +18,7 @@ import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
 import { getPlatform } from "@/utils/utils";
+import html2canvas from "html2canvas";
 
 const resultData = {
   results: [
@@ -63,7 +64,7 @@ const resultData = {
       hidden_mask: "#千人千面",
       personality_hidden: "101%",
       description:
-        "你的性格屬於愛冒險的人，通常大腦的思維非常活躍，是天生的領袖!喜歡嘗試新鮮的事情，常常不按套路出牌，語不驚人誓不罷休;決策果敢而堅決，不易受他人影響。",
+        "你的性格屬於愛冒險的人，通常大腦的思維非常活躍，是天生的領袖！喜歡嘗試新鮮的事情，常常不按套路出牌，語不驚人誓不罷休；決策果敢而堅決，不易受他人影響。",
       keywords: ["#千人千面", "#敢於冒險", "#人間清醒"],
       recommended_route: "#設計週全路線",
       recommendation: "敢於冒險的你，注定要嘗試一切嶄新的事物",
@@ -78,7 +79,9 @@ const ResultPage = () => {
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [imageDataUrl, setImageDataUrl] = useState("");
   const [platform, setPlatform] = useState("unknown");
+  const [nodeH, setNodeH] = useState(0);
   const numericalScore = Number(score);
+  const scale = 2;
 
   const result = resultData.results.find(({ score_range }) => {
     const [min, max] = score_range.split("-");
@@ -88,6 +91,24 @@ const ResultPage = () => {
   useEffect(() => {
     setPlatform(getPlatform());
   }, []);
+
+  async function convertSvgToPng(svgDataUrl: string) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = svgDataUrl;
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx: any = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL("image/png"));
+      };
+
+      img.onerror = reject;
+    });
+  }
 
   function useLongPress(callback = () => {}, ms = 300) {
     const [startLongPress, setStartLongPress] = useState(false);
@@ -121,46 +142,65 @@ const ResultPage = () => {
     };
   }
 
-  const buildImage = async () => {
-    const scale = 1;
-
+  const buildImage = () => {
     const node: any = document.getElementById("resultCard");
-    const minDataLength = 100000000;
-    const maxAttempts = platform === "iOS" ? 30 : 2;
+    const resultDetailsCardNode: any =
+      document.getElementById("resultDetailsCard");
+    setNodeH(resultDetailsCardNode.clientHeight);
+    console.log(resultDetailsCardNode.clientHeight);
+    let dataUrl = "";
 
-    let dataUrl = await domtoimage.toSvg(node, {
-      quality: 1,
-      width: node.clientWidth * scale,
-      height: node.clientHeight * scale,
-      style: {
-        transform: "scale(" + scale + ")",
-        transformOrigin: "top left",
-      },
-    });
-    let i = 1;
-
-    while (dataUrl.length < minDataLength && i < maxAttempts) {
-      dataUrl = await domtoimage.toSvg(node, {
-        quality: 1,
-        width: node.clientWidth * scale,
-        height: node.clientHeight * scale,
-        style: {
-          transform: "scale(" + scale + ")",
-          transformOrigin: "top left",
-        },
+    setTimeout(() => {
+      html2canvas(node, {
+        scale: scale,
+        allowTaint: true,
+        useCORS: true,
+      }).then((canvas) => {
+        dataUrl = canvas.toDataURL();
+        setImageDataUrl(dataUrl);
       });
-      i++;
-    }
+    }, 1000);
 
-    setIsGeneratingImage(false);
-    setImageDataUrl(dataUrl);
+    // const minDataLength = 10000000000;
+    // const maxAttempts = platform === "iOS" ? 20 : 2;
+
+    // let dataUrl = await domtoimage.toSvg(node, {
+    //   quality: 1,
+    //   width: node.clientWidth * scale,
+    //   height: node.clientHeight * scale,
+    //   style: {
+    //     transform: "scale(" + scale + ")",
+    //     transformOrigin: "top left",
+    //   },
+    // });
+    // let i = 1;
+
+    // while (dataUrl.length < minDataLength && i < maxAttempts) {
+    //   dataUrl = await domtoimage.toSvg(node, {
+    //     quality: 1,
+    //     width: node.clientWidth * scale,
+    //     height: node.clientHeight * scale,
+    //     style: {
+    //       transform: "scale(" + scale + ")",
+    //       transformOrigin: "top left",
+    //     },
+    //   });
+    //   i++;
+    // }
+
+    // console.log(dataUrl);
+    // const pngDataUrl: any = await convertSvgToPng(dataUrl);
+    // console.log(pngDataUrl);
+
+    // setIsGeneratingImage(false);
+    // setImageDataUrl(dataUrl);
 
     return dataUrl;
   };
 
   const handleDownloadImage = async () => {
     setIsGeneratingImage(true);
-    saveAs(imageDataUrl, "result");
+    saveAs(imageDataUrl, "result.png");
     setIsGeneratingImage(false);
   };
 
@@ -191,49 +231,61 @@ const ResultPage = () => {
       ) : null}
       {imageDataUrl === "" ? (
         <Box p={2} bgColor={"black"} id="resultCard" mb={0} {...longPressEvent}>
-          <Stack w={"full"} p={2} align="center" spacing={2}>
+          <Stack w={"full"} p={2} align="center">
             <Text
               w={"full"}
               textAlign={"center"}
               color={"white"}
-              fontSize={"lg"}
+              fontSize={"18px"}
             >
               發掘你不為人知的貓貓性格
             </Text>
             <Text
+              mb={2}
               w={"full"}
               textAlign={"center"}
-              fontSize={"3xl"}
+              fontSize={"30px"}
               color={"red"}
               dangerouslySetInnerHTML={{ __html: result?.mask as string }}
             />
-            <HStack mb={4}>
+            <HStack mb={4} justifyContent={"center"} alignItems={"center"}>
               {result?.keywords.map((keyword) => (
-                <Text
+                <Flex
                   key={keyword}
-                  fontSize={"sm"}
-                  color={"white"}
-                  bgColor={"transparent"}
                   border={"1px"}
                   borderColor={"white"}
                   borderRadius={"md"}
                   py={1}
                   px={4}
+                  justifyContent={"center"}
+                  alignItems={"center"}
                 >
-                  {keyword}
-                </Text>
+                  <Text
+                    textAlign={"center"}
+                    fontSize={"14px"}
+                    color={"white"}
+                    bgColor={"transparent"}
+                  >
+                    {keyword}
+                  </Text>
+                </Flex>
               ))}
             </HStack>
-            <Stack spacing={0} position={"relative"} overflow={"hidden"}>
+            <Stack
+              id="resultDetailsCard"
+              spacing={0}
+              position={"relative"}
+              overflow={"hidden"}
+              bgImage={"/assets/images/background.png"}
+            >
               <Stack
                 p={4}
                 pb={0}
                 align="center"
                 spacing={1}
                 bgColor={"transparent"}
-                bgGradient={
-                  "linear(transparent 0%, transparent calc(100% - 50px), rgba(255,0,0,0.3) calc(100% - 25px), rgba(255,0,0,0.6) calc(100% - 12.5px), rgba(255,0,0,0.8) calc(100% - 6.25px), rgba(255,0,0,1) 100%)"
-                }
+                bgImage={"/assets/images/bgGradient.png"}
+                bgGradient={`linear(transparent 0px, transparent calc(${nodeH}px - ${50}px), rgba(255,0,0,0.3) calc(${nodeH}px - ${25}px), rgba(255,0,0,0.6) calc(${nodeH}px - ${12.5}px), rgba(255,0,0,0.8) calc(${nodeH}px - ${6.25}px), rgba(255,0,0,1) ${nodeH}px)`}
                 zIndex={10}
               >
                 <HStack
@@ -250,27 +302,26 @@ const ResultPage = () => {
                       height={"auto"}
                       src={result?.image}
                       objectFit={"cover"}
-                      fallbackSrc={result?.image}
                       alt={name?.toString()}
                     />
                   </Box>
                   <Stack width={"55%"} spacing={0}>
-                    <Text mb={3} fontSize={"3xl"}>
+                    <Text mt={-4} mb={2} fontSize={"30px"}>
                       {name}
                     </Text>
                     <Spacer />
                     <Text mb={-4}>人格隱藏度</Text>
-                    <Text py={0} fontSize={"6xl"}>
+                    <Text mt={-2} py={0} fontSize={"60px"}>
                       {result?.personality_hidden}
                     </Text>
                   </Stack>
                 </HStack>
-                <Text zIndex={10} mb={2} fontSize={"md"} color={"black"}>
+                <Text zIndex={10} mb={2} color={"black"}>
                   {result?.description}
                 </Text>
                 <Text
                   zIndex={10}
-                  fontSize={"sm"}
+                  fontSize={"14px"}
                   px={4}
                   textAlign={"center"}
                   color={"white"}
@@ -281,7 +332,7 @@ const ResultPage = () => {
                 <Text
                   w={"full"}
                   zIndex={10}
-                  fontSize={"2xl"}
+                  fontSize={"24px"}
                   fontWeight={"bold"}
                   px={4}
                   textAlign={"center"}
@@ -289,7 +340,7 @@ const ResultPage = () => {
                   {result?.hidden_mask}
                 </Text>
                 <Text
-                  fontSize={"sm"}
+                  fontSize={"14px"}
                   px={4}
                   textAlign={"center"}
                   color={"white"}
@@ -300,7 +351,7 @@ const ResultPage = () => {
                 </Text>
                 <Text
                   w={"full"}
-                  fontSize={"2xl"}
+                  fontSize={"24px"}
                   fontWeight={"bold"}
                   px={4}
                   textAlign={"center"}
@@ -320,9 +371,8 @@ const ResultPage = () => {
                   boxSize={32}
                   objectFit={"contain"}
                   src="assets/images/2023logo.png"
-                  fallbackSrc="assets/images/2023logo.png"
                   alt="logo"
-                  mb={2}
+                  mb={4}
                   zIndex={10}
                 />
               </Stack>
@@ -334,23 +384,17 @@ const ResultPage = () => {
                 fontSize={"md"}
                 m={1}
               >
-                <Img
-                  src={"/assets/images/event_date.png"}
-                  fallbackSrc={"/assets/images/event_date.png"}
-                  alt="event_date"
-                />
+                <Img src={"/assets/images/event_date.png"} alt="event_date" />
               </Text>
-              <Img
-                position={"absolute"}
+              {/* <Img
+                position={'absolute'}
                 zIndex={0}
-                width={"100%"}
-                height={"100%"}
-                src={"/assets/images/background.png"}
-                fallbackSrc="/assets/images/background.png"
-                objectFit={"cover"}
+                width={'100%'}
+                height={'100%'}
+                src={'/assets/images/background.png'}
+                objectFit={'cover'}
                 alt="background"
-                fetchPriority="high"
-              />
+              /> */}
             </Stack>
           </Stack>
           <Flex justifyContent={"center"} alignItems={"center"}>

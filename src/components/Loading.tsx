@@ -41,10 +41,6 @@ function Loading() {
           objectFit={"cover"}
           alt="Loading"
           mb={4}
-          fallbackSrc={"/assets/images/travel_buddies.gif"}
-          onLoad={() => {
-            console.log("Travel Buddies GIF loaded!");
-          }}
         />
         <Text
           width={"fill"}
