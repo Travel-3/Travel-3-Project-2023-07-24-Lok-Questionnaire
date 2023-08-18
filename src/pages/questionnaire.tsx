@@ -204,11 +204,6 @@ const QuestionnairePage = () => {
               bg: "black",
               borderColor: "black",
             }}
-            // onClick={() => {
-            //   if (userName) {
-            //     router.push(`/result?score=${totalScore}&name=${userName}`);
-            //   }
-            // }}
             onClick={handleGenerateClick}
             size={"lg"}
           >

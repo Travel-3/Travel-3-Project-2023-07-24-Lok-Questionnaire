@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Box
         bgImage={"/assets/images/background.png"}
         bgSize={"cover"}
+        bgPosition={"center"}
         bgRepeat={"repeat-y"}
         minH={"100vh"}
       >

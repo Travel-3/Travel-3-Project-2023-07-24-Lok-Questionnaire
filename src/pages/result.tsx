@@ -13,11 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
-import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
-import { getPlatform } from "@/utils/utils";
 import html2canvas from "html2canvas";
 
 const resultData = {
@@ -78,7 +76,6 @@ const ResultPage = () => {
   const { score, name } = router.query;
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [imageDataUrl, setImageDataUrl] = useState("");
-  const [platform, setPlatform] = useState("unknown");
   const numericalScore = Number(score);
   const scale = 3;
 
@@ -86,28 +83,6 @@ const ResultPage = () => {
     const [min, max] = score_range.split("-");
     return numericalScore >= Number(min) && numericalScore <= Number(max || 64);
   });
-
-  useEffect(() => {
-    setPlatform(getPlatform());
-  }, []);
-
-  async function convertSvgToPng(svgDataUrl: string) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = svgDataUrl;
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx: any = canvas.getContext("2d");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL("image/png"));
-      };
-
-      img.onerror = reject;
-    });
-  }
 
   function useLongPress(callback = () => {}, ms = 300) {
     const [startLongPress, setStartLongPress] = useState(false);
@@ -156,40 +131,6 @@ const ResultPage = () => {
       });
     }, 1000);
 
-    // const minDataLength = 10000000000;
-    // const maxAttempts = platform === "iOS" ? 20 : 2;
-
-    // let dataUrl = await domtoimage.toSvg(node, {
-    //   quality: 1,
-    //   width: node.clientWidth * scale,
-    //   height: node.clientHeight * scale,
-    //   style: {
-    //     transform: "scale(" + scale + ")",
-    //     transformOrigin: "top left",
-    //   },
-    // });
-    // let i = 1;
-
-    // while (dataUrl.length < minDataLength && i < maxAttempts) {
-    //   dataUrl = await domtoimage.toSvg(node, {
-    //     quality: 1,
-    //     width: node.clientWidth * scale,
-    //     height: node.clientHeight * scale,
-    //     style: {
-    //       transform: "scale(" + scale + ")",
-    //       transformOrigin: "top left",
-    //     },
-    //   });
-    //   i++;
-    // }
-
-    // console.log(dataUrl);
-    // const pngDataUrl: any = await convertSvgToPng(dataUrl);
-    // console.log(pngDataUrl);
-
-    // setIsGeneratingImage(false);
-    // setImageDataUrl(dataUrl);
-
     return dataUrl;
   };
 
@@ -200,10 +141,10 @@ const ResultPage = () => {
   };
 
   useEffect(() => {
-    if (router.query.score && router.query.name && platform !== "unknown") {
+    if (router.query.score && router.query.name) {
       buildImage();
     }
-  }, [router, platform]);
+  }, [router]);
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
 
@@ -282,7 +223,6 @@ const ResultPage = () => {
                 pb={0}
                 align="center"
                 spacing={1}
-                bgColor={"transparent"}
                 bgImage={"/assets/images/bgGradient.png"}
                 bgPosition={"bottom"}
                 bgSize={"contain"}
@@ -317,7 +257,7 @@ const ResultPage = () => {
                     </Text>
                   </Stack>
                 </HStack>
-                <Text zIndex={10} mb={2} color={"black"}>
+                <Text zIndex={10} mb={4} color={"black"}>
                   {result?.description}
                 </Text>
                 <Text
@@ -396,15 +336,6 @@ const ResultPage = () => {
               >
                 <Img src={"/assets/images/event_date.png"} alt="event_date" />
               </Text>
-              {/* <Img
-                position={'absolute'}
-                zIndex={0}
-                width={'100%'}
-                height={'100%'}
-                src={'/assets/images/background.png'}
-                objectFit={'cover'}
-                alt="background"
-              /> */}
             </Stack>
           </Stack>
           <Flex justifyContent={"center"} alignItems={"center"}>
@@ -457,7 +388,6 @@ const ResultPage = () => {
           長按上方圖片存儲並分享
         </Text>
       </Flex>
-      {/* {imageDataUrl ? <Img src={imageDataUrl} alt="result" /> : null} */}
       <Stack p={8} spacing={4}>
         <Button
           bgColor={"black"}
