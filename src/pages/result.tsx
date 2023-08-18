@@ -252,7 +252,8 @@ const ResultPage = () => {
               {result?.keywords.map((keyword) => (
                 <Flex
                   key={keyword}
-                  border={"1px"}
+                  borderStyle={"solid"}
+                  borderWidth={"1px"}
                   borderColor={"white"}
                   borderRadius={"md"}
                   py={1}
@@ -278,7 +279,7 @@ const ResultPage = () => {
               spacing={0}
               position={"relative"}
               overflow={"hidden"}
-              bgImage={"/assets/images/background.png"}
+              backgroundImage={'/assets/images/background.png'}
             >
               <Stack
                 p={"10px"}
