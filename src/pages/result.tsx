@@ -362,14 +362,16 @@ const ResultPage = () => {
                 掃描
                 <ChevronRightIcon ml={-1} mt={1} boxSize={14} />
               </Text>
-              <Img
-                boxSize={32}
-                p={4}
-                bgColor={"white"}
-                borderRadius={"lg"}
-                src="/assets/images/qr_code.png"
-                alt="qrcode"
-              />
+              <Box>
+                <Img
+                  boxSize={32}
+                  p={3}
+                  bgColor={"white"}
+                  borderRadius={"2xl"}
+                  src="/assets/images/qr_code.png"
+                  alt="qrcode"
+                />
+              </Box>
               <Text color={"white"} fontSize={"xl"} textAlign={"center"}>
                 <ChevronLeftIcon mr={-1} mt={1} boxSize={14} />
                 參加
@@ -440,10 +442,6 @@ const ResultPage = () => {
             color={"black"}
             border={"1px solid red"}
             borderRadius={"md"}
-            _hover={{
-              bg: "black",
-              color: "white",
-            }}
             isLoading={isGeneratingImage}
           >
             分享結果
@@ -454,10 +452,6 @@ const ResultPage = () => {
             color={"black"}
             border={"1px solid red"}
             borderRadius={"md"}
-            _hover={{
-              bg: "black",
-              color: "white",
-            }}
             onClick={() => {
               router.push("/");
             }}
