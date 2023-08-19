@@ -168,14 +168,28 @@ const ResultPage = () => {
       {imageDataUrl === "" ? (
         <Box p={2} bgColor={"black"} id="resultCard" mb={0} {...longPressEvent}>
           <Stack w={"full"} p={2} align="center">
-            <Text
-              w={"full"}
-              textAlign={"center"}
-              color={"white"}
-              fontSize={"18px"}
-            >
-              發掘你不為人知的貓貓性格
-            </Text>
+            <HStack justifyContent={"center"} alignItems={"center"}>
+              <Img
+                mt={4}
+                h={4}
+                src="/assets/images/cat_footprint_left.png"
+                alt="logo"
+              />
+              <Text
+                w={"full"}
+                textAlign={"center"}
+                color={"white"}
+                fontSize={"18px"}
+              >
+                發掘你不為人知的貓貓性格
+              </Text>
+              <Img
+                mt={4}
+                h={4}
+                src="/assets/images/cat_footprint_right.png"
+                alt="logo"
+              />
+            </HStack>
             <Text
               mb={4}
               w={"full"}
