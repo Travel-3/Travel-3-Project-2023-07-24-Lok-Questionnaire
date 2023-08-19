@@ -11,6 +11,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { saveAs } from "file-saver";
@@ -352,11 +353,29 @@ const ResultPage = () => {
               </Text>
             </Stack>
           </Stack>
-          <Flex justifyContent={"center"} alignItems={"center"}>
+          <Stack justifyContent={"center"} alignItems={"center"}>
             <Text mt={-4} py={1} textAlign={"center"} color={"white"}>
               Character designed by Early Cloud Design
             </Text>
-          </Flex>
+            <HStack justifyContent={"center"} alignItems={"center"} my={8}>
+              <Text color={"white"} fontSize={"xl"} textAlign={"center"}>
+                掃描
+                <ChevronRightIcon ml={-1} mt={1} boxSize={14} />
+              </Text>
+              <Img
+                boxSize={32}
+                p={4}
+                bgColor={"white"}
+                borderRadius={"lg"}
+                src="/assets/images/qr_code.png"
+                alt="qrcode"
+              />
+              <Text color={"white"} fontSize={"xl"} textAlign={"center"}>
+                <ChevronLeftIcon mr={-1} mt={1} boxSize={14} />
+                參加
+              </Text>
+            </HStack>
+          </Stack>
         </Box>
       ) : (
         <Img src={imageDataUrl} alt="result" objectFit={"contain"} />
@@ -427,7 +446,7 @@ const ResultPage = () => {
             }}
             isLoading={isGeneratingImage}
           >
-            存儲結果
+            分享結果
           </Button>
           <Button
             flex={1}
