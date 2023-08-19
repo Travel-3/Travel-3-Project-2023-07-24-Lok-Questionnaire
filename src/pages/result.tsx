@@ -397,14 +397,16 @@ const ResultPage = () => {
             color: "white",
           }}
         >
-          參與你的設計週路線
+          獲取你的設計週路線
         </Button>
         <HStack spacing={4} w={"full"} mb={8}>
           <Button
             flex={1}
             onClick={handleDownloadImage}
-            bgColor={"black"}
-            color={"white"}
+            bgColor={"white"}
+            color={"black"}
+            border={"1px solid red"}
+            borderRadius={"md"}
             _hover={{
               bg: "black",
               color: "white",
@@ -415,8 +417,10 @@ const ResultPage = () => {
           </Button>
           <Button
             flex={1}
-            bgColor={"black"}
-            color={"white"}
+            bgColor={"white"}
+            color={"black"}
+            border={"1px solid red"}
+            borderRadius={"md"}
             _hover={{
               bg: "black",
               color: "white",

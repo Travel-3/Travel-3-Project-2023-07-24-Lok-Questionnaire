@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
   Image,
+  HStack,
 } from "@chakra-ui/react";
 import ReactCurvedText from "react-curved-text";
 
@@ -37,9 +38,21 @@ export default function Home() {
                 textProps={{ style: { fontSize: 24 } }}
               />
             </Flex>
-            <Text mb={8} fontSize={"4xl"}>
-              性格面具
-            </Text>
+            <HStack mb={8} justifyContent={"center"} alignItems={"center"}>
+              <Image
+                h={8}
+                src="/assets/images/cat_footprint_left.png"
+                alt="logo"
+              />
+              <Text mx={2} fontSize={"4xl"}>
+                性格貓貓
+              </Text>
+              <Image
+                h={8}
+                src="/assets/images/cat_footprint_right.png"
+                alt="logo"
+              />
+            </HStack>
             <Image
               w={"100%"}
               objectFit={"contain"}
