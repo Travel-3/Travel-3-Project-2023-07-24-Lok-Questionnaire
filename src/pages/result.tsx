@@ -18,6 +18,7 @@ import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
 import Loading from "@/components/Loading";
 import html2canvas from "html2canvas";
+import { Routes } from "@/constants/routes";
 
 const resultData = {
   results: [
@@ -427,6 +428,9 @@ const ResultPage = () => {
         <Button
           bgColor={"black"}
           color={"white"}
+          as="a"
+          href={Routes[result?.recommended_route as string]}
+          target="_blank"
           _hover={{
             bg: "black",
             color: "white",
