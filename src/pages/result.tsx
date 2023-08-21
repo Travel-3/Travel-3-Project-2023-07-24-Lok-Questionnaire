@@ -54,7 +54,7 @@ const resultData = {
       description:
         "為人謙遜，但同時有自己的主見，能夠理解他人，懂得照顧他人的感受，不容許別人的侵犯。有著很強的自我控制力，下決心做的事情一定會成功。喜歡交朋友，人際關係處理的不錯，常常是朋友圈裡最值得信賴的人物。",
       keywords: ["#平易近人", "#陽光率性", "#值得信賴"],
-      recommended_route: "#經營者路線",
+      recommended_route: "#設計與商業路線",
       recommendation: "獨具慧眼的你定能從設計關鍵字中發掘商機",
       image: "assets/images/brad.png",
     },
@@ -168,9 +168,16 @@ const ResultPage = () => {
         </Flex>
       ) : null}
       {imageDataUrl === "" ? (
-        <Box p={2} bgColor={"black"} id="resultCard" mb={0} {...longPressEvent}>
+        <Box
+          p={2}
+          bgColor={"black"}
+          id="resultCard"
+          borderColor={"black"}
+          borderWidth={"2px"}
+          {...longPressEvent}
+        >
           <Stack w={"full"} p={2} align="center">
-            <HStack justifyContent={"center"} alignItems={"center"}>
+            <HStack justifyContent={"center"} alignItems={"center"} mb={-2}>
               <Img
                 mt={4}
                 h={4}
@@ -200,32 +207,6 @@ const ResultPage = () => {
               color={"red"}
               dangerouslySetInnerHTML={{ __html: result?.mask as string }}
             />
-            <HStack mb={4} justifyContent={"center"} alignItems={"center"}>
-              {result?.keywords.map((keyword) => (
-                <Flex
-                  key={keyword}
-                  borderStyle={"solid"}
-                  borderWidth={"1px"}
-                  borderColor={"white"}
-                  borderRadius={"md"}
-                  py={1}
-                  px={4}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
-                  <Text
-                    py={2}
-                    mt={-4}
-                    textAlign={"center"}
-                    fontSize={"14px"}
-                    color={"white"}
-                    bgColor={"transparent"}
-                  >
-                    {keyword}
-                  </Text>
-                </Flex>
-              ))}
-            </HStack>
             <Stack
               id="resultDetailsCard"
               spacing={0}
@@ -251,6 +232,7 @@ const ResultPage = () => {
                   spacing={2}
                   justifyContent={"center"}
                   alignItems={"start"}
+                  mb={4}
                 >
                   <Box width={"45%"}>
                     <Img
@@ -268,37 +250,38 @@ const ResultPage = () => {
                     </Text>
                     <Spacer />
                     <Text mb={-4}>人格隱藏度</Text>
-                    <Text mt={-2} py={0} fontSize={"60px"}>
+                    <Text mt={-2} py={0} fontSize={"48px"}>
                       {result?.personality_hidden}
                     </Text>
                   </Stack>
                 </HStack>
-                <Text zIndex={10} mb={4} color={"black"}>
+                <HStack justifyContent={"center"} alignItems={"center"}>
+                  {result?.keywords.map((keyword) => (
+                    <Flex
+                      key={keyword}
+                      bgColor={"black"}
+                      borderRadius={"md"}
+                      color={"white"}
+                      py={1}
+                      px={4}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <Text
+                        py={2}
+                        mt={-4}
+                        textAlign={"center"}
+                        fontSize={"14px"}
+                        color={"white"}
+                        bgColor={"transparent"}
+                      >
+                        {keyword}
+                      </Text>
+                    </Flex>
+                  ))}
+                </HStack>
+                <Text zIndex={10} fontSize={"sm"} mb={4} color={"black"}>
                   {result?.description}
-                </Text>
-                <Text
-                  h={"34px"}
-                  zIndex={10}
-                  fontSize={"14px"}
-                  px={4}
-                  textAlign={"center"}
-                  color={"white"}
-                  bgColor={"black"}
-                  mb={2}
-                >
-                  你的隱藏面具
-                </Text>
-                <Text
-                  w={"full"}
-                  zIndex={10}
-                  fontSize={"24px"}
-                  fontWeight={"bold"}
-                  px={4}
-                  textAlign={"center"}
-                  mt={-4}
-                  mb={2}
-                >
-                  {result?.hidden_mask}
                 </Text>
                 <Text
                   h={"34px"}
@@ -327,14 +310,14 @@ const ResultPage = () => {
                 <Text
                   w={"full"}
                   textAlign={"center"}
-                  fontSize={"md"}
+                  fontSize={"sm"}
                   zIndex={10}
                   mb={4}
                 >
                   {result?.recommendation}
                 </Text>
                 <Img
-                  boxSize={32}
+                  boxSize={28}
                   objectFit={"contain"}
                   src="assets/images/2023logo.png"
                   alt="logo"
@@ -358,7 +341,7 @@ const ResultPage = () => {
             <Text mt={-4} py={1} textAlign={"center"} color={"white"}>
               Character designed by Early Cloud Design
             </Text>
-            <HStack justifyContent={"center"} alignItems={"center"} my={8}>
+            <HStack justifyContent={"center"} alignItems={"center"} my={4}>
               <Text color={"white"} fontSize={"xl"} textAlign={"center"}>
                 掃描
                 <ChevronRightIcon ml={-1} mt={1} boxSize={14} />

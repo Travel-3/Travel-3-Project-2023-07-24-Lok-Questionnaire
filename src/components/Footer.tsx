@@ -9,7 +9,7 @@ const Footer = () => {
       <Stack p={2} w={"100vw"} justifyContent={"center"} alignItems={"center"}>
         {router.pathname == "/result" || router.pathname == "/" ? null : (
           <Image
-            boxSize={48}
+            boxSize={32}
             objectFit={"contain"}
             src="/assets/images/2023logo.png"
             alt="logo"

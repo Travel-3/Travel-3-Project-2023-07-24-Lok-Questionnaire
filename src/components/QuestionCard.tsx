@@ -29,10 +29,10 @@ const QuestionCard = (props: QuestionCardProps) => {
       <Text fontSize={"4xl"} fontWeight={"bold"}>
         Q{currentQuestion}
       </Text>
-      <Text size="lg" mb="4">
+      <Text size="lg" mb="2">
         {question}
       </Text>
-      <Stack spacing="4" w={"100%"}>
+      <Stack spacing={3} w={"100%"}>
         {options.map((option) => {
           const radio = getRadioProps({ value: option.value });
           return (

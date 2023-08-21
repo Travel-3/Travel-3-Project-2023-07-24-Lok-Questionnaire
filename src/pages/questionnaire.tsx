@@ -161,7 +161,7 @@ const QuestionnairePage = () => {
   };
 
   return (
-    <Flex direction="column" align="center" p="8" justify={"center"}>
+    <Flex direction="column" align="center" py={4} px={8} justify={"center"}>
       {currentQuestion <= questionsData.length ? (
         <>
           <QuestionCard
