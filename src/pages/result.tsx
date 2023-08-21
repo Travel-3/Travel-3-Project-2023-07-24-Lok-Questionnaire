@@ -453,10 +453,14 @@ const ResultPage = () => {
           fontSize={"2xl"}
         >
           <Text fontSize={"lg"}>官方社交平台：</Text>
-          <Link href="https://www.facebook.com/macaodesignweek" mr={2} target='_blank'>
+          <Link
+            href="https://www.facebook.com/macaodesignweek"
+            mr={2}
+            target="_blank"
+          >
             <Icon fontSize={"3xl"} fontWeight={"bold"} as={FaFacebookF}></Icon>
           </Link>
-          <Link href="https://www.instagram.com/macao.da/" target='_blank'>
+          <Link href="https://www.instagram.com/macao.da/" target="_blank">
             <Icon fontSize={"3xl"} fontWeight={"bold"} as={FaInstagram}></Icon>
           </Link>
         </HStack>
