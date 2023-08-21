@@ -34,7 +34,7 @@ const questionsData = [
     question: "在你專注工作/學習時，突然有人打斷你",
     options: [
       { value: "q4a", label: "A. 生氣，並給臉色對方看", score: 2 },
-      { value: "q4b", label: "B. 詢問對方什麼事情，歡迎對方", score: 6 },
+      { value: "q4b", label: "B. 詢問對方甚麼事情，歡迎對方", score: 6 },
       { value: "q4c", label: "C. 在上述兩端之間", score: 4 },
     ],
   },
