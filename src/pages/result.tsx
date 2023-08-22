@@ -23,7 +23,7 @@ import { Routes } from "@/constants/routes";
 const resultData = {
   results: [
     {
-      score_range: "21-30",
+      score_range: "16-30",
       mask: "孤獨完美主義者<b>浪頭</b>",
       hidden_mask: "#小丑面具",
       personality_hidden: "37%",
