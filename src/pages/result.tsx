@@ -10,6 +10,10 @@ import {
   Spacer,
   Stack,
   Text,
+  Alert,
+  AlertDescription,
+  CloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
@@ -149,6 +153,14 @@ const ResultPage = () => {
   }, [router]);
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
+
+  const {
+    isOpen: isVisible,
+    onClose,
+    onOpen,
+  } = useDisclosure({
+    defaultIsOpen: true,
+  });
 
   return (
     <>
@@ -465,6 +477,76 @@ const ResultPage = () => {
           </Link>
         </HStack>
       </Stack>
+      {isVisible ? (
+        <Alert
+          zIndex={20}
+          bgColor={"white"}
+          bgImage={"/assets/images/background.png"}
+          backgroundSize={"cover"}
+          backgroundPosition={"center"}
+          variant="subtle"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          textAlign="center"
+          height="auto"
+          position={"fixed"}
+          bottom={0}
+          left={0}
+        >
+          <CloseButton
+            alignSelf="flex-end"
+            position="absolute"
+            right={2}
+            top={2}
+            onClick={onClose}
+          />
+          <Box>
+            <AlertDescription maxWidth="sm">
+              <Stack p={4} spacing={4}>
+                <Button
+                  bgColor={"black"}
+                  color={"white"}
+                  as="a"
+                  href={Routes[result?.recommended_route as string]}
+                  target="_blank"
+                  _hover={{
+                    bg: "black",
+                    color: "white",
+                  }}
+                >
+                  獲取你的設計週路線
+                </Button>
+                <HStack spacing={4} w={"full"}>
+                  <Button
+                    flex={1}
+                    onClick={handleDownloadImage}
+                    bgColor={"white"}
+                    color={"black"}
+                    border={"1px solid red"}
+                    borderRadius={"md"}
+                    isLoading={isGeneratingImage}
+                  >
+                    分享結果
+                  </Button>
+                  <Button
+                    flex={1}
+                    bgColor={"white"}
+                    color={"black"}
+                    border={"1px solid red"}
+                    borderRadius={"md"}
+                    onClick={() => {
+                      router.push("/");
+                    }}
+                  >
+                    再測試一次
+                  </Button>
+                </HStack>
+              </Stack>
+            </AlertDescription>
+          </Box>
+        </Alert>
+      ) : null}
     </>
   );
 };
