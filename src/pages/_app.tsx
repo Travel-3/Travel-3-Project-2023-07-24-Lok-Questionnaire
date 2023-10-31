@@ -28,28 +28,32 @@ const theme = extendTheme({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <><ChakraProvider theme={theme}>
-      <Box
-        bgImage={"/assets/images/background.png"}
-        bgSize={"cover"}
-        bgPosition={"center"}
-        bgRepeat={"repeat-y"}
-        minH={"100vh"}
-      >
-        <Stack
+    <>
+      <ChakraProvider theme={theme}>
+        <Box
+          // bgImage={"/assets/images/background.png"}
+          bgSize={"cover"}
+          bgPosition={"center"}
+          bgRepeat={"repeat-y"}
           minH={"100vh"}
-          bgGradient={"linear(transparent 0%, transparent calc(100% - 100px), rgba(255,0,0,0.3) calc(100% - 50px), rgba(255,0,0,0.6) calc(100% - 25px), rgba(255,0,0,0.8) calc(100% - 12.5px), rgba(255,0,0,1) 100%)"}
-          spacing={0}
+          overflow={"hidden"}
         >
-          <Header />
-          <Component {...pageProps} />
-          <Spacer />
-          <Footer />
-        </Stack>
-      </Box>
-    </ChakraProvider>
+          <Stack
+            minH={"100vh"}
+            // bgGradient={
+            //   "linear(transparent 0%, transparent calc(100% - 100px), rgba(255,0,0,0.3) calc(100% - 50px), rgba(255,0,0,0.6) calc(100% - 25px), rgba(255,0,0,0.8) calc(100% - 12.5px), rgba(255,0,0,1) 100%)"
+            // }
+            spacing={0}
+          >
+            {/* <Header /> */}
+            <Component {...pageProps} />
+            {/* <Spacer />
+            <Footer /> */}
+          </Stack>
+        </Box>
+      </ChakraProvider>
       <Script
-        id='Clarity'
+        id="Clarity"
         strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
@@ -58,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "ikagrdea9m");
-        `
+        `,
         }}
       />
     </>
