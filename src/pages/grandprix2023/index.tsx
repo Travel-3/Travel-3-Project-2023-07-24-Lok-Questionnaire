@@ -10,11 +10,19 @@ import {
   Image,
   HStack,
   AspectRatio,
+  Center,
+  Modal,
+  ModalOverlay,
+  ModalBody,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  useDisclosure,
   Box,
 } from "@chakra-ui/react";
-import ReactCurvedText from "react-curved-text";
 
 export default function Home() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box position={"relative"} w={"100vw"} h={"100vh"}>
       <AspectRatio
@@ -40,7 +48,6 @@ export default function Home() {
         w={"30%"}
       >
         <Button
-          as={Link}
           bgColor={"transparent"}
           w={"100%"}
           objectFit={"cover"}
@@ -48,7 +55,21 @@ export default function Home() {
           bgPosition={"center"}
           bgRepeat={"no-repeat"}
           bgSize={"contain"}
-          href="/grandprix2023/questionnaire"
+          _active={{
+            bgColor: "transparent",
+            bgImage: "/assets/grandprix2023/images/event_details.png",
+            bgPosition: "center",
+            bgRepeat: "no-repeat",
+            bgSize: "contain",
+          }}
+          _focus={{
+            bgColor: "transparent",
+            bgImage: "/assets/grandprix2023/images/event_details.png",
+            bgPosition: "center",
+            bgRepeat: "no-repeat",
+            bgSize: "contain",
+          }}
+          onClick={onOpen}
         />
       </AspectRatio>
       <AspectRatio
@@ -100,6 +121,116 @@ export default function Home() {
           }}
         />
       </AspectRatio>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        scrollBehavior="outside"
+        motionPreset="slideInBottom"
+        trapFocus={false}
+      >
+        <ModalOverlay height="100vh" />
+        <ModalContent
+          h={"55vh"}
+          position="fixed"
+          bottom="0px"
+          mb="0"
+          borderRadius="1.75rem 1.75rem 0px 0px"
+          maxW="lg"
+        >
+          <AspectRatio
+            position={"absolute"}
+            ratio={1082 / 1270}
+            w={"100%"}
+            height={"100%"}
+            objectFit={"cover"}
+          >
+            <Image
+              w={"100%"}
+              objectFit={"cover"}
+              h={"100%"}
+              src="/assets/grandprix2023/images/event_detail_bg.png"
+              alt="event_detail_bg"
+            />
+          </AspectRatio>
+          <ModalHeader
+            position={"relative"}
+            display={"flex"}
+            justifyContent={"center"}
+            textAlign="center"
+            fontSize="3xl"
+            w={"full"}
+            mx={"auto"}
+          >
+            <AspectRatio
+              position={"absolute"}
+              top={"-80%"}
+              ratio={463 / 124}
+              w={"40%"}
+              mx={"auto"}
+            >
+              <Image
+                w={"100%"}
+                src="/assets/grandprix2023/images/event_detail_text.png"
+                alt="event_detail_text"
+              />
+            </AspectRatio>
+          </ModalHeader>
+          <ModalCloseButton
+            size={"sm"}
+            position={"absolute"}
+            fontSize={"2xs"}
+            fontWeight={"bold"}
+            top={"-8%"}
+            color={"white"}
+            border={"2px"}
+            borderRadius={"full"}
+            outline="none"
+            _focus={{ outline: "none" }}
+          />
+          <ModalBody>
+            <Center
+              flexDir="column"
+              mt="4"
+              mb="4"
+              overflow={"scroll"}
+              h={"60%"}
+            >
+              <Text
+                px={4}
+                zIndex={20}
+                fontSize={"xl"}
+                fontWeight={"bold"}
+                color={"black"}
+                overflow={"scroll"}
+              >
+                Travel
+                Buddy考下您賽車知識，送您賽車門票和精美紀念品！如何參加抽獎 ?
+                <br />
+                <br />
+                ------------
+                <br />
+                ------------
+                <br />
+                ------------
+                <br />
+                <br />
+                參加者只需參與「賽車Q&A送大禮」活動，參與賽車Q&A，即有機會參與抽獎！參加者只需參與「賽車Q&A送大禮」活動，參與賽車Q&A，即有機會參與抽獎！
+                <br />
+                <br />
+                ------------
+                <br />
+                ------------
+                <br />
+                ------------
+                <br />
+                <br />
+                參加者只需參與「賽車Q&A送大禮」活動，參與賽車Q&A，即有機會參與抽獎！參加者只需參與「賽車Q&A送大禮」活動，參與賽車Q&A，即有機會參與抽獎！
+              </Text>
+            </Center>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
