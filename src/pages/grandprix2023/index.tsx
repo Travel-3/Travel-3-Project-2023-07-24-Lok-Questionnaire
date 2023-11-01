@@ -19,10 +19,20 @@ import {
   ModalHeader,
   useDisclosure,
   Box,
+  ModalFooter,
 } from "@chakra-ui/react";
 
 export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenDetailModal,
+    onOpen: onOpenDetailModal,
+    onClose: onCloseDetailModal,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenPrizeModal,
+    onOpen: onOpenPrizeModal,
+    onClose: onClosePrizeModal,
+  } = useDisclosure();
   return (
     <Box position={"relative"} w={"100vw"} h={"100vh"}>
       <AspectRatio
@@ -69,7 +79,7 @@ export default function Home() {
             bgRepeat: "no-repeat",
             bgSize: "contain",
           }}
-          onClick={onOpen}
+          onClick={onOpenDetailModal}
         />
       </AspectRatio>
       <AspectRatio
@@ -81,7 +91,6 @@ export default function Home() {
         w={"30%"}
       >
         <Button
-          as={Link}
           bgColor={"transparent"}
           w={"100%"}
           objectFit={"cover"}
@@ -89,7 +98,21 @@ export default function Home() {
           bgPosition={"center"}
           bgRepeat={"no-repeat"}
           bgSize={"contain"}
-          href="/grandprix2023/questionnaire"
+          _active={{
+            bgColor: "transparent",
+            bgImage: "/assets/grandprix2023/images/event_prize.png",
+            bgPosition: "center",
+            bgRepeat: "no-repeat",
+            bgSize: "contain",
+          }}
+          _focus={{
+            bgColor: "transparent",
+            bgImage: "/assets/grandprix2023/images/event_prize.png",
+            bgPosition: "center",
+            bgRepeat: "no-repeat",
+            bgSize: "contain",
+          }}
+          onClick={onOpenPrizeModal}
         />
       </AspectRatio>
       <AspectRatio
@@ -123,8 +146,8 @@ export default function Home() {
       </AspectRatio>
       <Modal
         isCentered
-        onClose={onClose}
-        isOpen={isOpen}
+        onClose={onCloseDetailModal}
+        isOpen={isOpenDetailModal}
         scrollBehavior="outside"
         motionPreset="slideInBottom"
         trapFocus={false}
@@ -229,6 +252,89 @@ export default function Home() {
               </Text>
             </Center>
           </ModalBody>
+        </ModalContent>
+      </Modal>
+      <Modal onClose={onClosePrizeModal} isOpen={isOpenPrizeModal} isCentered>
+        <ModalOverlay height="100vh" />
+        <ModalContent
+          position={"relative"}
+          h={"60vh"}
+          mx={4}
+          bgPosition={"center"}
+          bgRepeat={"no-repeat"}
+          bgSize={"cover"}
+          // bgImage={'/assets/grandprix2023/images/event_prize_bg.png'}
+        >
+          {/* <AspectRatio
+            position={'absolute'}
+            top={0}
+            ratio={1080 / 2074}
+            w={'100%'}
+            maxH={'60vh'}
+            objectFit={'cover'}
+          >
+            <Image
+              // w={'100%'}
+              h={'100%'}
+              objectFit={'cover'}
+              src="/assets/grandprix2023/images/event_prize_bg.png"
+              alt="event_prize_bg"
+              zIndex={10}
+            />
+          </AspectRatio> */}
+          <ModalHeader
+            position={"relative"}
+            display={"flex"}
+            justifyContent={"center"}
+            textAlign="center"
+            fontSize="3xl"
+            w={"full"}
+            mx={"auto"}
+          >
+            <AspectRatio
+              position={"absolute"}
+              top={"-80%"}
+              ratio={459 / 124}
+              w={"40%"}
+              mx={"auto"}
+            >
+              <Image
+                w={"100%"}
+                src="/assets/grandprix2023/images/event_prize_text.png"
+                alt="event_prize_text"
+              />
+            </AspectRatio>
+          </ModalHeader>
+          <ModalCloseButton
+            size={"sm"}
+            position={"absolute"}
+            fontSize={"2xs"}
+            fontWeight={"bold"}
+            top={"-7%"}
+            color={"white"}
+            border={"2px"}
+            borderRadius={"full"}
+            outline="none"
+            _focus={{ outline: "none" }}
+          />
+          <ModalBody></ModalBody>
+          <ModalFooter display={"flex"} justifyContent={"center"}>
+            {/* <Button onClick={onClosePrizeModal}>Close</Button> */}
+            <AspectRatio
+              position={"absolute"}
+              bottom={"-5%"}
+              ratio={318 / 123}
+              w={"40%"}
+              mx={"auto"}
+              zIndex={20}
+            >
+              <Image
+                w={"100%"}
+                src="/assets/grandprix2023/images/invite_friends_button.png"
+                alt="invite_friends_button"
+              />
+            </AspectRatio>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Box>
