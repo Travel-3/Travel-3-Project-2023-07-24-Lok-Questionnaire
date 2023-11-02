@@ -1,9 +1,6 @@
-// components/QuestionCard.tsx
-import React from "react";
 import {
   Text,
   Stack,
-  Button,
   useRadioGroup,
   AspectRatio,
   Image,
@@ -19,14 +16,14 @@ interface QuestionCardProps {
   question: string;
   options: Option[];
   onNext: (selectedOption: string) => void;
-  currentQuestion: number;
+  // currentQuestion: number;
   questionLogo?: string;
 }
 
 const QuestionCard = (props: QuestionCardProps) => {
-  const { question, options, onNext, currentQuestion, questionLogo } = props;
+  const { question, options, onNext, questionLogo } = props;
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRadioProps } = useRadioGroup({
     name: "framework",
     defaultValue: "react",
     onChange: (value: string) => onNext(value),
@@ -34,7 +31,7 @@ const QuestionCard = (props: QuestionCardProps) => {
 
   return (
     <Stack justifyContent={"center"} textAlign={"center"} w={"100%"}>
-      <AspectRatio ratio={158 / 121} w={"20%"} mb={6}>
+      <AspectRatio ratio={157 / 120} w={"20%"} mb={6}>
         <Image
           objectFit={"cover"}
           w={"100%"}
@@ -43,19 +40,20 @@ const QuestionCard = (props: QuestionCardProps) => {
         />
       </AspectRatio>
       <Text
-        mb="2"
-        fontWeight={"extrabold"}
-        fontSize={"2xl"}
+        mb={4}
+        fontWeight={700}
+        fontSize={"xl"}
+        fontFamily={"Noto Sans TC"}
         color={"black"}
         textAlign={"left"}
       >
         {question}
       </Text>
-      <Stack spacing={3} w={"100%"}>
-        {options.map((option) => {
+      <Stack spacing={3} w={"100%"} px={4}>
+        {options.map((option, index) => {
           const radio = getRadioProps({ value: option.value });
           return (
-            <RadioCard w={"100%"} key={option.value} {...radio}>
+            <RadioCard w={"100%"} key={option.value} {...radio} id={index}>
               {option.label}
             </RadioCard>
           );
