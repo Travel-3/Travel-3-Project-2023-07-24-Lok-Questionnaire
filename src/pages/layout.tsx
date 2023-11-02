@@ -1,4 +1,4 @@
-// app/layout.tsx
+import { Box } from "@chakra-ui/react";
 
 export default function RootLayout({
   children,
@@ -6,8 +6,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <Box
+      overflow="hidden"
+      w="100vw"
+      sx={{
+        "-ms-overflow-style": "none",
+        "scrollbar-width": "none",
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+      }}
+    >
+      {children}
+    </Box>
   );
 }

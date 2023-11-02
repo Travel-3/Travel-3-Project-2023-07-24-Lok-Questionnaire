@@ -22,7 +22,7 @@ import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { saveAs } from "file-saver";
 import { useState, useEffect, useCallback } from "react";
-import Loading from "@/components/grandprix2023/Loading";
+import Loading from "@/components/GrandPrix2023/Loading";
 import html2canvas from "html2canvas";
 import { Routes } from "@/constants/routes";
 

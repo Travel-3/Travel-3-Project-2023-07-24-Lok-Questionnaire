@@ -10,7 +10,7 @@ import {
   Image,
   Box,
 } from "@chakra-ui/react";
-import QuestionCard from "@/components/grandprix2023/QuestionCard";
+import QuestionCard from "@/components/GrandPrix2023/QuestionCard";
 import { useRouter } from "next/router";
 
 const questionsData = [
