@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 
 export default function RootLayout({
   children,
@@ -6,18 +6,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Box
+    <Container
       overflow="hidden"
+      px={0}
       w="100vw"
+      position={"relative"}
       sx={{
-        "-ms-overflow-style": "none",
-        "scrollbar-width": "none",
+        "msOverflowStyle?": "none",
+        scrollbarWidth: "none",
         "&::-webkit-scrollbar": {
           display: "none",
         },
       }}
     >
       {children}
-    </Box>
+    </Container>
   );
 }
