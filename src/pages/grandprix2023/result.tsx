@@ -264,8 +264,7 @@ const ResultPage = () => {
                 color={"black"}
                 textAlign={"center"}
               >
-                參加者只需參與「賽車Q&A送大禮」
-                活動，參與賽車Q&A，即有機會參與抽獎！參加者只需參與「賽車Q&A送大禮」活動，參與賽車Q&A，即有機會參與抽獎！
+                參加者只需參與「賽車Q&A送大禮」活動，參與賽車Q&A，再分享結果，最受歡迎的分享將可贏取獎品！
               </Text>
             </Stack>
             <AspectRatio

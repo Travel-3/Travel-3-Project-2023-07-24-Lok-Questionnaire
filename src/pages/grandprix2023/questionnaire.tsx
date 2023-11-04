@@ -18,38 +18,51 @@ import { Global, css } from "@emotion/react";
 
 const questionsData = [
   {
-    question: "一天當中，哪一個時間段讓你覺得最舒服?",
+    question: "今年是第 （ ）屆的澳門格蘭披治大賽車？",
     options: [
-      { value: "q1a", label: "早上", score: 2 },
-      { value: "q1b", label: "下午或黃昏", score: 4 },
-      { value: "q1c", label: "深夜", score: 6 },
+      { value: "q1a", label: "70", score: 10 },
+      { value: "q1b", label: "60", score: 1 },
+      { value: "q1c", label: "80", score: 3 },
+      { value: "q1d", label: "99", score: 3 },
     ],
     meta: {
       question_logo: "/assets/grandprix2023/images/q1.svg",
     },
   },
   {
-    question: "辦公室/休息時，你喜歡的坐姿是?",
+    question: "賽車旗號題，賽事完結會以哪個旗號表示？",
     options: [
-      { value: "q2a", label: "兩腳交叉", score: 4 },
-      { value: "q2b", label: "膝蓋併攏", score: 6 },
-      { value: "q2c", label: "伸直雙腿", score: 2 },
-      { value: "q2d", label: "一腿蜷縮在身下", score: 1 },
+      { value: "q2a", label: "藍旗", score: 1 },
+      { value: "q2b", label: "黑旗", score: 2 },
+      { value: "q2c", label: "黃旗", score: 3 },
+      { value: "q2d", label: "黑白格旗", score: 10 },
     ],
     meta: {
       question_logo: "/assets/grandprix2023/images/q2.svg",
     },
   },
   {
-    question: "當你刷到很好笑的視頻時候，你會?",
+    question: "澳門格蘭披治三級方程式大賽圈速記錄 保持者為？",
     options: [
-      { value: "q3a", label: "開懷大笑", score: 6 },
-      { value: "q3b", label: "輕聲捂嘴笑", score: 3 },
-      { value: "q3c", label: "強忍不發出聲音笑", score: 4 },
-      { value: "q3d", label: "羞怯地微笑", score: 5 },
+      { value: "q3a", label: "維比斯", score: 10 },
+      { value: "q3b", label: "菲比斯", score: 3 },
+      { value: "q3c", label: "美斯", score: 2 },
+      { value: "q3d", label: "雲迪素", score: 1 },
     ],
     meta: {
       question_logo: "/assets/grandprix2023/images/q3.svg",
+    },
+  },
+  {
+    question: "澳門澳門GT盃圈速記錄圈速記錄 保持者為？",
+    options: [
+      { value: "q4a", label: "班博", score: 10 },
+      { value: "q4b", label: "阿木", score: 1 },
+      { value: "q4c", label: "拓海", score: 3 },
+      { value: "q4d", label: "拓也", score: 2 },
+    ],
+    meta: {
+      question_logo: "/assets/grandprix2023/images/q4.svg",
     },
   },
 ];
@@ -207,7 +220,7 @@ const QuestionnairePage = () => {
                 h={`${160 * 0.28431372549019607}px`}
                 onClick={handleGenerateClick}
               >
-                <Text fontWeight={700}>生成你的貓貓</Text>
+                <Text fontWeight={700}>生成你的車手貓貓</Text>
               </Button>
             </Stack>
           )}
