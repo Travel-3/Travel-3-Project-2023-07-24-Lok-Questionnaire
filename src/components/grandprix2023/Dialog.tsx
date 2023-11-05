@@ -84,7 +84,6 @@ export const DialogContent = ({ children }: PropsWithChildren) => {
       maxH="60vh"
       overflowY="scroll"
     >
-      {/* <Image src='/assets/grandprix2023/images/DialogContent.png' w='100%' alt='content' /> */}
       <Box>{children}</Box>
     </Box>
   );

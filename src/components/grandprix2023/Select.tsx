@@ -1,6 +1,6 @@
 import { chakra } from "@chakra-ui/react";
 
-const Input = chakra("input", {
+const Select = chakra("select", {
   baseStyle: {
     backgroundColor: "#ffc600",
     border: "3px",
@@ -12,10 +12,10 @@ const Input = chakra("input", {
     outline: "none",
     color: "black",
     borderRadius: "6px",
-    padding: "0.5rem 1rem",
+    padding: "0.5rem 0.5rem",
     height: "auto",
     lineHeight: "auto",
   },
 });
 
-export default Input;
+export default Select;

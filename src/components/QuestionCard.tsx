@@ -1,5 +1,5 @@
 // components/QuestionCard.tsx
-import React from "react";
+
 import { Text, Stack, Button, useRadioGroup } from "@chakra-ui/react";
 import RadioCard from "./RadioCard";
 

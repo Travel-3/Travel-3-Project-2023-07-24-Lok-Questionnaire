@@ -1,17 +1,20 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // const windowSize = useWindowSize();
   return (
     <Container
-      overflow="hidden"
+      overflowX="hidden"
+      overflowY="scroll"
       px={0}
       w="100vw"
-      position={"relative"}
+      h="100vh"
       sx={{
+        maxHeight: "-webkit-fill-available",
         "msOverflowStyle?": "none",
         scrollbarWidth: "none",
         "&::-webkit-scrollbar": {

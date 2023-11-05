@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
-import {
-  Flex,
-  // Heading,
-  // Input,
-  // Button,
-  Stack,
-  Text,
-  AspectRatio,
-  Image,
-  Box,
-} from "@chakra-ui/react";
+import { Flex, Stack, Text, AspectRatio, Image, Box } from "@chakra-ui/react";
 import QuestionCard from "@/components/GrandPrix2023/QuestionCard";
 import { useRouter } from "next/router";
 import Input from "@/components/GrandPrix2023/Input";
 import Button from "@/components/GrandPrix2023/Button";
 import { Global, css } from "@emotion/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
+// import Select from "@/components/GrandPrix2023/Select";
 
 const questionsData = [
   {
@@ -26,7 +20,7 @@ const questionsData = [
       { value: "q1d", label: "99", score: 3 },
     ],
     meta: {
-      question_logo: "/assets/grandprix2023/images/q1.svg",
+      question_logo: "/assets/grandprix2023/images/Q1.svg",
     },
   },
   {
@@ -38,7 +32,7 @@ const questionsData = [
       { value: "q2d", label: "黑白格旗", score: 10 },
     ],
     meta: {
-      question_logo: "/assets/grandprix2023/images/q2.svg",
+      question_logo: "/assets/grandprix2023/images/Q2.svg",
     },
   },
   {
@@ -50,7 +44,7 @@ const questionsData = [
       { value: "q3d", label: "雲迪素", score: 1 },
     ],
     meta: {
-      question_logo: "/assets/grandprix2023/images/q3.svg",
+      question_logo: "/assets/grandprix2023/images/Q3.svg",
     },
   },
   {
@@ -62,40 +56,50 @@ const questionsData = [
       { value: "q4d", label: "拓也", score: 2 },
     ],
     meta: {
-      question_logo: "/assets/grandprix2023/images/q4.svg",
+      question_logo: "/assets/grandprix2023/images/Q4.svg",
     },
   },
 ];
 
 const MAX_QUESTIONS = questionsData.length;
 
+const schema = zod.object({
+  username: zod
+    .string()
+    .min(1, { message: "名字不能為空！" })
+    .max(10, { message: "名字不能超過10個字符！" }),
+  // phone: zod.string().min(1, { message: '手機號碼不能為空！' }).max(10, { message: '手機號碼不能超過10個字符！' }),
+  // region: zod.number().min(1, { message: '請選擇地區！' }),
+});
+
 const QuestionnairePage = () => {
   const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState<any>({});
   const [totalScore, setTotalScore] = useState(0);
-  const [userName, setUserName] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isValid, setIsValid] = useState(false);
 
-  const handleGenerateClick = () => {
-    // Reset validation states
-    setIsValid(true);
-    setErrorMessage("");
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: "",
+      phone: "",
+      region: 853,
+    },
+    resolver: zodResolver(schema),
+  });
 
-    if (!userName) {
-      setIsValid(false);
-      setErrorMessage("名字不能為空！");
-      return;
-    }
-
-    if (userName.length > 10) {
-      setIsValid(false);
-      setErrorMessage("名字不能超過10個字符！");
-      return;
-    }
-
-    router.push(`/grandprix2023/result?score=${totalScore}&name=${userName}`);
+  const handleGenerateClick = (data: {
+    username: string;
+    phone: string;
+    region: number;
+  }) => {
+    // console.log("totalScore", totalScore);
+    router.push(
+      `/grandprix2023/result?score=${totalScore}&name=${data.username}&ref=${router.query.ref}`,
+    );
   };
 
   useEffect(() => {
@@ -147,7 +151,7 @@ const QuestionnairePage = () => {
           <Image
             w={"100%"}
             objectFit={"cover"}
-            src="/assets/grandprix2023/images/questionnaire_bg.png"
+            src="/assets/grandprix2023/images/questionnaire_background.webp"
             alt="questionnaire_bg"
           />
         </AspectRatio>
@@ -180,7 +184,6 @@ const QuestionnairePage = () => {
                 question={questionsData[currentQuestion - 1].question}
                 options={questionsData[currentQuestion - 1].options}
                 onNext={handleNextQuestion}
-                // currentQuestion={currentQuestion}
                 questionLogo={
                   questionsData[currentQuestion - 1].meta.question_logo
                 }
@@ -189,36 +192,40 @@ const QuestionnairePage = () => {
           ) : (
             <Stack
               position={"absolute"}
-              top={"15%"}
+              bottom={"50%"}
               px={6}
-              spacing="0"
+              spacing={3}
               align="center"
             >
-              <Text
-                mb={4}
-                fontSize="4xl"
-                fontWeight={"extrabold"}
-                color={"black"}
-              >
-                測驗完成
-              </Text>
-              <Text mb={4} fontSize={"lg"} fontWeight={"bold"} color={"black"}>
+              <Text fontSize={"xl"} fontWeight={"bold"} color={"black"}>
                 輸入你的名字
               </Text>
-              <Input
-                value={userName}
-                onChange={(event) => setUserName(event.target.value)}
-              />
-              {!isValid && (
+              <Input {...register("username")} />
+              {/* <Text mt={2} fontSize={"xl"} fontWeight={"bold"} color={"black"}>
+                輸入你的手機號碼
+              </Text>
+              <HStack  spacing={1}>
+                <Select placeholder='+853' >
+                  <option value='+853'>+853</option>
+                  <option value='+852'>+852</option>
+                  <option value='+86'>+86</option>
+                </Select>
+                <Input
+                  {...register("phone")}
+                />
+              </HStack> */}
+
+              {errors && (
                 <Text w={"full"} float={"left"} fontSize={"sm"} color="red">
-                  {errorMessage}
+                  {errors.username?.message}
+                  {errors.phone?.message}
                 </Text>
               )}
               <Button
-                mt={4}
-                w="160px"
-                h={`${160 * 0.28431372549019607}px`}
-                onClick={handleGenerateClick}
+                mt={2}
+                w="180px"
+                h={`${180 * 0.28431372549019607}px`}
+                onClick={handleSubmit(handleGenerateClick)}
               >
                 <Text fontWeight={700}>生成你的車手貓貓</Text>
               </Button>
