@@ -79,7 +79,7 @@ export default function BottomSheet() {
       <Drawer
         isOpen={isOpen}
         placement="bottom"
-        onClose={() => setIsOpen(true)}
+        onClose={() => setIsOpen(false)}
       >
         <DrawerOverlay />
         <DrawerContent borderRadius="12px 12px 0px 0px">

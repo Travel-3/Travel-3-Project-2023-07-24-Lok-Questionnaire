@@ -96,9 +96,10 @@ const QuestionnairePage = () => {
     phone: string;
     region: number;
   }) => {
+    const ref = router.query.ref ?? "";
     // console.log("totalScore", totalScore);
     router.push(
-      `/grandprix2023/result?score=${totalScore}&name=${data.username}&ref=${router.query.ref}`,
+      `/grandprix2023/result?score=${totalScore}&name=${data.username}&ref=${ref}`,
     );
   };
 

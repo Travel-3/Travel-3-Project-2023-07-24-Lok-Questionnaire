@@ -54,7 +54,7 @@ const ResultPage = () => {
 
   const isLoaded = useImagesOnLoad([
     "/assets/grandprix2023/images/questionnaire_background.webp",
-    "/assets/grandprix2023/images/gp2023_travelbuddy_logo.png",
+    // "/assets/grandprix2023/images/gp2023_travelbuddy_logo.png",
     "/assets/grandprix2023/images/Frame 9.png",
     "/assets/grandprix2023/images/Frame 7.png",
     "/assets/grandprix2023/images/Frame 8.png",
@@ -200,11 +200,11 @@ const ResultPage = () => {
       <Box bottom={"4%"} position={"absolute"} w={"100vw"} h={8} zIndex={100}>
         <AspectRatio
           position={"absolute"}
-          left={"4%"}
+          left={"3%"}
           ratio={320 / 123}
           w={"30%"}
         >
-          <Button
+          <Box
             bgColor={"transparent"}
             w={"100%"}
             bgImage="/assets/grandprix2023/images/share_button.png"
@@ -212,37 +212,37 @@ const ResultPage = () => {
             bgRepeat={"no-repeat"}
             bgSize={"cover"}
             onClick={handleDownloadImage}
-            _active={{
-              bgImage: "/assets/grandprix2023/images/share_button.png",
-              bgPosition: "center",
-              bgRepeat: "no-repeat",
-              bgSize: "cover",
-              bgColor: "transparent",
-            }}
+            // _active={{
+            //   bgImage: "/assets/grandprix2023/images/share_button.png",
+            //   bgPosition: "center",
+            //   bgRepeat: "no-repeat",
+            //   bgSize: "cover",
+            //   bgColor: "transparent",
+            // }}
           />
         </AspectRatio>
 
         <Link href="/grandprix2023">
           <AspectRatio
             position={"absolute"}
-            right={"4%"}
+            right={"3%"}
             ratio={320 / 123}
             w={"30%"}
           >
-            <Button
+            <Box
               bgColor={"transparent"}
               w={"100%"}
               bgImage="/assets/grandprix2023/images/replay_button.png"
               bgPosition={"center"}
               bgRepeat={"no-repeat"}
               bgSize={"cover"}
-              _active={{
-                bgColor: "transparent",
-                bgImage: "/assets/grandprix2023/images/replay_button.png",
-                bgPosition: "center",
-                bgRepeat: "no-repeat",
-                bgSize: "cover",
-              }}
+              // _active={{
+              //   bgColor: "transparent",
+              //   bgImage: "/assets/grandprix2023/images/replay_button.png",
+              //   bgPosition: "center",
+              //   bgRepeat: "no-repeat",
+              //   bgSize: "cover",
+              // }}
             />
           </AspectRatio>
         </Link>
