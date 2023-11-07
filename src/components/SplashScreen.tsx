@@ -1,12 +1,14 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { type PropsWithChildren } from "react";
 import InView from "./InView";
+import useCounter from "@/hooks/useCounter";
 
 export default function SplashScreen({
   title,
   isLoaded,
   children,
 }: { isLoaded?: boolean; title?: string } & PropsWithChildren) {
+  const counter = useCounter(0, 100, 300);
   return (
     <>
       <Box
@@ -37,7 +39,7 @@ export default function SplashScreen({
             fontWeight={"bold"}
             color={"black"}
           >
-            Loading 100%
+            Loading {counter}%
           </Text>
         </Flex>
       </Box>

@@ -26,9 +26,8 @@ export const useDeviceID = () => {
 
   useEffect(() => {
     if (!deviceID) {
-      const newDeviceID = nanoid();
+      const newDeviceID = nanoid(7);
       setDeviceID(newDeviceID);
-      // return newDeviceID;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

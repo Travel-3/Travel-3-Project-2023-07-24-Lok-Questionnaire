@@ -1,6 +1,6 @@
 // components/QuestionCard.tsx
 
-import { Text, Stack, Button, useRadioGroup } from "@chakra-ui/react";
+import { Text, Stack, useRadioGroup } from "@chakra-ui/react";
 import RadioCard from "./RadioCard";
 
 interface Option {
@@ -18,7 +18,7 @@ interface QuestionCardProps {
 const QuestionCard = (props: QuestionCardProps) => {
   const { question, options, onNext, currentQuestion } = props;
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRadioProps } = useRadioGroup({
     name: "framework",
     defaultValue: "react",
     onChange: (value: string) => onNext(value),

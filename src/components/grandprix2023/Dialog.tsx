@@ -75,7 +75,7 @@ export const DialogHeader = () => {
 export const DialogContent = ({ children }: PropsWithChildren) => {
   return (
     <Box
-      backgroundImage={"url(/assets/grandprix2023/images/DialogContent.png)"}
+      backgroundImage={"url(/assets/grandprix2023/images/DialogContent.webp)"}
       backgroundSize="cover"
       p={4}
       sx={{

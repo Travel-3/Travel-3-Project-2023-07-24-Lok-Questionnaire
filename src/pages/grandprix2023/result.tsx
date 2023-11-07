@@ -1,64 +1,78 @@
 // pages/result.js
 import {
   Box,
-  Button,
   Flex,
   Image as Img,
-  // Link,
   Text,
   AspectRatio,
   Image,
   Center,
+  HStack,
+  Icon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import { useState, useEffect } from "react";
-// import Loading from "@/components/GrandPrix2023/Loading";
 import html2canvas from "html2canvas";
 import useImagesOnLoad from "@/hooks/useImagesOnLoad";
 import QrCode from "qrcode.react";
 import useLongPress from "@/hooks/useLongPress";
 import { Global, css } from "@emotion/react";
 import { useDeviceID } from "@/hooks/useDeviceID";
-// import css from "styled-jsx/css";
+import { RiFacebookCircleLine, RiInstagramLine } from "react-icons/ri";
 import Link from "next/link";
-import BottomSheet from "@/components/BottomSheet";
+import dynamic from "next/dynamic";
+// import InView from "@/components/InView";
+// import BottomSheet from "@/components/BottomSheet";
+
+const BottomSheet = dynamic(() => import("@/components/BottomSheet"), {
+  ssr: false,
+});
 
 const Result = [
   {
     score_range: [0, 19],
     name: "新手級車手",
-    avatar: "/assets/grandprix2023/images/Frame 9.png",
+    avatar: "/assets/grandprix2023/images/Frame 9.webp",
   },
   {
     score_range: [20, 29],
     name: "業餘級車手",
-    avatar: "/assets/grandprix2023/images/Frame 7.png",
+    avatar: "/assets/grandprix2023/images/Frame 7.webp",
   },
   {
     score_range: [30, 39],
     name: "職業級車手",
-    avatar: "/assets/grandprix2023/images/Frame 8.png",
+    avatar: "/assets/grandprix2023/images/Frame 8.webp",
   },
   {
     score_range: [40, 40],
     name: "世界級車手",
-    avatar: "/assets/grandprix2023/images/Frame 6.png",
+    avatar: "/assets/grandprix2023/images/Frame 6.webp",
   },
 ];
+
+// async function dataUrlToFile(dataUrl: string, filename: string) {
+//   const res = await fetch(dataUrl);
+//   const blob = await res.blob();
+//   return new File([blob], filename, {
+//     type: "image/png",
+//     lastModified: new Date().getTime()
+//   });
+// }
 
 const ResultPage = () => {
   const router = useRouter();
   const { score, name } = router.query;
   const [imageDataUrl, setImageDataUrl] = useState("");
+  const [imageBlob, setImageBlob] = useState<Blob | null>();
 
   const isLoaded = useImagesOnLoad([
     "/assets/grandprix2023/images/questionnaire_background.webp",
-    // "/assets/grandprix2023/images/gp2023_travelbuddy_logo.png",
-    "/assets/grandprix2023/images/Frame 9.png",
-    "/assets/grandprix2023/images/Frame 7.png",
-    "/assets/grandprix2023/images/Frame 8.png",
-    "/assets/grandprix2023/images/Frame 6.png",
+    "/assets/grandprix2023/images/Frame 9.webp",
+    "/assets/grandprix2023/images/Frame 7.webp",
+    "/assets/grandprix2023/images/Frame 8.webp",
+    "/assets/grandprix2023/images/Frame 6.webp",
   ]);
 
   const result = Result.find((item) => {
@@ -67,7 +81,7 @@ const ResultPage = () => {
   });
 
   const deviceID = useDeviceID();
-  console.log("device", deviceID, result);
+  // console.log("device", deviceID, result);
 
   const buildImage = () => {
     const node: any = document.getElementById("resultCard");
@@ -77,14 +91,32 @@ const ResultPage = () => {
       useCORS: true,
     }).then((canvas) => {
       setImageDataUrl(canvas.toDataURL());
+      canvas.toBlob((blob) => setImageBlob(blob));
     });
   };
 
   const handleDownloadImage = async () => {
-    // alert(imageDataUrl)
-    if (!imageDataUrl) return alert("請刷新頁面後再試一次！");
+    if (!imageDataUrl || !imageBlob) return alert("請刷新頁面後再試一次！");
 
-    saveAs(imageDataUrl, "Travel3 x Grand Prix 2023");
+    const url = window.URL.createObjectURL(imageBlob);
+    window.open(url, "_blank");
+    // if (!navigator.canShare) return saveAs(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`);
+
+    // const file = await dataUrlToFile(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`)
+    // if (navigator.canShare({ files: [file] })) {
+    //   try {
+    //     await navigator.share({
+    //       files: [file],
+    //       title: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+    //       text: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+    //       url: shareUrl
+    //     });
+    //     alert("Travel3「賽車Q&A送大禮」活動分享成功!");
+
+    //   } catch (error) {
+    //     alert("Travel3「賽車Q&A送大禮」活動分享失敗!");
+    //   }
+    // }
   };
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
@@ -95,13 +127,15 @@ const ResultPage = () => {
     }
   }, [isLoaded, router.query]);
 
+  const shareUrl = `https://t3-queestionnaire.vercel.app/grandprix2023/${deviceID}`;
+
   return (
     <>
       <Global
         styles={css`
           body,
           html {
-            background-color: rgb(62, 102, 209);
+            background-color: #316adf;
           }
         `}
       />
@@ -163,8 +197,8 @@ const ResultPage = () => {
           <Box mt={3} px={8}>
             <Text
               px={2}
-              fontSize={"lg"}
-              fontWeight={900}
+              fontSize={"md"}
+              fontWeight={700}
               color={"black"}
               textAlign={"center"}
             >
@@ -172,20 +206,10 @@ const ResultPage = () => {
             </Text>
           </Box>
           <Center mt={3}>
-            <QrCode
-              bgColor="transparent"
-              level="L"
-              value={`https://travel3.app/gp2023/${deviceID}`}
-            />
+            <QrCode bgColor="transparent" level="L" value={shareUrl} />
           </Center>
-          <Text
-            textAlign="center"
-            mt={1}
-            px={12}
-            fontWeight={700}
-            fontSize="sm"
-          >
-            https://travel3.app/gp2023/{deviceID}
+          <Text textAlign="center" mt={1} px={6} fontWeight={700} fontSize="sm">
+            {shareUrl}
           </Text>
         </Box>
       </Box>
@@ -196,7 +220,34 @@ const ResultPage = () => {
         objectFit={"cover"}
         display="none"
       />
-
+      <Box mb={16}>
+        <HStack spacing={0} justifyContent={"center"} alignItems={"center"}>
+          <Text fontSize={"md"} fontWeight={700}>
+            官方社交平台：
+          </Text>
+          <Link
+            href="https://www.facebook.com/profile.php?id=100089729841964"
+            target="_blank"
+          >
+            <Icon
+              fontSize={"3xl"}
+              fontWeight={"bold"}
+              as={RiFacebookCircleLine}
+            ></Icon>
+          </Link>
+          <Link
+            href="https://www.instagram.com/travel3_official/"
+            target="_blank"
+          >
+            <Icon
+              fontSize={"3xl"}
+              fontWeight={"bold"}
+              as={RiInstagramLine}
+            ></Icon>
+          </Link>
+        </HStack>
+        <Text textAlign="center">Powered by Travel3</Text>
+      </Box>
       <Box bottom={"4%"} position={"absolute"} w={"100vw"} h={8} zIndex={100}>
         <AspectRatio
           position={"absolute"}
@@ -212,13 +263,6 @@ const ResultPage = () => {
             bgRepeat={"no-repeat"}
             bgSize={"cover"}
             onClick={handleDownloadImage}
-            // _active={{
-            //   bgImage: "/assets/grandprix2023/images/share_button.png",
-            //   bgPosition: "center",
-            //   bgRepeat: "no-repeat",
-            //   bgSize: "cover",
-            //   bgColor: "transparent",
-            // }}
           />
         </AspectRatio>
 
@@ -236,13 +280,6 @@ const ResultPage = () => {
               bgPosition={"center"}
               bgRepeat={"no-repeat"}
               bgSize={"cover"}
-              // _active={{
-              //   bgColor: "transparent",
-              //   bgImage: "/assets/grandprix2023/images/replay_button.png",
-              //   bgPosition: "center",
-              //   bgRepeat: "no-repeat",
-              //   bgSize: "cover",
-              // }}
             />
           </AspectRatio>
         </Link>

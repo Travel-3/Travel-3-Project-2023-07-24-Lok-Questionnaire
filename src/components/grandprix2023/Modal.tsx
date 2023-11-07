@@ -86,8 +86,8 @@ export const DialogContent = ({ children }: PropsWithChildren) => {
       backgroundImage={"url(/assets/grandprix2023/images/Prize/Background.png)"}
       backgroundSize="cover"
       w="90vw"
-      h="calc(90vw * 1.356)"
-      borderRadius="calc(90vw * 0.08)"
+      h="calc(95vw * 1.356)"
+      borderRadius="calc(95vw * 0.08)"
       overflow="hidden"
     >
       <Image

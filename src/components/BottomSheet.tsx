@@ -71,8 +71,9 @@ export default function BottomSheet() {
   });
 
   useEffect(() => {
-    if (!isJoined && isOpen === false) setIsOpen(true);
-  }, [isJoined, isOpen]);
+    if (!isJoined && isOpen === false) setTimeout(() => setIsOpen(true), 300);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isJoined]);
 
   return (
     <>

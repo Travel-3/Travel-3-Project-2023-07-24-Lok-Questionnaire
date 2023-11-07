@@ -10,23 +10,26 @@ import Modal from "@/components/GrandPrix2023/Modal";
 import { useRouter } from "next/router";
 import { useDeviceID } from "@/hooks/useDeviceID";
 import useRecordGame from "@/hooks/useRecordGame";
+// import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 const IMAGES = [
   "/assets/grandprix2023/images/Background.webp",
   "/assets/grandprix2023/images/Racer.webp",
   "/assets/grandprix2023/images/Button.png",
-  "/assets/grandprix2023/images/EventTitle.png",
+
   "/assets/grandprix2023/images/EventPrizeTitle.png",
 
-  "/assets/grandprix2023/images/A.png",
-  "/assets/grandprix2023/images/B.png",
-  "/assets/grandprix2023/images/C.png",
-  "/assets/grandprix2023/images/D.png",
+  "/assets/grandprix2023/images/questionnaire_background.webp",
+
+  "/assets/grandprix2023/images/A.webp",
+  "/assets/grandprix2023/images/B.webp",
+  "/assets/grandprix2023/images/C.webp",
+  "/assets/grandprix2023/images/D.webp",
   "/assets/grandprix2023/images/Q1.svg",
   "/assets/grandprix2023/images/Q2.svg",
   "/assets/grandprix2023/images/Q3.svg",
   "/assets/grandprix2023/images/Q4.svg",
-  "/assets/grandprix2023/images/DialogContent.png",
+  "/assets/grandprix2023/images/DialogContent.webp",
   "/assets/grandprix2023/images/DialogHeader.png",
 
   // "/assets/grandprix2023/images/questionnaire_background.png",
@@ -34,7 +37,7 @@ const IMAGES = [
   "/assets/grandprix2023/images/gp2013_travel3_logo.png",
   "/assets/grandprix2023/images/event_detail_label.svg",
   "/assets/grandprix2023/images/event_prizes_label.svg",
-  "/assets/grandprix2023/images/EventTitle.png",
+
   "/assets/grandprix2023/images/EventDetailTitle.png",
   "/assets/grandprix2023/images/Result.webp",
 
@@ -46,9 +49,15 @@ const IMAGES = [
   "/assets/grandprix2023/images/Prize/Prize02.png",
   "/assets/grandprix2023/images/Prize/Prize03.png",
   "/assets/grandprix2023/images/Prize/Shape.png",
-  "/assets/grandprix2023/images/Prize/Text01.png",
-  "/assets/grandprix2023/images/Prize/Text02.png",
-  "/assets/grandprix2023/images/Prize/Text03.png",
+  "/assets/grandprix2023/images/Prize/Text01.svg",
+  "/assets/grandprix2023/images/Prize/Text02.svg",
+  "/assets/grandprix2023/images/Prize/Text03.svg",
+  //
+  "/assets/grandprix2023/images/questionnaire_background.webp",
+  "/assets/grandprix2023/images/Frame 9.webp",
+  "/assets/grandprix2023/images/Frame 7.webp",
+  "/assets/grandprix2023/images/Frame 8.webp",
+  "/assets/grandprix2023/images/Frame 6.webp",
 ];
 
 export default function Home() {
@@ -69,7 +78,7 @@ export default function Home() {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router, deviceId]);
 
   return (
     <>
@@ -140,7 +149,7 @@ export default function Home() {
                 w={"100%"}
                 h={"100%"}
                 objectFit={"cover"}
-                src="/assets/grandprix2023/images/Racer.png"
+                src="/assets/grandprix2023/images/Racer.webp"
               />
             </AspectRatio>
           </Flex>
@@ -152,13 +161,15 @@ export default function Home() {
                 position="absolute"
                 w={"100%"}
                 // objectFit={"cover"}
-                src="/assets/grandprix2023/images/EventTitle.png"
+                src="/assets/grandprix2023/images/Event Title.webp"
               />
             </AspectRatio>
           </Box>
         </Box>
 
-        <Link href={`/grandprix2023/questionnaire?ref=${router.query.ref}`}>
+        <Link
+          href={`/grandprix2023/questionnaire?ref=${router.query.ref || ""}`}
+        >
           <AspectRatio
             position={"fixed"}
             zIndex={10}
@@ -181,74 +192,92 @@ export default function Home() {
         </Link>
       </SplashScreen>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Stack py={6}>
-          <Flex w="100%" alignItems={"center"} px={2}>
-            <Box flex={1}>
-              <Image
-                w="100%"
-                src="/assets/grandprix2023/images/Prize/Text01.png"
-                alt="Text"
-                objectFit="cover"
-              />
-            </Box>
-            <Box flex={1}>
-              <Image
-                w="100%"
-                src="/assets/grandprix2023/images/Prize/Prize01.png"
-                alt="Prize"
-                objectFit="cover"
-              />
-            </Box>
-          </Flex>
-          <Flex
-            w="100%"
-            alignItems={"center"}
-            px={2}
-            py={4}
-            backgroundSize="cover"
-            backgroundImage="/assets/grandprix2023/images/Prize/Shape.png"
+        <Stack py={2}>
+          <Link
+            href={"https://www.macauec.com/projects/123-version-artist"}
+            target="_blank"
           >
-            <Box flex={1}>
-              <Image
-                w="100%"
-                src="/assets/grandprix2023/images/Prize/Prize02.png"
-                alt="Prize"
-                objectFit="cover"
-              />
-            </Box>
-            <Box flex={1}>
-              <Image
-                w="100%"
-                src="/assets/grandprix2023/images/Prize/Text02.png"
-                alt="Text"
-                objectFit="cover"
-              />
-            </Box>
-          </Flex>
-          <Flex w="100%" alignItems={"center"} px={2}>
-            <Box flex={1}>
-              <Image
-                w="100%"
-                src="/assets/grandprix2023/images/Prize/Text03.png"
-                alt="Text"
-                objectFit="cover"
-              />
-            </Box>
-            <Box flex={1}>
-              <Image
-                w="100%"
-                src="/assets/grandprix2023/images/Prize/Prize03.png"
-                alt="Prize"
-                objectFit="cover"
-              />
-            </Box>
-          </Flex>
+            <Flex w="100%" alignItems={"center"} px={2}>
+              <Box flex={1}>
+                <Image
+                  w="100%"
+                  src="/assets/grandprix2023/images/Prize/Text01.svg"
+                  alt="Text"
+                  objectFit="cover"
+                />
+              </Box>
+              <Box flex={1}>
+                <Image
+                  w="100%"
+                  src="/assets/grandprix2023/images/Prize/Prize01.png"
+                  alt="Prize"
+                  objectFit="cover"
+                />
+              </Box>
+            </Flex>
+          </Link>
+          <Link
+            href={"https://www.macauec.com/projects/123-version-artist"}
+            target="_blank"
+          >
+            <Flex
+              pb={2}
+              w="100%"
+              alignItems={"center"}
+              px={2}
+              backgroundSize="cover"
+              backgroundImage="/assets/grandprix2023/images/Prize/Shape.png"
+            >
+              <Box flex={1}>
+                <Image
+                  w="100%"
+                  src="/assets/grandprix2023/images/Prize/Prize02.png"
+                  alt="Prize"
+                  objectFit="cover"
+                />
+              </Box>
+              <Box flex={1}>
+                <Image
+                  w="100%"
+                  src="/assets/grandprix2023/images/Prize/Text02.svg"
+                  alt="Text"
+                  objectFit="cover"
+                />
+              </Box>
+            </Flex>
+          </Link>
+          <Link
+            href={"https://www.instagram.com/jump_off_backpack/"}
+            target="_blank"
+          >
+            <Flex w="100%" alignItems={"center"} px={2}>
+              <Box flex={1}>
+                <Image
+                  w="100%"
+                  src="/assets/grandprix2023/images/Prize/Text03.svg"
+                  alt="Text"
+                  objectFit="cover"
+                />
+              </Box>
+              <Box flex={1}>
+                <Image
+                  w="100%"
+                  src="/assets/grandprix2023/images/Prize/Prize03.png"
+                  alt="Prize"
+                  objectFit="cover"
+                />
+              </Box>
+            </Flex>
+          </Link>
         </Stack>
       </Modal>
       <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Text fontWeight={700}>
           Travel Buddy 考下您賽車知識，送您精美賽車紀念品 !
           <br />
+          ------------
+          <br />
+          活動日期：2023年11月7日至11月17日
           <br />
           ------------
           <br />

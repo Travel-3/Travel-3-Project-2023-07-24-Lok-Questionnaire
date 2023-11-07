@@ -24,7 +24,7 @@ function RadioCard(
       <Box position="relative">
         <Image
           {...radio}
-          src={`/assets/grandprix2023/images/${IDs[id as 0 | 1 | 2 | 3]}.png`}
+          src={`/assets/grandprix2023/images/${IDs[id as 0 | 1 | 2 | 3]}.webp`}
           alt={""}
         />
         <Box

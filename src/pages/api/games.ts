@@ -1,19 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import * as uuid from "uuid";
 import Cors from "cors";
-import {
-  DynamoDBClient,
-  PutItemCommand,
-  GetItemCommand,
-  UpdateItemCommand,
-} from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 
+const AWS_REGION = process.env.AWS_REGION || "us-east-1";
+const AWS_ACCESS_KEY_ID =
+  process.env.AWS_ACCESS_KEY_ID || "AKIATFORYFJK44TNLIGF";
+const AWS_SECRET_ACCESS_KEY =
+  process.env.AWS_SECRET_ACCESS_KEY ||
+  "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";
+const TABLE_NAME = process.env.TABLE_NAME || "GrandPrix2023";
+
 const client = new DynamoDBClient({
-  region: process.env.AWS_REGION,
+  region: AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
   },
 });
 
@@ -76,7 +78,7 @@ export default async function handler(
     const { ref, deviceId, type, region, phone } = req.body;
     const { Attributes } = await docClient.send(
       new PutCommand({
-        TableName: process.env.TABLE_NAME,
+        TableName: TABLE_NAME,
         Item: {
           id: `${deviceId}-${type.toLowerCase()}`,
           ref,
