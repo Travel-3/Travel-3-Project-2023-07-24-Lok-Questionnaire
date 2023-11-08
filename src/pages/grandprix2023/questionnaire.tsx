@@ -8,6 +8,7 @@ import { Global, css } from "@emotion/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
+import Head from "next/head";
 // import Select from "@/components/GrandPrix2023/Select";
 
 const questionsData = [
@@ -133,6 +134,9 @@ const QuestionnairePage = () => {
 
   return (
     <>
+      <Head>
+        <title>「賽車Q&A送大禮」活動 - Travel3</title>
+      </Head>
       <Global
         styles={css`
           body,

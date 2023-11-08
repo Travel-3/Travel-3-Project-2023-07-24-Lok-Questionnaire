@@ -10,7 +10,7 @@ import Modal from "@/components/GrandPrix2023/Modal";
 import { useRouter } from "next/router";
 import { useDeviceID } from "@/hooks/useDeviceID";
 import useRecordGame from "@/hooks/useRecordGame";
-// import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import Head from "next/head";
 
 const IMAGES = [
   "/assets/grandprix2023/images/Background.webp",
@@ -90,6 +90,9 @@ export default function Home() {
           }
         `}
       />
+      <Head>
+        <title>「賽車Q&A送大禮」活動 - Travel3</title>
+      </Head>
       <SplashScreen isLoaded={isLoaded} title="進入遊戲中">
         <Box position={"relative"} w={"100%"} h={"100%"} overflowX="hidden">
           <Box position="fixed" top={"3%"} right={"-16px"} zIndex={99}>

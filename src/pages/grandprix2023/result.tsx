@@ -22,6 +22,7 @@ import { useDeviceID } from "@/hooks/useDeviceID";
 import { RiFacebookCircleLine, RiInstagramLine } from "react-icons/ri";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 // import InView from "@/components/InView";
 // import BottomSheet from "@/components/BottomSheet";
 
@@ -99,7 +100,14 @@ const ResultPage = () => {
     if (!imageDataUrl || !imageBlob) return alert("請刷新頁面後再試一次！");
 
     const url = window.URL.createObjectURL(imageBlob);
-    window.open(url, "_blank");
+    // window.open(url, "_blank");
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
     // if (!navigator.canShare) return saveAs(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`);
 
     // const file = await dataUrlToFile(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`)
@@ -127,7 +135,7 @@ const ResultPage = () => {
     }
   }, [isLoaded, router.query]);
 
-  const shareUrl = `https://t3-queestionnaire.vercel.app/grandprix2023/${deviceID}`;
+  const shareUrl = `https://travel3exp.xyz/grandprix2023/${deviceID}`;
 
   return (
     <>
@@ -139,6 +147,9 @@ const ResultPage = () => {
           }
         `}
       />
+      <Head>
+        <title>「賽車Q&A送大禮」活動 - Travel3</title>
+      </Head>
       <Box
         position={"relative"}
         id="resultCard"
@@ -174,16 +185,16 @@ const ResultPage = () => {
               borderWidth={"3px 5px 6px 3px"}
               borderRadius="50%"
             >
-              <AspectRatio ratio={417 / 417}>
+              <Box borderRadius={"0px 0px 50% 50%"} overflow="hidden">
                 <Image
                   w={"100%"}
                   objectFit={"cover"}
-                  borderRadius="50%"
                   src={result?.avatar}
                   alt="Avatar"
-                  transform={"scale(1.25)"}
+                  // translateY={"-50%"}
+                  transform={"scale(1.8) translateY(10%)"}
                 />
-              </AspectRatio>
+              </Box>
             </Box>
             <Box ml={4} pb={12}>
               <Text fontSize={"2xl"} fontWeight={"bold"} color={"black"}>
@@ -208,7 +219,13 @@ const ResultPage = () => {
           <Center mt={3}>
             <QrCode bgColor="transparent" level="L" value={shareUrl} />
           </Center>
-          <Text textAlign="center" mt={1} px={6} fontWeight={700} fontSize="sm">
+          <Text
+            textAlign="center"
+            mt={2}
+            px={12}
+            fontWeight={700}
+            fontSize="sm"
+          >
             {shareUrl}
           </Text>
         </Box>

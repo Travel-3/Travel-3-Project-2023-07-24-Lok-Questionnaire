@@ -5,10 +5,9 @@ import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 
 const AWS_REGION = process.env.AWS_REGION || "us-east-1";
 const AWS_ACCESS_KEY_ID =
-  process.env.AWS_ACCESS_KEY_ID || "AKIATFORYFJK44TNLIGF";
+  process.env.AWS_ACCESS_KEY_ID || "";
 const AWS_SECRET_ACCESS_KEY =
-  process.env.AWS_SECRET_ACCESS_KEY ||
-  "xAedWFq8jfmDI1aoTm1/Jcexni9SPAPLKimAKmMX";
+  process.env.AWS_SECRET_ACCESS_KEY || ""
 const TABLE_NAME = process.env.TABLE_NAME || "GrandPrix2023";
 
 const client = new DynamoDBClient({
