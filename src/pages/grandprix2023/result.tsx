@@ -53,14 +53,14 @@ const Result = [
   },
 ];
 
-async function dataUrlToFile(dataUrl: string, filename: string) {
-  const res = await fetch(dataUrl);
-  const blob = await res.blob();
-  return new File([blob], filename, {
-    type: "image/png",
-    lastModified: new Date().getTime(),
-  });
-}
+// async function dataUrlToFile(dataUrl: string, filename: string) {
+//   const res = await fetch(dataUrl);
+//   const blob = await res.blob();
+//   return new File([blob], filename, {
+//     type: "image/png",
+//     lastModified: new Date().getTime()
+//   });
+// }
 
 const ResultPage = () => {
   const router = useRouter();
@@ -99,26 +99,21 @@ const ResultPage = () => {
   const handleDownloadImage = async () => {
     if (!imageDataUrl || !imageBlob) return alert("請刷新頁面後再試一次！");
 
-    if (!navigator.canShare)
-      return saveAs(
-        imageDataUrl,
-        `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
-      );
+    // if (!navigator.canShare) 
 
-    // const file = await dataUrlToFile(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`)
-    try {
-      await navigator.share({
-        text: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
-        url: shareUrl,
-      });
-      alert("Travel3「賽車Q&A送大禮」活動分享成功!");
-      saveAs(
-        imageDataUrl,
-        `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
-      );
-    } catch (error) {
-      alert("Travel3「賽車Q&A送大禮」活動分享失敗!");
-    }
+    return saveAs(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`);
+    
+    // try {
+    //   await navigator.share({
+    //     text: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+    //     url: shareUrl
+    //   });
+    //   alert("Travel3「賽車Q&A送大禮」活動分享成功!");
+    //   saveAs(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`);
+
+    // } catch (error) {
+    //   alert("Travel3「賽車Q&A送大禮」活動分享失敗!");
+    // }
   };
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
@@ -129,7 +124,7 @@ const ResultPage = () => {
     }
   }, [isLoaded, router.query]);
 
-  const shareUrl = `https://travel3exp.xyz/${deviceID}`;
+  const shareUrl = `https://travel3exp.xyz/grandprix2023/${deviceID}`;
 
   return (
     <>
@@ -179,7 +174,7 @@ const ResultPage = () => {
               borderWidth={"3px 5px 6px 3px"}
               borderRadius="50%"
             >
-              <Box borderRadius={"0px 0px 50% 50%"} overflow="hidden">
+              <Box borderRadius={'0px 0px 50% 50%'} overflow='hidden'>
                 <Image
                   w={"100%"}
                   objectFit={"cover"}
@@ -213,13 +208,7 @@ const ResultPage = () => {
           <Center mt={3}>
             <QrCode bgColor="transparent" level="L" value={shareUrl} />
           </Center>
-          <Text
-            textAlign="center"
-            mt={2}
-            px={12}
-            fontWeight={700}
-            fontSize="sm"
-          >
+          <Text textAlign="center" mt={2} px={12} fontWeight={700} fontSize="sm">
             {shareUrl}
           </Text>
         </Box>
