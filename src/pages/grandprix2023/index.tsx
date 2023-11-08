@@ -174,7 +174,7 @@ export default function Home() {
           href={`/grandprix2023/questionnaire?ref=${router.query.ref || ""}`}
         >
           <AspectRatio
-            position={"fixed"}
+            position={"absolute"}
             zIndex={10}
             ratio={378 / 147}
             bottom={"0%"}

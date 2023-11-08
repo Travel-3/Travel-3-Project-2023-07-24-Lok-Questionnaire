@@ -11,7 +11,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-// import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 import { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import useImagesOnLoad from "@/hooks/useImagesOnLoad";
@@ -53,14 +53,14 @@ const Result = [
   },
 ];
 
-// async function dataUrlToFile(dataUrl: string, filename: string) {
-//   const res = await fetch(dataUrl);
-//   const blob = await res.blob();
-//   return new File([blob], filename, {
-//     type: "image/png",
-//     lastModified: new Date().getTime()
-//   });
-// }
+async function dataUrlToFile(dataUrl: string, filename: string) {
+  const res = await fetch(dataUrl);
+  const blob = await res.blob();
+  return new File([blob], filename, {
+    type: "image/png",
+    lastModified: new Date().getTime(),
+  });
+}
 
 const ResultPage = () => {
   const router = useRouter();
@@ -99,32 +99,26 @@ const ResultPage = () => {
   const handleDownloadImage = async () => {
     if (!imageDataUrl || !imageBlob) return alert("請刷新頁面後再試一次！");
 
-    const url = window.URL.createObjectURL(imageBlob);
-    // window.open(url, "_blank");
-    const a = document.createElement("a");
-    a.href = url;
-    a.target = "_blank";
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    // if (!navigator.canShare) return saveAs(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`);
+    if (!navigator.canShare)
+      return saveAs(
+        imageDataUrl,
+        `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+      );
 
     // const file = await dataUrlToFile(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`)
-    // if (navigator.canShare({ files: [file] })) {
-    //   try {
-    //     await navigator.share({
-    //       files: [file],
-    //       title: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
-    //       text: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
-    //       url: shareUrl
-    //     });
-    //     alert("Travel3「賽車Q&A送大禮」活動分享成功!");
-
-    //   } catch (error) {
-    //     alert("Travel3「賽車Q&A送大禮」活動分享失敗!");
-    //   }
-    // }
+    try {
+      await navigator.share({
+        text: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+        url: shareUrl,
+      });
+      alert("Travel3「賽車Q&A送大禮」活動分享成功!");
+      saveAs(
+        imageDataUrl,
+        `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+      );
+    } catch (error) {
+      alert("Travel3「賽車Q&A送大禮」活動分享失敗!");
+    }
   };
 
   const longPressEvent = useLongPress(handleDownloadImage, 700);
@@ -135,7 +129,7 @@ const ResultPage = () => {
     }
   }, [isLoaded, router.query]);
 
-  const shareUrl = `https://travel3exp.xyz/grandprix2023/${deviceID}`;
+  const shareUrl = `https://travel3exp.xyz/${deviceID}`;
 
   return (
     <>
@@ -192,7 +186,7 @@ const ResultPage = () => {
                   src={result?.avatar}
                   alt="Avatar"
                   // translateY={"-50%"}
-                  transform={"scale(1.8) translateY(10%)"}
+                  transform={"scale(1.) translateY(10%)"}
                 />
               </Box>
             </Box>
@@ -265,7 +259,7 @@ const ResultPage = () => {
         </HStack>
         <Text textAlign="center">Powered by Travel3</Text>
       </Box>
-      <Box bottom={"4%"} position={"absolute"} w={"100vw"} h={8} zIndex={100}>
+      <Box bottom={"4%"} position={"fixed"} w={"100vw"} h={8} zIndex={100}>
         <AspectRatio
           position={"absolute"}
           left={"3%"}

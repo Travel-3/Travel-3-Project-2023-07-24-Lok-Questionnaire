@@ -4,10 +4,8 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 
 const AWS_REGION = process.env.AWS_REGION || "us-east-1";
-const AWS_ACCESS_KEY_ID =
-  process.env.AWS_ACCESS_KEY_ID || "";
-const AWS_SECRET_ACCESS_KEY =
-  process.env.AWS_SECRET_ACCESS_KEY || ""
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || "";
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || "";
 const TABLE_NAME = process.env.TABLE_NAME || "GrandPrix2023";
 
 const client = new DynamoDBClient({
@@ -74,7 +72,7 @@ export default async function handler(
   //   }
 
   if (req.method === "POST") {
-    const { ref, deviceId, type, region, phone } = req.body;
+    const { ref, deviceId, type, region, phone, name, score } = req.body;
     const { Attributes } = await docClient.send(
       new PutCommand({
         TableName: TABLE_NAME,
@@ -86,6 +84,8 @@ export default async function handler(
           type,
           region,
           phone,
+          name,
+          score,
         },
       }),
     );

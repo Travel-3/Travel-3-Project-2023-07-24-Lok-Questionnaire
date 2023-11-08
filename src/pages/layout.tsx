@@ -13,6 +13,7 @@ export default function RootLayout({
       px={0}
       w="100vw"
       h="100vh"
+      position={"relative"}
       sx={{
         maxHeight: "-webkit-fill-available",
         "msOverflowStyle?": "none",

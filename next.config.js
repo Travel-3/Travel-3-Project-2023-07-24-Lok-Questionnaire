@@ -8,6 +8,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/grandprix2023",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
