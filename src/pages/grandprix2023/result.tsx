@@ -23,8 +23,6 @@ import { RiFacebookCircleLine, RiInstagramLine } from "react-icons/ri";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-// import InView from "@/components/InView";
-// import BottomSheet from "@/components/BottomSheet";
 
 const BottomSheet = dynamic(() => import("@/components/BottomSheet"), {
   ssr: false,
@@ -53,20 +51,10 @@ const Result = [
   },
 ];
 
-// async function dataUrlToFile(dataUrl: string, filename: string) {
-//   const res = await fetch(dataUrl);
-//   const blob = await res.blob();
-//   return new File([blob], filename, {
-//     type: "image/png",
-//     lastModified: new Date().getTime()
-//   });
-// }
-
 const ResultPage = () => {
   const router = useRouter();
   const { score, name } = router.query;
   const [imageDataUrl, setImageDataUrl] = useState("");
-  const [imageBlob, setImageBlob] = useState<Blob | null>();
 
   const isLoaded = useImagesOnLoad([
     "/assets/grandprix2023/images/questionnaire_background.webp",
@@ -82,7 +70,6 @@ const ResultPage = () => {
   });
 
   const deviceID = useDeviceID();
-  // console.log("device", deviceID, result);
 
   const buildImage = () => {
     const node: any = document.getElementById("resultCard");
@@ -92,17 +79,20 @@ const ResultPage = () => {
       useCORS: true,
     }).then((canvas) => {
       setImageDataUrl(canvas.toDataURL());
-      canvas.toBlob((blob) => setImageBlob(blob));
+      // canvas.toBlob((blob) => setImageBlob(blob));
     });
   };
 
   const handleDownloadImage = async () => {
-    if (!imageDataUrl || !imageBlob) return alert("請刷新頁面後再試一次！");
+    if (!imageDataUrl) return alert("請刷新頁面後再試一次！");
 
-    // if (!navigator.canShare) 
+    // if (!navigator.canShare)
 
-    return saveAs(imageDataUrl, `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`);
-    
+    return saveAs(
+      imageDataUrl,
+      `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
+    );
+
     // try {
     //   await navigator.share({
     //     text: `${result?.name} - ${name} - Travel3「賽車Q&A送大禮」活動`,
@@ -174,7 +164,7 @@ const ResultPage = () => {
               borderWidth={"3px 5px 6px 3px"}
               borderRadius="50%"
             >
-              <Box borderRadius={'0px 0px 50% 50%'} overflow='hidden'>
+              <Box borderRadius={"0px 0px 50% 50%"} overflow="hidden">
                 <Image
                   w={"100%"}
                   objectFit={"cover"}
@@ -208,7 +198,13 @@ const ResultPage = () => {
           <Center mt={3}>
             <QrCode bgColor="transparent" level="L" value={shareUrl} />
           </Center>
-          <Text textAlign="center" mt={2} px={12} fontWeight={700} fontSize="sm">
+          <Text
+            textAlign="center"
+            mt={2}
+            px={12}
+            fontWeight={700}
+            fontSize="sm"
+          >
             {shareUrl}
           </Text>
         </Box>
