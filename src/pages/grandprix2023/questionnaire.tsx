@@ -229,6 +229,7 @@ const QuestionnairePage = () => {
               <Button
                 mt={2}
                 w="180px"
+                cursor="pointer"
                 h={`${180 * 0.28431372549019607}px`}
                 onClick={handleSubmit(handleGenerateClick)}
               >
