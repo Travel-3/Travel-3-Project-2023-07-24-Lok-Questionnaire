@@ -170,24 +170,52 @@ const ResultPage = () => {
                   objectFit={"cover"}
                   src={result?.avatar}
                   alt="Avatar"
-                  // translateY={"-50%"}
-                  transform={"scale(1.) translateY(10%)"}
+                  transform={"scale(1.5) translateY(10%)"}
                 />
               </Box>
             </Box>
-            <Box ml={4} pb={12}>
-              <Text fontSize={"2xl"} fontWeight={"bold"} color={"black"}>
+            <Box
+              ml={{
+                base: 3,
+                md: 6,
+              }}
+              pb={{
+                base: 10,
+                md: 24,
+              }}
+            >
+              <Text
+                fontSize={{
+                  base: "2xl",
+                  md: "4xl",
+                }}
+                fontWeight={"bold"}
+                color={"black"}
+              >
                 {name}
               </Text>
-              <Text fontSize={"3xl"} fontWeight={"bold"} color={"black"}>
+              <Text
+                fontSize={{
+                  base: "2xl",
+                  md: "4xl",
+                }}
+                fontWeight={"bold"}
+                color={"black"}
+              >
                 {result?.name}
               </Text>
             </Box>
           </Flex>
           <Box mt={3} px={8}>
             <Text
-              px={2}
-              fontSize={"md"}
+              px={{
+                base: 2,
+                md: 12,
+              }}
+              fontSize={{
+                base: "md",
+                md: "2xl",
+              }}
               fontWeight={700}
               color={"black"}
               textAlign={"center"}
@@ -203,7 +231,10 @@ const ResultPage = () => {
             mt={2}
             px={12}
             fontWeight={700}
-            fontSize="sm"
+            fontSize={{
+              base: "sm",
+              md: "md",
+            }}
           >
             {shareUrl}
           </Text>
@@ -244,7 +275,19 @@ const ResultPage = () => {
         </HStack>
         <Text textAlign="center">Powered by Travel3</Text>
       </Box>
-      <Box bottom={"4%"} position={"fixed"} w={"100vw"} h={8} zIndex={100}>
+
+      <Box
+        bottom={{
+          base: "4%",
+          md: 0,
+        }}
+        position={{
+          base: "fixed",
+          md: "absolute",
+        }}
+        w={"100%"}
+        zIndex={100}
+      >
         <AspectRatio
           position={"absolute"}
           left={"3%"}
@@ -280,6 +323,7 @@ const ResultPage = () => {
           </AspectRatio>
         </Link>
       </Box>
+
       <BottomSheet />
     </>
   );
