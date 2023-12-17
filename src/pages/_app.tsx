@@ -17,6 +17,20 @@ function MyApp({ Component }: AppProps) {
       <QueryClientProvider client={cache}>
         <Component />
       </QueryClientProvider>
+      <Script
+        strategy="lazyOnload"
+        src="https://www.googletagmanager.com/gtag/js?id=G-C8GGC13NV6"
+      />
+      <Script
+        id="GA"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: ` window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-C8GGC13NV6');`,
+        }}
+      />
       {process.env.NODE_ENV === "production" && (
         <Script
           id="Clarity"
