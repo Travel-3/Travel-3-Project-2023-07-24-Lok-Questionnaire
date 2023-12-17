@@ -3,7 +3,7 @@ import Answer from "./Answer";
 export default class Question {
   constructor(
     public question: string,
-    public answers: Answer[]
+    public answers: Answer[],
   ) {}
 
   public static from(question: string, answers: Answer[]) {
