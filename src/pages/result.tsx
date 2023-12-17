@@ -144,7 +144,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>「聖誕送大禮」活動 - Travel3</title>
+        <title>Travel3 X 粉啵啵送聖誕禮物</title>
         <meta name="theme-color" content={colors.red} />
       </Head>
       <SplashScreen isLoaded={isLoaded}>
