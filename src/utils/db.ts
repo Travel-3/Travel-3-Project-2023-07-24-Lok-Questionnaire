@@ -1,5 +1,8 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import {
+  DynamoDBDocument,
+  DynamoDBDocumentClient,
+} from "@aws-sdk/lib-dynamodb";
 
 const AWS_REGION = process.env.AWS_REGION || "us-east-1";
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || "";
@@ -13,4 +16,9 @@ export const client = new DynamoDBClient({
   },
 });
 
-export const docClient = DynamoDBDocumentClient.from(client);
+export const document = DynamoDBDocument.from(client);
+export const docClient = DynamoDBDocumentClient.from(client, {
+  marshallOptions: {
+    removeUndefinedValues: true,
+  },
+});
