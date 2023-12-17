@@ -1,30 +1,22 @@
 // pages/_app.js
-import { theme } from "@/theme";
-import { ChakraBaseProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Script from "next/script";
-import RootLayout from "./layout";
-import CSR from "@/components/CSR";
+import "./global.css";
+import "normalize.css";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
+  // useQuery,
 } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+const cache = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component }: AppProps) {
   return (
     <>
-      <ChakraBaseProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-          <CSR>
-            <RootLayout>
-              <Component {...pageProps} />
-            </RootLayout>
-          </CSR>
-        </QueryClientProvider>
-      </ChakraBaseProvider>
+      <QueryClientProvider client={cache}>
+        <Component />
+      </QueryClientProvider>
       {process.env.NODE_ENV === "production" && (
         <Script
           id="Clarity"
