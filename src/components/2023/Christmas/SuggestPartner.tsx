@@ -1,5 +1,4 @@
 import { AspectRatio } from "@/components/ui";
-import Image from "next/image";
 import styled from "styled-components";
 
 const CreamBackground = styled.div`
@@ -44,6 +43,15 @@ const PartnerPicture = styled.div`
   /* transform: translateX(); */
 `;
 
+const Image = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 export type SuggestPartnerProps = { src: string; description: string };
 
 export default function SuggestPartner({
@@ -57,8 +65,9 @@ export default function SuggestPartner({
           <Image
             src={`/images/2023/Christmas/dots.png`}
             alt={`Dots`}
-            fill
-            unoptimized
+            loading="eager"
+            // fill
+            // unoptimized
           />
         </AspectRatio>
       </TopDotsPosition>
@@ -69,8 +78,7 @@ export default function SuggestPartner({
               <Image
                 src={`/images/2023/Christmas/your-good-partner.png`}
                 alt={`Your Good Partner`}
-                fill
-                unoptimized
+                loading="eager"
               />
             </AspectRatio>
           </PartnerTitle>
@@ -78,13 +86,7 @@ export default function SuggestPartner({
         </PartnerInformation>
         <PartnerPicture>
           <AspectRatio ratio={497 / 547}>
-            <Image
-              src={src}
-              alt={`Your Good Partner`}
-              objectFit="cover"
-              fill
-              unoptimized
-            />
+            <Image src={src} alt={`Your Good Partner`} loading="eager" />
           </AspectRatio>
         </PartnerPicture>
       </PartnerContainer>
@@ -93,9 +95,7 @@ export default function SuggestPartner({
           <Image
             src={`/images/2023/Christmas/dots.png`}
             alt={`Dots`}
-            objectFit="fill"
-            fill
-            unoptimized
+            loading="eager"
           />
         </AspectRatio>
       </BottomDotsPosition>

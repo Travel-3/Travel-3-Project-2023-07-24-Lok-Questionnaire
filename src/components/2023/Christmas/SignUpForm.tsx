@@ -141,7 +141,9 @@ export default function SignUpForm() {
           <br />
           若您未填寫手機號碼，將視為不參與該活動。
         </Hint>
-        <PolicyLink onClick={() => setIsMore(!isMore)}>活動規則與條例</PolicyLink>
+        <PolicyLink onClick={() => setIsMore(!isMore)}>
+          活動規則與條例
+        </PolicyLink>
         {isMore && (
           <Hint>
             1.閣下可按照自己的意願，在本公司的遊戲（「本網站」）提供閣下的電郵地址及其他個人資料（「個人資料」）。

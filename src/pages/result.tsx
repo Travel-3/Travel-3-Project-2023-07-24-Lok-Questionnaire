@@ -12,10 +12,12 @@ import useParams from "@/hooks/useParams";
 import colors from "@/tokens/2023/Christmas/colors";
 import { blue, green, red, white } from "@/tokens/2023/Christmas/results";
 import Head from "next/head";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { QRCodeSVG } from "qrcode.react";
+import { useDeviceID } from "@/hooks/useDeviceID";
 
 const RedBackground = styled.div`
   width: 100%;
@@ -90,12 +92,20 @@ const UserCharacter = styled.div`
 const UserCharacterDescription = styled.div`
   color: black;
   font-size: 14px;
-  position: relative;
-  padding: 16px 24px 24px 16px;
-  background-color: #fff;
+  flex: 1;
   font-weight: 700;
-  z-index: 10;
+  padding-right: 8px;
+`;
+
+const WhiteBackground = styled.div`
+  position: relative;
+  padding: 10px 16px 0px 16px;
+  /* padding: 10px 24px 24px 10px; */
+  background-color: #fff;
   margin-top: -3px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
 `;
 
 const UserPeronalityLabel = styled.div`
@@ -118,6 +128,15 @@ const Result = {
   40: blue,
 } as const;
 
+const Image = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 export default function Page() {
   const router = useRouter();
   const { name, score } = useParams({
@@ -138,8 +157,11 @@ export default function Page() {
     {
       enabled: router.isReady,
       preload: false,
-    }
+    },
   );
+
+  const id = useDeviceID();
+  const shareUrl = `https://travel3exp.xyz?referral=${id}`;
 
   return (
     <>
@@ -159,8 +181,9 @@ export default function Page() {
                         <Image
                           src={`/images/2023/Christmas/merry-christmas.png`}
                           alt={`Merry Christmas`}
-                          fill
-                          unoptimized
+                          loading={"eager"}
+                          // fill
+                          // unoptimized
                         />
                       </AspectRatio>
                     </MerryChristmas>
@@ -175,8 +198,9 @@ export default function Page() {
                           <Image
                             src={result.main}
                             alt={`Cat`}
-                            fill
-                            unoptimized
+                            loading={"eager"}
+                            // fill
+                            // unoptimized
                           />
                         </AspectRatio>
                       )}
@@ -188,25 +212,29 @@ export default function Page() {
                         <Image
                           src={`/images/2023/Christmas/snow-man-with-tree.png`}
                           alt={`Snow Man With Tree`}
-                          fill
-                          unoptimized
+                          loading={"eager"}
+                          // fill
+                          // unoptimized
                         />
                       </AspectRatio>
                     </SnowManWithTreePosition>
                   </SnowManWithTreeContainer>
                 </CharacterContainer>
 
-                <UserCharacterDescription>
-                  {result?.aboutMain}
-                </UserCharacterDescription>
-
+                <WhiteBackground>
+                  <UserCharacterDescription>
+                    {result?.aboutMain}
+                  </UserCharacterDescription>
+                  <QRCodeSVG width={80} level="L" value={shareUrl} />
+                </WhiteBackground>
                 <SmallSnowOverlay>
                   <AspectRatio ratio={1084 / 746}>
                     <Image
                       src={`/images/2023/Christmas/small-snows-overlay.png`}
                       alt={`Snow Man With Tree`}
-                      fill
-                      unoptimized
+                      loading={"eager"}
+                      // fill
+                      // unoptimized
                     />
                   </AspectRatio>
                 </SmallSnowOverlay>

@@ -16,7 +16,7 @@ const cors = Cors({
 const getOrCreateRankItem = async (
   game: string,
   sessionId: string,
-  score: number
+  score: number,
 ) => {
   try {
     let id = null;
@@ -43,7 +43,7 @@ const getOrCreateRankItem = async (
             game,
             score,
           },
-        })
+        }),
       );
     } else {
       id = Items?.[0]?.id;
@@ -62,7 +62,7 @@ const getOrCreateRankItem = async (
 async function updateItemById(
   tableName: string,
   id: string,
-  newValue: Record<string, unknown>
+  newValue: Record<string, unknown>,
 ) {
   try {
     // const params = {
@@ -82,7 +82,7 @@ async function updateItemById(
           id,
           ...newValue,
         },
-      })
+      }),
     );
 
     // const response = await client.send(new UpdateItemCommand(params));
@@ -110,7 +110,7 @@ const getAllRankItems = async (game: string) => {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   await runMiddleware(req, res, cors);
   if (req.method !== "GET") return res.status(404).json({});
@@ -123,7 +123,7 @@ export default async function handler(
   if (allRankItems) {
     const allRankItemsSorted = allRankItems.sort((a, b) => b.score - a.score);
     const rank = allRankItemsSorted.findIndex(
-      (item) => item.sessionId === sessionId
+      (item) => item.sessionId === sessionId,
     );
     return res.status(200).json({
       ok: true,

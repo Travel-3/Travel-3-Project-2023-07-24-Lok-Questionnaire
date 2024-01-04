@@ -216,6 +216,24 @@ const RankInfoContainer = styled.div`
   justify-content: center;
 `;
 
+const AboutTravel3Container = styled.div`
+  position: relative;
+`;
+
+const AboutTravel3 = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* top: 0; */
+  left: 0;
+  display: flex;
+  padding-bottom: 16px;
+  color: #000;
+  /* justify-items: center; */
+  justify-content: center;
+  /* margin: auto; */
+`;
+
 const Images = [
   "/images/2023/Christmas/tree.png",
   "/images/2023/Christmas/3cats.png",
@@ -315,6 +333,16 @@ export default function Page() {
       <Head>
         <title>Travel3 X 粉啵啵送聖誕禮物</title>
         <meta name="theme-color" content={colors.red} />
+        <meta property="og:url" content="http://travel3exp.xyz" />
+        <meta property="og:title" content="Travel3 X 粉啵啵送聖誕禮物" />
+        <meta
+          property="og:description"
+          content="Travel Buddy 同 「粉啵啵」提早送您聖誕禮物！玩問卷遊戲送您「粉啵啵」禮品和精美紀念品 "
+        />
+        <meta
+          property="og:image"
+          content="https://travel3exp.xyz/_next/image?url=%2Fimages%2F2023%2FChristmas%2Fpreview.png&w=768&q=100"
+        />
       </Head>
       <SplashScreen isLoaded={isLoaded}>
         <App>
@@ -477,14 +505,22 @@ export default function Page() {
                   </BoardA>
                 </BoardWrapper>
               </BoradContainer>
-              <AspectRatio ratio={1167 / 414}>
-                <Image
-                  src="/images/2023/Christmas/snow-man.svg"
-                  alt="Snow man"
-                  quality={90}
-                  fill
-                />
-              </AspectRatio>
+              <AboutTravel3Container>
+                <AspectRatio ratio={1167 / 414}>
+                  <Image
+                    src="/images/2023/Christmas/snow-man.svg"
+                    alt="Snow man"
+                    quality={90}
+                    fill
+                  />
+                </AspectRatio>
+                <a
+                  href="https://www.facebook.com/profile.php?id=100089729841964"
+                  target="_blank"
+                >
+                  <AboutTravel3>Travel3.app</AboutTravel3>
+                </a>
+              </AboutTravel3Container>
             </GreenBackground>
             <SnowsRainOverlay />
           </div>

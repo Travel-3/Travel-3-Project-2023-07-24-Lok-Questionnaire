@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const GamePrizeContainer = styled.div`
   position: relative;
-  /* margin: 0 24px; */
   margin-bottom: 32px;
 `;
 
@@ -109,6 +108,17 @@ const Calendars = styled.div`
   width: 38.9%;
 `;
 
+const GamePrizeShadow = styled.div`
+  position: absolute;
+  border-radius: 12px;
+  background-color: #000;
+  left: 8px;
+  top: 8px;
+  right: -8px;
+  bottom: -8px;
+  margin: 0 32px;
+`;
+
 export default function GamePrize() {
   return (
     <GamePrizeContainer>
@@ -125,6 +135,8 @@ export default function GamePrize() {
           </GamePrizeTitle>
         </DecorationContainer>
       </GamePrizeTitleContainer>
+
+      <GamePrizeShadow />
       <GamePrizeBoxContainer>
         <AboutSponsorContainer>
           <TrackLink game="Demo" href="https://www.instagram.com/jessdessin/">

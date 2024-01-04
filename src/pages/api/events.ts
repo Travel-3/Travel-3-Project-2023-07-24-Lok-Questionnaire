@@ -59,7 +59,7 @@ const getReferralItemsCount = async (tableName: string, sessionId: string) => {
     return Count ?? 0;
   } catch (error) {
     console.log("error", error);
-    return 0
+    return 0;
   }
 };
 
@@ -67,7 +67,8 @@ const getFinishedItemsCount = async (tableName: string, sessionId: string) => {
   try {
     const { Count } = await document.scan({
       TableName: tableName,
-      FilterExpression: "(#ref = :ref_val And behaviour = :behaviour_val) Or (sessionId = :ref_val and behaviour = :behaviour_val)",
+      FilterExpression:
+        "(#ref = :ref_val And behaviour = :behaviour_val) Or (sessionId = :ref_val and behaviour = :behaviour_val)",
       ExpressionAttributeNames: {
         "#ref": "ref",
       },
@@ -79,11 +80,11 @@ const getFinishedItemsCount = async (tableName: string, sessionId: string) => {
       Select: "COUNT",
     });
 
-    console.log("ScanCommand", Count)
+    console.log("ScanCommand", Count);
     return Count ?? 0;
   } catch (error) {
     console.log("error", error);
-    return 0
+    return 0;
   }
 };
 
@@ -134,7 +135,7 @@ export default async function handler(
         game as string,
         sessionId as string,
       );
-      const score = referralCount  + finishedCount  * 5;
+      const score = referralCount + finishedCount * 5;
       return res.status(200).json({
         ok: true,
         score,
