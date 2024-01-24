@@ -1,17 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Cors from "cors";
-import {
-  UpdateItemCommand,
-  UpdateItemCommandInput,
-} from "@aws-sdk/client-dynamodb";
-import { ScanCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { runMiddleware } from "@/utils/middleware";
-import { v4 as uuid } from "uuid";
-import { client, docClient, document } from "@/utils/db";
 
-const cors = Cors({
-  methods: ["GET", "HEAD"],
-});
+import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { v4 as uuid } from "uuid";
+import { docClient, document } from "@/utils/db";
 
 const getOrCreateRankItem = async (
   game: string,
@@ -112,7 +103,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  await runMiddleware(req, res, cors);
   if (req.method !== "GET") return res.status(404).json({});
 
   const { sessionId, game, score } = req.query;

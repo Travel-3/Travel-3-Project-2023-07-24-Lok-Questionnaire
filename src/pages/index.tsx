@@ -344,7 +344,7 @@ export default function Page() {
           content="https://travel3exp.xyz/_next/image?url=%2Fimages%2F2023%2FChristmas%2Fpreview.png&w=768&q=100"
         />
       </Head>
-      <SplashScreen isLoaded={isLoaded}>
+      <SplashScreen isLoaded={true}>
         <App>
           <div style={{ position: "relative" }}>
             <RedBackground>

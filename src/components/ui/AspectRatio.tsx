@@ -7,7 +7,9 @@ type AspectRatioProps = {
 
 const AspectRatioContainer = styled.div<AspectRatioProps>`
   position: relative;
-  width: 100%;
+  /* width: 100%; */
+  overflow: hidden;
+  height: 0;
   padding-bottom: ${(props) => 100 / props.ratio}%;
 `;
 

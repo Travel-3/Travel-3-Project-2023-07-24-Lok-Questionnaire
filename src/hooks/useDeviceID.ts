@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-// import { nanoid } from "nanoid";
 import { useEffect } from "react";
 
 type State = {
@@ -29,6 +28,10 @@ function generateRandomString() {
     .padStart(6, "0");
   return randomCharA + randomCharB + randomNumber;
 }
+
+export const getDeviceID = () => {
+  return useDeviceIDState.getState().deviceID;
+};
 
 export const useDeviceID = () => {
   const { deviceID, setDeviceID } = useDeviceIDState();

@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Cors from "cors";
+// import Cors from "cors";
 import { ScanCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { runMiddleware } from "@/utils/middleware";
 import { v4 as uuid } from "uuid";
 import { docClient, document } from "@/utils/db";
 
-const cors = Cors({
-  methods: ["GET", "HEAD"],
-});
+// const cors = Cors({
+//   methods: ["GET", "HEAD"],
+// });
 
 const getSessionItem = async (
   tableName: string,
@@ -120,7 +120,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  await runMiddleware(req, res, cors);
   if (req.method !== "GET") return res.status(404).json({});
 
   const { sessionId, behaviour, game, createdAt, userAgent } = req.query;
