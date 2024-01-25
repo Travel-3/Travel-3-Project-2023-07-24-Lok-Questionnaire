@@ -5,14 +5,15 @@ import { Coupons } from "../constant";
 import { useMemo } from "react";
 import clsx from "clsx";
 import { useManshokuya } from "../Provider";
+import GachaCard from "./GachaCard";
 
-const MyGachaBallListContainer = styled.div`
-  border-radius: 40px;
-  border: 4px solid #000;
-  background: #fff;
-  position: relative;
-  box-shadow: 8px 8px 0px #000;
-`;
+// const MyGachaBallListContainer = styled.div`
+//   border-radius: 40px;
+//   border: 4px solid #000;
+//   background: #fff;
+//   position: relative;
+//   box-shadow: 8px 8px 0px #000;
+// `;
 
 const CardButton = styled.div`
   border-radius: 40px;
@@ -29,7 +30,11 @@ export type MyGachaBallCardProps = {
   couponId: number;
 };
 
-export function MyGachaBallCard({ status, couponId }: MyGachaBallCardProps) {
+export function MyGachaBallCard({
+  status,
+  couponId,
+  code,
+}: MyGachaBallCardProps) {
   const { view } = useManshokuya();
   const coupon = useMemo(
     () => Coupons.find((coupon) => coupon.id === couponId),
@@ -37,7 +42,10 @@ export function MyGachaBallCard({ status, couponId }: MyGachaBallCardProps) {
   );
 
   const handleView = () => {
-    view(coupon);
+    view({
+      ...coupon,
+      code,
+    });
   };
 
   return (
@@ -54,7 +62,7 @@ export function MyGachaBallCard({ status, couponId }: MyGachaBallCardProps) {
           alt="Gocha Ball Card"
         />
       </AspectRatio>
-      <div className="absolute left-0 top-0 bottom-0 right-0 flex items-center pl-1 pr-3 pb-1">
+      <div className="absolute left-0 top-0 bottom-0 right-0 flex items-center pl-2 pr-3 pb-1">
         <div className="w-16">
           <AspectRatio ratio={2048 / 1835}>
             <Image
@@ -67,8 +75,8 @@ export function MyGachaBallCard({ status, couponId }: MyGachaBallCardProps) {
         </div>
         {/* <div className="h-12 mx-1 border-r border-black "></div> */}
         <div className="flex-1 ml-1">
-          <div className="text-lg">{coupon?.name}</div>
-          <div className="text-xs">{coupon?.description}</div>
+          <div className="text-md">{coupon?.name}</div>
+          {/* <div className="text-xs">{coupon?.description}</div> */}
         </div>
         <CardButton
           className="px-3 py-1.5 font-bold text-xs"
@@ -92,7 +100,7 @@ export type MyGachaBallListProps = {
 
 export default function MyGachaBallList({ data }: MyGachaBallListProps) {
   return (
-    <MyGachaBallListContainer id="balls">
+    <GachaCard id="balls">
       <div className="flex flex-col px-4 pb-6">
         <div className="flex flex-col items-center">
           <div
@@ -125,6 +133,6 @@ export default function MyGachaBallList({ data }: MyGachaBallListProps) {
           ))}
         </div>
       </div>
-    </MyGachaBallListContainer>
+    </GachaCard>
   );
 }

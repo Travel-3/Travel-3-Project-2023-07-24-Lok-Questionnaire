@@ -87,7 +87,7 @@ export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
     enabled: !!userId,
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: true,
-    refetchInterval: 30_000,
+    refetchInterval: 10_000,
   });
 
   useEffect(() => {

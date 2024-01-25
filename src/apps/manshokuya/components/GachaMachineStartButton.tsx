@@ -22,7 +22,7 @@ export default function GachaMachineStartButton() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div onClick={handlePress}>
+      <div onClick={handlePress} className="relative">
         <m.div
           style={{
             transition: "all 1s ease-in-out",
@@ -37,6 +37,10 @@ export default function GachaMachineStartButton() {
             />
           </AspectRatio>
         </m.div>
+        <div className="flex flex-col absolute top-0 left-0 right-0 bottom-0 justify-center items-center text-xs font-bold">
+          <div className="mb-1">開</div>
+          <div className="mt-1">始</div>
+        </div>
       </div>
     </LazyMotion>
   );

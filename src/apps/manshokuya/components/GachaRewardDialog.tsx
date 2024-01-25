@@ -67,10 +67,10 @@ export default function GachaRewardDialog({
 }: GachaRewardDialogProps) {
   const { reward } = useManshokuya();
 
-  //   console.log('reward', reward)
   const coupon = useMemo(() => {
     return reward && Coupons.find((coupon) => coupon.id === reward.id);
   }, [reward]);
+
   return (
     <LazyMotion features={domAnimation}>
       {isOpen && (
@@ -118,7 +118,12 @@ export default function GachaRewardDialog({
                   </AspectRatio>
                 </div>
 
-                <GachaMachineOpenedBall coupon={coupon} />
+                <GachaMachineOpenedBall
+                  coupon={{
+                    ...coupon,
+                    code: reward.code,
+                  }}
+                />
               </div>
             </GachaRewardWrapper>
             <div className="absolute bottom-0 flex justify-center w-full">

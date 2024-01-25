@@ -60,7 +60,13 @@ export function BaseGachaBall({
         }}
       >
         <AspectRatio ratio={Ball[type].ratio}>
-          <Image src={Ball[type].src} fill alt="Gocha Ball" />
+          <Image
+            src={Ball[type].src}
+            fill
+            alt="Gocha Ball"
+            quality={90}
+            priority
+          />
         </AspectRatio>
       </m.div>
     </LazyMotion>
@@ -116,7 +122,13 @@ function GachaBall({ y, x, rotation, width = 100, type }: GochaBallProps) {
         }}
       >
         <AspectRatio ratio={Ball[type].ratio}>
-          <Image src={Ball[type].src} fill alt="Gocha Ball" />
+          <Image
+            src={Ball[type].src}
+            fill
+            alt="Gocha Ball"
+            quality={90}
+            priority
+          />
         </AspectRatio>
       </m.div>
     </LazyMotion>

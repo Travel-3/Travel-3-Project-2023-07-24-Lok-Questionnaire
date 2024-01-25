@@ -42,11 +42,11 @@ export const Coupons = [
   },
   {
     id: 4,
-    name: "生可樂",
+    name: "一罐生可樂",
     poster: "/images/manshokuya/Poster-04.png",
     ball: "/images/manshokuya/Ball-01.png",
     ballOpened: "/images/manshokuya/Ball-Open-04.png",
-    avatar: "/images/manshokuya/Coke.png",
+    avatar: "/images/manshokuya/Avatar-04.png",
     description: "截止日期 2024年2月28日",
   },
 ];

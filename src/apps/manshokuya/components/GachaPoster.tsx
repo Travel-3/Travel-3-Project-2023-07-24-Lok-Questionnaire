@@ -1,10 +1,11 @@
 import { AspectRatio } from "@/components/ui";
-import Image from "next/image";
+import NextImage from "next/image";
 import styled from "styled-components";
 import { QRCodeSVG } from "qrcode.react";
 import { useManshokuya } from "../Provider";
 import { useScreenshot } from "@/components/Screenshot/ScreenshotProvider";
 import useLongPress from "@/hooks/useLongPress";
+import GachaCard from "./GachaCard";
 
 const PosterContainer = styled.div`
   background: #fbcb01;
@@ -18,6 +19,8 @@ const PosterContent = styled.div`
   background-repeat: repeat;
   color: #241716;
   position: relative;
+  width: 100%;
+  height: auto;
   /* overflow: hidden; */
 `;
 
@@ -28,6 +31,16 @@ const ReturnButton = styled.div`
   color: #241716;
   border-radius: 8px;
 `;
+
+const Image = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 export default function GachaPoster() {
   const { setPreviewCoupon, previewCoupon } = useManshokuya();
   const { take } = useScreenshot();
@@ -56,15 +69,19 @@ export default function GachaPoster() {
           >
             <AspectRatio ratio={2048 / 500}>
               <Image
-                src="/images/manshokuya/Window.svg"
-                fill
+                src="/images/manshokuya/Window.png"
+                loading={"eager"}
                 alt="Gocha Texture"
               />
             </AspectRatio>
           </div>
           <div className="mt-2 flex-1">
             <AspectRatio ratio={998 / 1217}>
-              <Image src={previewCoupon?.poster} fill alt="Poster" />
+              <Image
+                src={previewCoupon?.poster}
+                alt="Poster"
+                loading={"eager"}
+              />
             </AspectRatio>
           </div>
         </PosterContent>
@@ -72,7 +89,7 @@ export default function GachaPoster() {
           <div className="px-2 mr-4 mt-4 flex-1">
             <div onClick={handleNavigateCode}>
               <AspectRatio ratio={2048 / 417}>
-                <Image
+                <NextImage
                   src="/images/manshokuya/Use-Coupon-Btn.png"
                   fill
                   alt="Gocha Texture"
@@ -81,7 +98,7 @@ export default function GachaPoster() {
             </div>
             <div className="mt-3" onClick={take}>
               <AspectRatio ratio={2048 / 417}>
-                <Image
+                <NextImage
                   src="/images/manshokuya/Share-Poster-Btn.png"
                   fill
                   alt="Gocha Texture"
@@ -91,7 +108,7 @@ export default function GachaPoster() {
             {/* <p className="mt-3 text-center">- 長按保存圖片 -</p> */}
             <div className="w-2/3 mx-auto mt-2">
               <AspectRatio ratio={326 / 33}>
-                <Image
+                <NextImage
                   src="/images/manshokuya/Long-Press.svg"
                   fill
                   alt="Long Press"
@@ -101,7 +118,7 @@ export default function GachaPoster() {
           </div>
           <div style={{ width: "37%" }} className="-mt-1 relative">
             <AspectRatio ratio={2048 / 2256}>
-              <Image
+              <NextImage
                 src="/images/manshokuya/Poster-Qrcode.svg"
                 fill
                 alt="Gocha Texture"
@@ -133,10 +150,15 @@ export default function GachaPoster() {
             <p className="text-inherit text-center mb-2 font-bold">
               優惠券代碼
             </p>
-            <p className="text-4xl text-center text-inherit font-bold">PV573</p>
+            <p className="text-4xl text-center text-inherit font-bold">
+              {previewCoupon.code}
+            </p>
           </PosterContent>
         </div>
-        <div className="mt-4">
+        <GachaCard className="my-4">
+          <p className="p-4 ">{previewCoupon.description}</p>
+        </GachaCard>
+        <div className="mt-1">
           <ReturnButton
             onClick={() => setPreviewCoupon(null)}
             className="text-center py-1 text-lg font-bold"

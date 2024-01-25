@@ -59,6 +59,11 @@ export function GachaMachinePanel() {
   );
 }
 
+const ChanceLabel = styled.div`
+  color: #241716;
+  border-color: #241716;
+`;
+
 export default function GachaMachine() {
   const { numOfOpportunitie, reward } = useManshokuya();
   // const y = useMotionValue(-100)
@@ -97,14 +102,20 @@ export default function GachaMachine() {
   return (
     <div className="relative">
       <AspectRatio ratio={2048 / 2654}>
-        <Image src="/images/manshokuya/Machine.png" fill alt="Gocha Machine" />
+        <Image
+          quality={90}
+          priority
+          src="/images/manshokuya/Machine.png"
+          fill
+          alt="Gocha Machine"
+        />
       </AspectRatio>
       <GachaMachinePanel />
       <div
         className="absolute"
         style={{
           left: "10%",
-          right: "10%",
+          right: "5%",
           bottom: "5%",
           top: "75%",
         }}
@@ -120,6 +131,7 @@ export default function GachaMachine() {
               <Image
                 src="/images/manshokuya/Out-Box.png"
                 fill
+                quality={90}
                 alt="Gocha Texture"
               />
             </AspectRatio>
@@ -129,10 +141,10 @@ export default function GachaMachine() {
               </div>
             </div>
           </div>
-          <div className="flex-1 flex">
-            <div className="flex flex-col flex-1">
+          <div className="flex-1 flex mx-1">
+            <div className="flex flex-col flex-1 pr-1">
               <div className="flex">
-                <div
+                {/* <div
                   style={{
                     width: "45.5%",
                   }}
@@ -145,14 +157,9 @@ export default function GachaMachine() {
                       alt="Gocha Texture"
                     />
                   </AspectRatio>
-                </div>
-                <div
-                  className="relative bg-gray-200 border-2 text-sm"
-                  style={{
-                    width: "54.5%",
-                  }}
-                >
-                  剩餘<span>{numOfOpportunitie}</span>次機會
+                </div> */}
+                <ChanceLabel className="flex justify-center relative bg-gray-200 border-2 text-sm rounded-sm w-full text-center mb-1 font-bold">
+                  剩餘<div className="w-6">{numOfOpportunitie}</div>次機會
                   {/* <AspectRatio ratio={2048 / 556}>
                     <Image
                       src="/images/manshokuya/Chance-Label.png"
@@ -166,13 +173,15 @@ export default function GachaMachine() {
                   >
                     <span>{numOfOpportunitie}</span>
                   </div> */}
-                </div>
+                </ChanceLabel>
               </div>
               <div className="relative">
                 <AspectRatio ratio={2048 / 1218}>
                   <Image
                     src="/images/manshokuya/Coin-Machine.png"
                     fill
+                    quality={90}
+                    priority
                     alt="Gocha Texture"
                   />
                 </AspectRatio>
@@ -196,6 +205,8 @@ export default function GachaMachine() {
                 <Image
                   src="/images/manshokuya/My-Ball-Btn.png"
                   fill
+                  quality={90}
+                  priority
                   alt="Gocha Texture"
                 />
               </AspectRatio>
