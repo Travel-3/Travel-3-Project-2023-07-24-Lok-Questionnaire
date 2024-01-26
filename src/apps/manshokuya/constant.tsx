@@ -1,11 +1,11 @@
 export const Business = {
-  title: "萬食屋扭蛋優惠活動",
+  title: "玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 ",
   facebookId: "manshokuya",
   instagramId: "manshokuya",
-  description: "萬食屋扭蛋優惠活動",
+  description: "玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 ",
   url: "https://manshokuya.com",
   image: "https://manshokuya.com/images/ogp.png",
-  address: "台北市大安區忠孝東路四段181巷3號",
+  // address: "台北市大安區忠孝東路四段181巷3號",
   // period: "2021/10/01 ~ 2021/10/31",
 };
 
@@ -19,34 +19,40 @@ export const Coupons = [
     avatar: "/images/manshokuya/Avatar-01.png",
     ball: "/images/manshokuya/Ball-01.png",
     ballOpened: "/images/manshokuya/Ball-Open-01.png",
-    description: "截止日期 2024年2月28日",
+    ballRatio: 2048 / 1997,
+    description: "優惠劵使用截止日期 2024年2月28日。",
+    auth: true,
   },
   {
     id: 2,
     name: "9折萬食屋優惠劵",
     poster: "/images/manshokuya/Poster-02.png",
-    ball: "/images/manshokuya/Ball-01.png",
+    ball: "/images/manshokuya/Ball-02.png",
     ballOpened: "/images/manshokuya/Ball-Open-02.png",
+    ballRatio: 2048 / 1831,
     avatar: "/images/manshokuya/Avatar-02.png",
-    description: "截止日期 2024年2月28日",
+    description: "優惠劵使用截止日期 2024年2月28日。",
   },
   {
     id: 3,
     name: "95折萬食屋優惠劵",
     poster: "/images/manshokuya/Poster-03.png",
-    ball: "/images/manshokuya/Ball-01.png",
+    ball: "/images/manshokuya/Ball-03.png",
     ballOpened: "/images/manshokuya/Ball-Open-03.png",
+    ballRatio: 2048 / 1997,
     avatar: "/images/manshokuya/Avatar-03.png",
-    description: "截止日期 2024年2月28日",
+    description: "優惠劵使用截止日期 2024年2月28日。",
   },
   {
     id: 4,
     name: "一罐生可樂",
     poster: "/images/manshokuya/Poster-04.png",
-    ball: "/images/manshokuya/Ball-01.png",
+    ball: "/images/manshokuya/Ball-04.png",
     ballOpened: "/images/manshokuya/Ball-Open-04.png",
+    ballRatio: 2048 / 1997,
     avatar: "/images/manshokuya/Avatar-04.png",
-    description: "截止日期 2024年2月28日",
+    description: "生可樂換領截止日期 2024年2月28日。一罐生可樂只可換領一次。",
+    auth: true,
   },
 ];
 
@@ -71,7 +77,7 @@ export const TC = `
 `;
 
 export const SMS_MESSAGE = `
-【Travel3】歡迎參與Travel3 x 萬食屋扭蛋遊戲。
+【Travel3】歡迎參與玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 。
 
 如有任何問題，請隨時到我們的Facebook專頁「Travel3 Official」https://fb.me/travel3official 查詢。感謝您的參與！
 

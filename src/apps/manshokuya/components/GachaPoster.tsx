@@ -54,16 +54,21 @@ const Image = styled.img`
 `;
 
 export default function GachaPoster() {
-  const { setPreviewCoupon, previewCoupon } = useManshokuya();
+  const { setPreviewCoupon, previewCoupon, onAsk4PhoneOpen } = useManshokuya();
   const { take } = useScreenshot();
   const [codeVisible, setCodeVisible] = useState(false);
-  const { userId } = useUser();
+  const { userId, userPhone } = useUser();
 
   const events = useLongPress(() => {
     take();
   }, 1000);
 
   const handleNavigateCode = () => {
+    if (previewCoupon?.auth && !userPhone) {
+      onAsk4PhoneOpen();
+      console.log("ask for phone");
+      return;
+    }
     setCodeVisible(true);
     const element = document.getElementById("code");
     element?.scrollIntoView({ behavior: "smooth" });
@@ -179,7 +184,10 @@ export default function GachaPoster() {
           <p className="p-4 ">{previewCoupon.description}</p>
         </PosterContent>
         <div className="mt-1">
-          <TrackLink game="Demo" href="https://www.facebook.com/manshokuya">
+          <TrackLink
+            game="Manshokuya"
+            href="https://www.facebook.com/manshokuya"
+          >
             <FacebookButton className="text-center py-1 text-lg font-bold text-outlined">
               萬食屋 Facebook 專頁
             </FacebookButton>

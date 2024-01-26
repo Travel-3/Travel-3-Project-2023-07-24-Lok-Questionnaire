@@ -10,7 +10,7 @@ export const GachaRewardContainer = styled(m.div)`
   left: 0;
   right: 0;
   top: 0;
-  z-index: 100;
+  z-index: 10;
   overflow-y: scroll;
   overflow-x: hidden;
 `;

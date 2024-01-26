@@ -13,8 +13,9 @@ import Meta from "@/components/Meta";
 import GachaCard from "@/apps/manshokuya/components/GachaCard";
 import SplashScreen from "@/apps/manshokuya/components/SplashScreen";
 import styled from "styled-components";
-import { Business, TC } from "@/apps/manshokuya/constant";
+import { Business, Coupons, TC } from "@/apps/manshokuya/constant";
 import dynamic from "next/dynamic";
+import { BaseGachaBall } from "@/apps/manshokuya/components/GachaBall";
 
 const BaseBottomSheet = dynamic(
   () => import("@/components/Dialog/BaseBottomSheet"),
@@ -82,14 +83,9 @@ function Page() {
     onClose: onPrivacyClose,
   } = useDisclosure();
   const {
-    isOpen: isShareRuleOpen,
-    onOpen: onShareRuleOpen,
-    onClose: onShareRuleClose,
-  } = useDisclosure();
-  const {
-    isOpen: isAsk4PhoneOpen,
-    onOpen: onAsk4PhoneOpen,
-    onClose: onAsk4PhoneClose,
+    isOpen: isGiftOpen,
+    onOpen: onGiftOpen,
+    onClose: onGiftClose,
   } = useDisclosure();
   const {
     isOpen: isRewardOpen,
@@ -97,7 +93,8 @@ function Page() {
     onClose: onRewardClose,
   } = useDisclosure();
 
-  const { reward } = useManshokuya();
+  const { reward, isAsk4PhoneOpen, onAsk4PhoneOpen, onAsk4PhoneClose } =
+    useManshokuya();
   const { data: { data } = { data: [] } } = useQuery({
     queryKey: ["Coupons"],
     queryFn: () => {
@@ -165,11 +162,10 @@ function Page() {
     <>
       <Meta
         slug="manshokuya"
-        title="萬食屋扭蛋優惠活動"
-        description="萬食屋扭蛋優惠活動"
+        title="玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 "
+        description="玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 "
         themeColor="#FACD00"
       />
-
       <SplashScreen>
         <App
           style={{
@@ -190,15 +186,18 @@ function Page() {
               <GachaMachine />
             </div>
 
-            <div
-              className="absolute right-0 top-6 w-24 -mr-1"
-              onClick={onPrivacyOpen}
-            >
-              <StickyButton className="text-outlined text-center font-m-plus text-lg">
+            <div className="absolute right-0 top-6 w-24 -mr-1">
+              <StickyButton
+                className="text-outlined text-center font-m-plus text-lg"
+                onClick={onPrivacyOpen}
+              >
                 活動規則
               </StickyButton>
               <div className="flex justify-end">
-                <StickyButton className="inline-block px-3  mt-3 text-outlined text-center font-m-plus text-lg">
+                <StickyButton
+                  className="inline-block px-3  mt-3 text-outlined text-center font-m-plus text-lg"
+                  onClick={onGiftOpen}
+                >
                   禮品
                 </StickyButton>
               </div>
@@ -280,21 +279,20 @@ function Page() {
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col items-center" id="gameRule">
-              <div
-                style={{
-                  width: "49.3%",
-                }}
-              >
-                <AspectRatio ratio={2048 / 575}>
+            <div
+              className="mt-8 mb-6  relative flex flex-col items-center"
+              id="gameRule"
+            >
+              <div className="w-full">
+                <AspectRatio ratio={1080 / 255}>
                   <Image
-                    src="/images/manshokuya/How-To-Play-Btn.png"
+                    src="/images/manshokuya/Game-Rule.png"
                     fill
                     alt={"Game Rule"}
                   />
                 </AspectRatio>
               </div>
-              <div className="flex justify-center w-full relative my-6 -mx-1">
+              <div className="flex justify-center w-full relative mb-6 -mx-1 -mt-2">
                 <div className="flex-1 mx-1">
                   <AspectRatio ratio={2048 / 2623}>
                     <Image
@@ -325,6 +323,7 @@ function Page() {
                 </div>
               </div>
             </div>
+
             <GachaCard className="mb-12">
               <div className="text-center p-4 text-sm">
                 首次參加活動時，您將獲得一次扭蛋機會。隨後您可以將活動圖片和鏈結分享到社交媒體上。
@@ -399,7 +398,10 @@ function Page() {
                 因此，請確保在使用折扣之前閱讀並理解相關的使用條款和條件。
               </div>
             </GachaCard>
-            <TrackLink game="Demo" href="https://www.facebook.com/manshokuya">
+            <TrackLink
+              game="Manshokuya"
+              href="https://www.facebook.com/manshokuya"
+            >
               <FacebookButton className="text-center mt-6 py-1 text-lg font-bold text-outlined">
                 萬食屋 Facebook 專頁
               </FacebookButton>
@@ -429,6 +431,24 @@ function Page() {
           onClose={onAsk4PhoneClose}
         >
           <SignUpForm onDone={onAsk4PhoneClose} />
+        </BaseBottomSheet>
+        <BaseBottomSheet
+          isOpen={isGiftOpen}
+          title=""
+          overlay
+          onClose={onGiftClose}
+        >
+          <div className="flex flex-wrap">
+            {Coupons.map((coupon) => (
+              <div
+                key={coupon.id}
+                className="w-1/2 flex flex-col items-center mb-4"
+              >
+                <BaseGachaBall type={coupon.id as 1 | 2 | 3 | 4} width="50%" />
+                <p>{coupon.name}</p>
+              </div>
+            ))}
+          </div>
         </BaseBottomSheet>
         <GachaRewardDialog isOpen={isRewardOpen} onClose={handleRewardClose} />
         <GachaPosterDialog />

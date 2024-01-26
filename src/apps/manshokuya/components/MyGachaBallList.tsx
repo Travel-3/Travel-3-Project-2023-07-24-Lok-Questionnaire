@@ -102,7 +102,7 @@ export default function MyGachaBallList({ data }: MyGachaBallListProps) {
   return (
     <GachaCard id="balls">
       <div className="flex flex-col px-4 pb-6">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center -mx-4">
           <div
             style={{
               width: "49.3%",

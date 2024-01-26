@@ -1,6 +1,7 @@
 import Airtable from "airtable";
 import { NextApiRequest, NextApiResponse } from "next";
 import { decreaseItem, getSessionItem } from "./utils";
+import { document } from "@/utils/db";
 
 function generateCode() {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -15,13 +16,18 @@ const base = new Airtable({
   apiKey: process.env.AIRTABLE_KEY,
 }).base("appNP4ctRAIBxohZu");
 
-function luckyDraw() {
-  const items = [
-    { id: 1, weight: 0.01, name: "30% off" },
-    { id: 2, weight: 0.1, name: "10% off" },
-    { id: 4, weight: 0.29, name: "生可樂" },
-    { id: 3, weight: 0.6, name: "5% off" },
-  ];
+function luckyDraw(coupons: { quantity: number; ID: string; name: string }[]) {
+  const totalQuantity = coupons.reduce(
+    (total, coupon) => total + coupon.quantity,
+    0,
+  );
+  const items = coupons
+    .map((coupon) => ({
+      id: coupon.ID,
+      weight: coupon.quantity / totalQuantity,
+      name: coupon.name,
+    }))
+    .sort((a, b) => a.weight - b.weight);
 
   const totalWeight = items.reduce((total, item) => total + item.weight, 0);
   let randomNum = Math.random() * totalWeight;
@@ -75,18 +81,25 @@ export default async function handler(
     });
   }
 
+  const { Items: coupons } = await document.scan({
+    TableName: "Manshokuya_Drawing",
+  });
+
   const table = base.table("Records");
-  const luckyDrawResult = luckyDraw();
+  const luckyDrawResult = luckyDraw(coupons as any[]);
   const createdRecord = await table.create([
     {
       fields: {
         "Coupon Code": generateCode(),
         "Coupon Discount": luckyDrawResult?.name,
-        "Coupon ID": luckyDrawResult?.id,
+        "Coupon ID": Number(luckyDrawResult?.id),
         "User ID": sessionId,
       },
     },
   ]);
+
+  if (luckyDrawResult?.id)
+    await decreaseItem("Manshokuya_Drawing", luckyDrawResult.id, "quantity");
 
   await decreaseItem(game as string, item.ID, "score");
 

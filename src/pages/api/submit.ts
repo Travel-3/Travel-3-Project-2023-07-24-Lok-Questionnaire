@@ -4,7 +4,7 @@ import {
   UpdateItemCommand,
   UpdateItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
-import { client } from "@/utils/db";
+import { client, document } from "@/utils/db";
 import SMS from "@/services/sms";
 import { SMS_MESSAGE } from "@/apps/manshokuya/constant";
 
@@ -31,6 +31,27 @@ export default async function handler(
     res.status(400).json({
       ok: false,
       error: "Phone already set",
+    });
+    return;
+  }
+
+  const { Items } = await document.scan({
+    TableName: game as string,
+    FilterExpression: "#phone = :phone And #region = :region",
+    ExpressionAttributeValues: {
+      ":phone": phone?.toString() ?? "",
+      ":region": region?.toString() ?? "",
+    },
+    ExpressionAttributeNames: {
+      "#phone": "phone",
+      "#region": "region",
+    },
+  });
+
+  if (Items && Items.length) {
+    res.status(400).json({
+      ok: false,
+      error: "Phone and region already used.",
     });
     return;
   }

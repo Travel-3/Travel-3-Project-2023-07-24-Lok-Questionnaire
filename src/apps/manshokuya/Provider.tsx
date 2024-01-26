@@ -12,6 +12,7 @@ import {
   useState,
 } from "react";
 import { useUser } from "./hooks";
+import useDisclosure from "@/hooks/useDisclosure";
 
 export type ManshokuyaContextState = {
   numOfOpportunitie: number;
@@ -22,6 +23,9 @@ export type ManshokuyaContextState = {
   setReward: Dispatch<SetStateAction<any>>;
   setIsAnimating: Dispatch<SetStateAction<boolean>>;
   setNumOfOpportunitie: Dispatch<SetStateAction<number>>;
+  isAsk4PhoneOpen: boolean;
+  onAsk4PhoneOpen: () => void;
+  onAsk4PhoneClose: () => void;
 };
 
 export const ManshokuyaContext = createContext<ManshokuyaContextState>({
@@ -33,12 +37,20 @@ export const ManshokuyaContext = createContext<ManshokuyaContextState>({
   setReward: () => {},
   setIsAnimating: () => {},
   setNumOfOpportunitie: () => {},
+  isAsk4PhoneOpen: false,
+  onAsk4PhoneOpen: () => {},
+  onAsk4PhoneClose: () => {},
 });
 
 export type ManshokuyaProviderProps = PropsWithChildren;
 
 export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
   const { setUser, userId } = useUser();
+  const {
+    isOpen: isAsk4PhoneOpen,
+    onOpen: onAsk4PhoneOpen,
+    onClose: onAsk4PhoneClose,
+  } = useDisclosure();
   const [numOfOpportunitie, setNumOfOpportunitie] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [previewCoupon, setPreviewCoupon] = useState<any>(null);
@@ -91,7 +103,7 @@ export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && data.score) {
       // console.log('data', data.score.score)
       setNumOfOpportunitie(data.score.score);
       setUser((prev) => ({
@@ -101,6 +113,7 @@ export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
         region: "",
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
@@ -114,6 +127,9 @@ export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
         setReward,
         setIsAnimating,
         setNumOfOpportunitie,
+        isAsk4PhoneOpen,
+        onAsk4PhoneOpen,
+        onAsk4PhoneClose,
       }}
     >
       {children}
@@ -131,6 +147,9 @@ export const useManshokuya = () => {
     reward,
     previewCoupon,
     setPreviewCoupon,
+    isAsk4PhoneOpen,
+    onAsk4PhoneOpen,
+    onAsk4PhoneClose,
   } = useContext(ManshokuyaContext);
 
   const { userId } = useUser();
@@ -174,6 +193,9 @@ export const useManshokuya = () => {
     previewCoupon,
     view,
     setPreviewCoupon,
+    isAsk4PhoneOpen,
+    onAsk4PhoneOpen,
+    onAsk4PhoneClose,
     // eslint-disable-next-line react-hooks/exhaustive-deps
     draw: useCallback(draw, [numOfOpportunitie]),
   };

@@ -11,25 +11,7 @@ import {
 import Image from "next/image";
 import { memo, useEffect, useRef } from "react";
 import { useManshokuya } from "../Provider";
-
-const Ball = {
-  1: {
-    ratio: 2048 / 1997,
-    src: "/images/manshokuya/Ball-01.png",
-  },
-  2: {
-    ratio: 2048 / 1831,
-    src: "/images/manshokuya/Ball-02.png",
-  },
-  3: {
-    ratio: 2048 / 1997,
-    src: "/images/manshokuya/Ball-03.png",
-  },
-  4: {
-    ratio: 2048 / 1997,
-    src: "/images/manshokuya/Ball-04.png",
-  },
-};
+import { Coupons } from "../constant";
 
 export type GochaBallProps = {
   x: number;
@@ -48,6 +30,10 @@ export function BaseGachaBall({
   x?: MotionValue<any>;
   y?: MotionValue<any>;
 }) {
+  const ball = Coupons.find((coupon) => coupon.id === type);
+
+  if (!ball) return null;
+
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -59,14 +45,8 @@ export function BaseGachaBall({
           width,
         }}
       >
-        <AspectRatio ratio={Ball[type].ratio}>
-          <Image
-            src={Ball[type].src}
-            fill
-            alt="Gocha Ball"
-            quality={90}
-            priority
-          />
+        <AspectRatio ratio={ball.ballRatio}>
+          <Image src={ball.ball} fill alt="Gocha Ball" quality={90} priority />
         </AspectRatio>
       </m.div>
     </LazyMotion>
@@ -105,6 +85,11 @@ function GachaBall({ y, x, rotation, width = 100, type }: GochaBallProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAnimating]);
 
+  const ball = Coupons.find((coupon) => +coupon.id === +type);
+
+  console.log("ball", ball);
+  if (!ball) return null;
+
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -121,14 +106,8 @@ function GachaBall({ y, x, rotation, width = 100, type }: GochaBallProps) {
           ...(x < 50 ? { left: `${x}%` } : { right: `${100 - x}%` }),
         }}
       >
-        <AspectRatio ratio={Ball[type].ratio}>
-          <Image
-            src={Ball[type].src}
-            fill
-            alt="Gocha Ball"
-            quality={90}
-            priority
-          />
+        <AspectRatio ratio={ball.ballRatio}>
+          <Image src={ball.ball} fill alt="Gocha Ball" quality={90} priority />
         </AspectRatio>
       </m.div>
     </LazyMotion>

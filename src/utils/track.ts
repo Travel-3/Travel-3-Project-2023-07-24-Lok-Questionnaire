@@ -67,7 +67,7 @@ export default class Track {
         behaviour: this.behaviour,
         createdAt: this.createdAt,
         userAgent: this.userAgent,
-        ...this.payload,
+        // ...this.payload,
       },
     });
     if (response.status !== 200) {
@@ -82,7 +82,10 @@ export default class Track {
   }
 
   private sessionId() {
-    const id = useDeviceIDState.getState().deviceID;
+    const user = localStorage.getItem("User/Manshokuya");
+    const id = user
+      ? JSON.parse(user)["ID"]
+      : useDeviceIDState.getState().deviceID;
     if (!id) throw new Error("Device ID not found");
 
     return id;
