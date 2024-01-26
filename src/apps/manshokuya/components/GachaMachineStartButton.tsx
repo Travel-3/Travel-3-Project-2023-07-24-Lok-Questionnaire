@@ -2,10 +2,13 @@ import { AspectRatio } from "@/components/ui";
 import { LazyMotion, domAnimation, m, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { useManshokuya } from "../Provider";
+import { fireEvent } from "@/services/pixel";
+import { useUser } from "../hooks";
 
 export default function GachaMachineStartButton() {
   const { numOfOpportunitie, isAnimating, draw } = useManshokuya();
   const rotate = useMotionValue(0);
+  const { userId } = useUser();
 
   const handlePress = () => {
     if (isAnimating) {
@@ -17,6 +20,11 @@ export default function GachaMachineStartButton() {
     }
 
     rotate.set(rotate.get() + 720);
+
+    fireEvent("Draw", {
+      userId,
+      numOfOpportunitie,
+    });
     draw();
   };
 
@@ -37,9 +45,9 @@ export default function GachaMachineStartButton() {
             />
           </AspectRatio>
         </m.div>
-        <div className="flex flex-col absolute top-0 left-0 right-0 bottom-0 justify-center items-center text-xs font-bold">
-          <div className="mb-1">開</div>
-          <div className="mt-1">始</div>
+        <div className="font-m-plus flex flex-col absolute top-0 left-0 right-0 bottom-0 justify-center items-center text-xs font-bold">
+          <div className="mb-1.5">開</div>
+          <div className="mt-1.5">始</div>
         </div>
       </div>
     </LazyMotion>

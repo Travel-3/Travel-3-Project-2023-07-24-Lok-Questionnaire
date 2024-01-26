@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSessionItem, increaseItem, writeItem } from "./utils";
+import { getSessionItem, increaseItem } from "./utils";
 import {
   UpdateItemCommand,
   UpdateItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
 import { client } from "@/utils/db";
 import SMS from "@/services/sms";
+import { SMS_MESSAGE } from "@/apps/manshokuya/constant";
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,7 +57,7 @@ export default async function handler(
     const scoreItem = await getSessionItem(game, sessionId, "Score");
     if (scoreItem) increaseItem(game as string, scoreItem.ID, "score");
 
-    const response = await SMS.build().send("+85368185610", "Hello World");
+    const response = await SMS.build().send("+85368185610", SMS_MESSAGE);
 
     response.ok
       ? res.status(200).json(response)

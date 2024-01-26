@@ -75,19 +75,6 @@ export default function GachaMachine() {
     });
   };
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "web.dev",
-          text: "Check out web.dev.",
-          url: "https://web.dev/",
-        })
-        .then(() => console.log("Successful share"))
-        .catch((error) => console.log("Error sharing", error));
-    }
-  };
-
   useEffect(() => {
     if (reward.id) {
       y.set(0);
@@ -100,51 +87,52 @@ export default function GachaMachine() {
   }, [reward]);
 
   return (
-    <div className="relative">
-      <AspectRatio ratio={2048 / 2654}>
-        <Image
-          quality={90}
-          priority
-          src="/images/manshokuya/Machine.png"
-          fill
-          alt="Gocha Machine"
-        />
-      </AspectRatio>
-      <GachaMachinePanel />
-      <div
-        className="absolute"
-        style={{
-          left: "10%",
-          right: "5%",
-          bottom: "5%",
-          top: "75%",
-        }}
-      >
-        <div className="flex h-full">
-          <div
-            className="relative"
-            style={{
-              width: "40%",
-            }}
-          >
-            <AspectRatio ratio={2048 / 1792}>
-              <Image
-                src="/images/manshokuya/Out-Box.png"
-                fill
-                quality={90}
-                alt="Gocha Texture"
-              />
-            </AspectRatio>
-            <div className="absolute top-0 left-0 bottom-0 right-0 p-0">
-              <div className="overflow-hidden w-full h-full flex justify-center items-center">
-                <BaseGachaBall type={1} width={"60%"} y={y} />
+    <>
+      <div className="relative">
+        <AspectRatio ratio={2048 / 2654}>
+          <Image
+            quality={90}
+            priority
+            src="/images/manshokuya/Machine.png"
+            fill
+            alt="Gocha Machine"
+          />
+        </AspectRatio>
+        <GachaMachinePanel />
+        <div
+          className="absolute"
+          style={{
+            left: "10%",
+            right: "5%",
+            bottom: "5%",
+            top: "75%",
+          }}
+        >
+          <div className="flex h-full">
+            <div
+              className="relative"
+              style={{
+                width: "40%",
+              }}
+            >
+              <AspectRatio ratio={2048 / 1792}>
+                <Image
+                  src="/images/manshokuya/Out-Box.png"
+                  fill
+                  quality={90}
+                  alt="Gocha Texture"
+                />
+              </AspectRatio>
+              <div className="absolute top-0 left-0 bottom-0 right-0 p-0">
+                <div className="overflow-hidden w-full h-full flex justify-center items-center">
+                  <BaseGachaBall type={1} width={"60%"} y={y} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex-1 flex mx-1">
-            <div className="flex flex-col flex-1 pr-1">
-              <div className="flex">
-                {/* <div
+            <div className="flex-1 flex mx-1">
+              <div className="flex flex-col flex-1 pr-1">
+                <div className="flex">
+                  {/* <div
                   style={{
                     width: "45.5%",
                   }}
@@ -158,9 +146,9 @@ export default function GachaMachine() {
                     />
                   </AspectRatio>
                 </div> */}
-                <ChanceLabel className="flex justify-center relative bg-gray-200 border-2 text-sm rounded-sm w-full text-center mb-1 font-bold">
-                  剩餘<div className="w-6">{numOfOpportunitie}</div>次機會
-                  {/* <AspectRatio ratio={2048 / 556}>
+                  <ChanceLabel className="font-m-plus flex justify-center relative bg-gray-200 border-2 text-sm rounded-md w-full text-center mb-1 font-bold">
+                    剩餘<div className="w-6">{numOfOpportunitie}</div>次機會
+                    {/* <AspectRatio ratio={2048 / 556}>
                     <Image
                       src="/images/manshokuya/Chance-Label.png"
                       fill
@@ -173,47 +161,48 @@ export default function GachaMachine() {
                   >
                     <span>{numOfOpportunitie}</span>
                   </div> */}
-                </ChanceLabel>
+                  </ChanceLabel>
+                </div>
+                <div className="relative">
+                  <AspectRatio ratio={2048 / 1218}>
+                    <Image
+                      src="/images/manshokuya/Coin-Machine.png"
+                      fill
+                      quality={90}
+                      priority
+                      alt="Gocha Texture"
+                    />
+                  </AspectRatio>
+                  <div
+                    className="absolute top-0 right-0 bottom-0"
+                    style={{
+                      width: "50%",
+                    }}
+                  >
+                    <GachaMachineStartButton />
+                  </div>
+                </div>
               </div>
-              <div className="relative">
-                <AspectRatio ratio={2048 / 1218}>
+              <div
+                style={{
+                  width: "17.5%",
+                }}
+                onClick={handleNavigateReward}
+              >
+                <AspectRatio ratio={2048 / 7009}>
                   <Image
-                    src="/images/manshokuya/Coin-Machine.png"
+                    src="/images/manshokuya/My-Ball-Btn.png"
                     fill
                     quality={90}
                     priority
                     alt="Gocha Texture"
                   />
                 </AspectRatio>
-                <div
-                  className="absolute top-0 right-0 bottom-0"
-                  style={{
-                    width: "50%",
-                  }}
-                >
-                  <GachaMachineStartButton />
-                </div>
               </div>
-            </div>
-            <div
-              style={{
-                width: "17.5%",
-              }}
-              onClick={handleNavigateReward}
-            >
-              <AspectRatio ratio={2048 / 7009}>
-                <Image
-                  src="/images/manshokuya/My-Ball-Btn.png"
-                  fill
-                  quality={90}
-                  priority
-                  alt="Gocha Texture"
-                />
-              </AspectRatio>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ export type MetaProps = {
   type?: string;
   image?: string;
   description?: string;
+  themeColor?: string;
 };
 
 export default function Meta({
@@ -14,12 +15,14 @@ export default function Meta({
   type,
   image,
   description,
+  themeColor,
 }: MetaProps) {
   const url = `https://www.travel3exp.xyz/${slug}`;
   return (
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="theme-color" content={themeColor} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />

@@ -19,6 +19,9 @@ const BottomSheetWrapper = styled.div`
   border-radius: 12px 12px 0px 0px;
   /* background-color: #fff; */
   /* border-top: 1px solid #000; */
+  white-space: pre-wrap;
+  overflow-y: scroll;
+  max-height: 90vh;
 `;
 
 const BottomSheetHeader = styled.div`
@@ -95,6 +98,7 @@ export default function BaseBottomSheet({
         initial={{ y: "100%", opacity: 0.5 }}
         animate={{ y: isOpen ? "0%" : "100%", opacity: isOpen ? 1 : 0.5 }}
         exit={{ y: "100%" }}
+        transition={{ duration: 0.2 }}
       >
         <BottomSheetWrapper className="p-3 bg-white border-t">
           <BottomSheetHeader className="flex justify-between py-1 pb-2">

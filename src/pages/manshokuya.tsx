@@ -1,21 +1,78 @@
 import App from "@/components/App";
 import { useManshokuya, withProvider } from "@/apps/manshokuya/Provider";
-import BaseBottomSheet from "@/components/Dialog/BaseBottomSheet";
 import useDisclosure from "@/hooks/useDisclosure";
 import TrackLink from "@/components/Track/TrackLink";
 import { AspectRatio } from "@/components/ui";
 import Image from "next/image";
 import GachaMachine from "@/apps/manshokuya/components/GachaMachine";
-import MyGachaBallList from "@/apps/manshokuya/components/MyGachaBallList";
 import GachaRewardDialog from "@/apps/manshokuya/components/GachaRewardDialog";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import GachaPosterDialog from "@/apps/manshokuya/components/GachaPosterDialog";
-import SignUpForm from "@/apps/manshokuya/components/SignUpForm";
 import { useUser } from "@/apps/manshokuya/hooks";
 import Meta from "@/components/Meta";
 import GachaCard from "@/apps/manshokuya/components/GachaCard";
 import SplashScreen from "@/apps/manshokuya/components/SplashScreen";
+import styled from "styled-components";
+import { Business, TC } from "@/apps/manshokuya/constant";
+import dynamic from "next/dynamic";
+
+const BaseBottomSheet = dynamic(
+  () => import("@/components/Dialog/BaseBottomSheet"),
+  {
+    ssr: false,
+  },
+);
+
+const MyGachaBallList = dynamic(
+  () => import("@/apps/manshokuya/components/MyGachaBallList"),
+  {
+    ssr: false,
+  },
+);
+
+const GachaPosterDialog = dynamic(
+  () => import("@/apps/manshokuya/components/GachaPosterDialog"),
+  {
+    ssr: false,
+  },
+);
+
+const SignUpForm = dynamic(
+  () => import("@/apps/manshokuya/components/SignUpForm"),
+  {
+    ssr: false,
+  },
+);
+
+const FacebookButton = styled.div`
+  border: 2px solid #241716;
+  box-shadow: 0px 4px 0px #241716;
+  color: #fff;
+  background-color: #0972df;
+  border-radius: 8px;
+  --stroke-width: 1px;
+  --stroke-color: #241716;
+`;
+
+const ShareButton = styled.div`
+  border: 2px solid #241716;
+  box-shadow: 0px 4px 0px #241716;
+  background-color: #ec1827;
+  color: #fff;
+  border-radius: 8px;
+  --stroke-width: 2px;
+  --stroke-color: #241716;
+`;
+
+const StickyButton = styled.div`
+  border: 2px solid #241716;
+  box-shadow: 0px 4px 0px #241716;
+  background-color: #facc00;
+  color: #fff;
+  border-radius: 8px 0 0 8px;
+  --stroke-width: 1px;
+  --stroke-color: #241716;
+`;
 
 function Page() {
   const { userId, userPhone } = useUser();
@@ -84,9 +141,35 @@ function Page() {
     });
   };
 
+  const shareURL = useMemo(() => {
+    return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
+  }, [userId]);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: Business.title,
+          text: Business.description,
+          url: shareURL,
+        })
+        .then(() => console.log("成功分享!"));
+    } else {
+      const copy = (await import("copy-to-clipboard")).default;
+      copy(shareURL);
+      alert("複製鏈結成功！");
+    }
+  };
+
   return (
     <>
-      <Meta slug="manshokuya" title="萬食屋" description="萬食屋" />
+      <Meta
+        slug="manshokuya"
+        title="萬食屋扭蛋優惠活動"
+        description="萬食屋扭蛋優惠活動"
+        themeColor="#FACD00"
+      />
+
       <SplashScreen>
         <App
           style={{
@@ -103,25 +186,37 @@ function Page() {
                 alt={"Background"}
               />
             </AspectRatio>
-            <div className="absolute top-0 left-0 right-0 mx-2 mt-12">
+            <div className="absolute top-0 left-0 right-0 mx-2 mt-16">
               <GachaMachine />
             </div>
-            {/* ===活動規則=== */}
+
             <div
               className="absolute right-0 top-6 w-24 -mr-1"
               onClick={onPrivacyOpen}
             >
-              <AspectRatio ratio={2160 / 787}>
-                <Image
-                  src="/images/manshokuya/T&C.png"
-                  fill
-                  alt={"Background"}
-                />
-              </AspectRatio>
+              <StickyButton className="text-outlined text-center font-m-plus text-lg">
+                活動規則
+              </StickyButton>
+              <div className="flex justify-end">
+                <StickyButton className="inline-block px-3  mt-3 text-outlined text-center font-m-plus text-lg">
+                  禮品
+                </StickyButton>
+              </div>
             </div>
           </div>
           {/*  */}
-          <div className="px-4 mt-20">
+          <div className="mx-6 mt-20 mb-0">
+            <div className="pt-2">
+              <ShareButton
+                className="tracking-wider text-outlined py-1.5 text-center font-bold text-xl font-m-plus"
+                onClick={handleShare}
+              >
+                立刻分享獲取機會
+              </ShareButton>
+            </div>
+          </div>
+          {/*  */}
+          <div className="px-4 mt-6">
             <div className="relative">
               <AspectRatio ratio={2048 / 1065}>
                 <Image
@@ -304,12 +399,19 @@ function Page() {
                 因此，請確保在使用折扣之前閱讀並理解相關的使用條款和條件。
               </div>
             </GachaCard>
-            <div className="text-center pb-12 mt-6 ">
-              Made By - Travel3
+            <TrackLink game="Demo" href="https://www.facebook.com/manshokuya">
+              <FacebookButton className="text-center mt-6 py-1 text-lg font-bold text-outlined">
+                萬食屋 Facebook 專頁
+              </FacebookButton>
+            </TrackLink>
+            <div className="text-center pb-12 mt-4">
+              Powered By - Travel3
               <br />
               Email: info@travel3.app
               <br />
-              https://travel3.app
+              <a href="https://travel3.app" target="_blank">
+                https://travel3.app
+              </a>
             </div>
           </div>
         </App>
@@ -318,7 +420,7 @@ function Page() {
           title=""
           onClose={onPrivacyClose}
         >
-          Privacy
+          {TC}
         </BaseBottomSheet>
         <BaseBottomSheet
           isOpen={isAsk4PhoneOpen}

@@ -19,8 +19,8 @@ function luckyDraw() {
   const items = [
     { id: 1, weight: 0.01, name: "30% off" },
     { id: 2, weight: 0.1, name: "10% off" },
-    { id: 3, weight: 0.6, name: "5% off" },
     { id: 4, weight: 0.29, name: "生可樂" },
+    { id: 3, weight: 0.6, name: "5% off" },
   ];
 
   const totalWeight = items.reduce((total, item) => total + item.weight, 0);

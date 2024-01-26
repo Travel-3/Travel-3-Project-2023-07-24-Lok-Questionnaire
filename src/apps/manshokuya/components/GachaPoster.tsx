@@ -5,7 +5,9 @@ import { QRCodeSVG } from "qrcode.react";
 import { useManshokuya } from "../Provider";
 import { useScreenshot } from "@/components/Screenshot/ScreenshotProvider";
 import useLongPress from "@/hooks/useLongPress";
-import GachaCard from "./GachaCard";
+import { useMemo, useState } from "react";
+import TrackLink from "@/components/Track/TrackLink";
+import { useUser } from "../hooks";
 
 const PosterContainer = styled.div`
   background: #fbcb01;
@@ -21,15 +23,25 @@ const PosterContent = styled.div`
   position: relative;
   width: 100%;
   height: auto;
+  /* border-radius: 24px; */
   /* overflow: hidden; */
 `;
 
 const ReturnButton = styled.div`
   border: 2px solid #241716;
   box-shadow: 0px 4px 0px #241716;
-  background-color: #fff;
   color: #241716;
   border-radius: 8px;
+`;
+
+const FacebookButton = styled.div`
+  border: 2px solid #241716;
+  box-shadow: 0px 4px 0px #241716;
+  color: #fff;
+  background-color: #0972df;
+  border-radius: 8px;
+  --stroke-width: 1px;
+  --stroke-color: #241716;
 `;
 
 const Image = styled.img`
@@ -44,17 +56,22 @@ const Image = styled.img`
 export default function GachaPoster() {
   const { setPreviewCoupon, previewCoupon } = useManshokuya();
   const { take } = useScreenshot();
+  const [codeVisible, setCodeVisible] = useState(false);
+  const { userId } = useUser();
 
   const events = useLongPress(() => {
     take();
   }, 1000);
 
-  console.log("previewCoupon", previewCoupon);
-
   const handleNavigateCode = () => {
+    setCodeVisible(true);
     const element = document.getElementById("code");
     element?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const shareURL = useMemo(() => {
+    return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
+  }, [userId]);
 
   return (
     <>
@@ -136,8 +153,8 @@ export default function GachaPoster() {
                 <QRCodeSVG
                   width={"100%"}
                   height={"100%"}
-                  level="H"
-                  value={`1234567`}
+                  level="M"
+                  value={shareURL}
                   bgColor={`#00000000`}
                 />
                 <p className="mt-2 text-sm text-center">邀請碼</p>
@@ -145,23 +162,39 @@ export default function GachaPoster() {
             </div>
           </div>
         </div>
+
         <div className="mt-6" id="code">
-          <PosterContent className="py-3">
-            <p className="text-inherit text-center mb-2 font-bold">
-              優惠券代碼
-            </p>
-            <p className="text-4xl text-center text-inherit font-bold">
-              {previewCoupon.code}
-            </p>
-          </PosterContent>
+          {codeVisible && (
+            <PosterContent className="py-3 font-m-plus">
+              <p className="text-inherit text-center mb-2 font-bold">
+                優惠券代碼
+              </p>
+              <p className="text-4xl text-center text-inherit font-bold">
+                {previewCoupon.code}
+              </p>
+            </PosterContent>
+          )}
         </div>
-        <GachaCard className="my-4">
+        <PosterContent className="my-4 ">
           <p className="p-4 ">{previewCoupon.description}</p>
-        </GachaCard>
+        </PosterContent>
         <div className="mt-1">
+          <TrackLink game="Demo" href="https://www.facebook.com/manshokuya">
+            <FacebookButton className="text-center py-1 text-lg font-bold text-outlined">
+              萬食屋 Facebook 專頁
+            </FacebookButton>
+          </TrackLink>
+          <a
+            target="_blank"
+            href="https://www.google.com/maps/dir/?api=1&destination=22.195461562482%2C113.5454338789&fbclid=IwAR0lWw_naHfc5zoSRFfRWjabGszz5dZdk2KZq1dc2zguu-lbVWGBYyArjjw"
+          >
+            <ReturnButton className="text-center py-1 text-lg font-bold mt-3 bg-white">
+              萬食屋地址
+            </ReturnButton>
+          </a>
           <ReturnButton
             onClick={() => setPreviewCoupon(null)}
-            className="text-center py-1 text-lg font-bold"
+            className="text-center py-1 text-lg font-bold mt-3 bg-white"
           >
             返回
           </ReturnButton>
