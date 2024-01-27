@@ -21,7 +21,7 @@ const BottomSheetWrapper = styled.div`
   /* border-top: 1px solid #000; */
   white-space: pre-wrap;
   overflow-y: scroll;
-  max-height: 90vh;
+  max-height: 88dvh;
 `;
 
 const BottomSheetHeader = styled.div`
