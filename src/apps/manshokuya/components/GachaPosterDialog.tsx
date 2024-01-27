@@ -39,7 +39,10 @@ export default function GachaPosterDialog() {
           animate={{ opacity: isOpen ? 1 : 0 }}
           exit={{ opacity: 0 }}
         >
-          <ScreenshotProvider isReady>
+          <ScreenshotProvider
+            isReady
+            filename="玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂"
+          >
             <GachaPoster />
           </ScreenshotProvider>
         </GachaRewardContainer>

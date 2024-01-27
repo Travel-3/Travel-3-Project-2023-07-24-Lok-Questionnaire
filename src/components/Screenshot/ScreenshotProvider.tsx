@@ -20,10 +20,12 @@ export const ScreenshotContext = createContext<ScreenshotContextState>({
 
 export type ScreenshotProviderProps = {
   isReady: boolean;
+  filename: string;
 } & PropsWithChildren;
 
 export default function ScreenshotProvider({
   children,
+  filename = "",
 }: ScreenshotProviderProps) {
   const [base64, setBase64] = useState<string | null>(null);
 
@@ -76,9 +78,9 @@ export default function ScreenshotProvider({
       const _base64 = await build();
       if (_base64 === null) return alert("請刷新頁面後再試一次！");
 
-      return saveAs(_base64, `「Travel3 X 粉啵啵送聖誕禮物」活動`);
+      return saveAs(_base64, filename);
     })();
-  }, []);
+  }, [filename]);
 
   return (
     <ScreenshotContext.Provider value={{ screenshot: base64, take }}>

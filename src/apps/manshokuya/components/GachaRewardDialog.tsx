@@ -85,7 +85,12 @@ export default function GachaRewardDialog({
 
       {isOpen && (
         <GachaRewardContainer className="flex flex-col justify-center items-center">
-          <div className="relative w-full max-w-lg mx-auto">
+          <div
+            className="relative w-full max-w-lg mx-auto"
+            style={{
+              marginTop: "calc(100vw * 0.41845703125 * 0.5)",
+            }}
+          >
             <GachaRewardHeader>
               <AspectRatio ratio={2048 / 857}>
                 <Image

@@ -171,7 +171,7 @@ export default function Page() {
       </Head>
       <SplashScreen isLoaded={isLoaded}>
         <App>
-          <ScreenshotProvider isReady={isLoaded}>
+          <ScreenshotProvider isReady={isLoaded} filename="">
             <div id="canvas">
               <RedBackground>
                 <CharacterContainer>
