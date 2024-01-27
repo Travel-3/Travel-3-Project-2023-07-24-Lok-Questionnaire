@@ -227,7 +227,7 @@ function Page() {
               >
                 <TrackLink
                   game="Manshokuya"
-                  href="https://www.facebook.com/photo.php?fbid=875081747957871&amp;set=a.455841246548592&amp;type=3&amp;ref=embed_post"
+                  href="https://www.facebook.com/manshokuya/posts/pfbid0ckDKfR18mxA97FCX2sXjJPdHXRc8kuzystM7sjpJ4x3rjxPQqkzHSnf7XuFqvvEol"
                 >
                   <AspectRatio ratio={2048 / 276}>
                     <Image
