@@ -26,7 +26,7 @@ export default async function handler(
     const score = await getOrCreateScoreItem(
       game as string,
       sessionId as string,
-      100,
+      1,
     );
 
     res.status(200).json({
