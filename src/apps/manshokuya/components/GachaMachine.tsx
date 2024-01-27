@@ -68,6 +68,7 @@ export default function GachaMachine() {
   const { numOfOpportunitie, reward } = useManshokuya();
   // const y = useMotionValue(-100)
   const y = useSpring(-100);
+
   const handleNavigateReward = () => {
     window.scrollBy({
       top: document.querySelector("#balls")?.getBoundingClientRect().top,
@@ -85,8 +86,6 @@ export default function GachaMachine() {
     }, 1500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reward]);
-
-  console.log(reward, "reward");
 
   return (
     <>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useLocalStorage } from "usehooks-ts";
 import { useUser } from "../hooks";
+import { fireEvent } from "@/services/pixel";
 
 const InputContainer = styled.div`
   position: relative;
@@ -94,6 +95,10 @@ export default function SignUpForm({ onDone }: SignUpFormProps) {
     setIsLoading(true);
 
     try {
+      fireEvent("Register", {
+        userId,
+        ...form,
+      });
       await fetch("/api/submit", {
         method: "POST",
         headers: {

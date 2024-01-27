@@ -8,6 +8,7 @@ import useLongPress from "@/hooks/useLongPress";
 import { useMemo, useState } from "react";
 import TrackLink from "@/components/Track/TrackLink";
 import { useUser } from "../hooks";
+import { FacebookButton, InstagramButton } from "./Buttons";
 
 const PosterContainer = styled.div`
   background: #fbcb01;
@@ -32,16 +33,6 @@ const ReturnButton = styled.div`
   box-shadow: 0px 4px 0px #241716;
   color: #241716;
   border-radius: 8px;
-`;
-
-const FacebookButton = styled.div`
-  border: 2px solid #241716;
-  box-shadow: 0px 4px 0px #241716;
-  color: #fff;
-  background-color: #0972df;
-  border-radius: 8px;
-  --stroke-width: 1px;
-  --stroke-color: #241716;
 `;
 
 const Image = styled.img`
@@ -191,6 +182,14 @@ export default function GachaPoster() {
             <FacebookButton className="text-center py-1 text-lg font-bold text-outlined">
               萬食屋 Facebook 專頁
             </FacebookButton>
+          </TrackLink>
+          <TrackLink
+            game="Manshokuya"
+            href="https://www.instagram.com/manshokuya"
+          >
+            <InstagramButton className="text-center mt-3 py-1 text-lg font-bold text-outlined">
+              萬食屋 Instagram 專頁
+            </InstagramButton>
           </TrackLink>
           <a
             target="_blank"

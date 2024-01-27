@@ -16,6 +16,10 @@ import styled from "styled-components";
 import { Business, Coupons, TC } from "@/apps/manshokuya/constant";
 import dynamic from "next/dynamic";
 import { BaseGachaBall } from "@/apps/manshokuya/components/GachaBall";
+import {
+  FacebookButton,
+  InstagramButton,
+} from "@/apps/manshokuya/components/Buttons";
 
 const BaseBottomSheet = dynamic(
   () => import("@/components/Dialog/BaseBottomSheet"),
@@ -44,16 +48,6 @@ const SignUpForm = dynamic(
     ssr: false,
   },
 );
-
-const FacebookButton = styled.div`
-  border: 2px solid #241716;
-  box-shadow: 0px 4px 0px #241716;
-  color: #fff;
-  background-color: #0972df;
-  border-radius: 8px;
-  --stroke-width: 1px;
-  --stroke-color: #241716;
-`;
 
 const ShareButton = styled.div`
   border: 2px solid #241716;
@@ -115,7 +109,7 @@ function Page() {
       }, 300);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reward, userPhone]);
+  }, [reward]);
 
   const handleRewardClose = () => {
     onRewardClose();
@@ -147,7 +141,7 @@ function Page() {
       navigator
         .share({
           title: Business.title,
-          text: Business.description,
+          text: `${Business.description}. 活動網址：${shareURL}`,
           url: shareURL,
         })
         .then(() => console.log("成功分享!"));
@@ -405,6 +399,14 @@ function Page() {
               <FacebookButton className="text-center mt-6 py-1 text-lg font-bold text-outlined">
                 萬食屋 Facebook 專頁
               </FacebookButton>
+            </TrackLink>
+            <TrackLink
+              game="Manshokuya"
+              href="https://www.instagram.com/manshokuya"
+            >
+              <InstagramButton className="text-center mt-3 py-1 text-lg font-bold text-outlined">
+                萬食屋 Instagram 專頁
+              </InstagramButton>
             </TrackLink>
             <div className="text-center pb-12 mt-4">
               Powered By - Travel3

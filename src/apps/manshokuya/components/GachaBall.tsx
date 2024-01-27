@@ -38,7 +38,6 @@ export function BaseGachaBall({
     <LazyMotion features={domAnimation}>
       <m.div
         initial={false}
-        // transition={{ ease: "easeOut", duration: 0.2 }}
         style={{
           x,
           y,

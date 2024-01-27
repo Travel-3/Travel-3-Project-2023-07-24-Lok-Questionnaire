@@ -67,7 +67,7 @@ export default class Track {
         behaviour: this.behaviour,
         createdAt: this.createdAt,
         userAgent: this.userAgent,
-        // ...this.payload,
+        payload: JSON.stringify(this.payload),
       },
     });
     if (response.status !== 200) {

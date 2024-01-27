@@ -33,7 +33,9 @@ export default class SMS {
   private _send(to: string, message: string) {
     return this.client.messages.create({
       body: message,
-      from: process.env.TWILIO_PHONE_NUMBER,
+      messagingServiceSid: "MG93b73887505cc4a39ac39c73abe54082",
+      // messagingServiceSid="MG93b73887505cc4a39ac39c73abe54082",
+      // from: process.env.TWILIO_PHONE_NUMBER,
       to,
     });
   }
