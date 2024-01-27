@@ -24,6 +24,7 @@ export default async function handler(
       sessionId: sessionId as string,
       score: 0,
       behaviour: "New User",
+      createdAt: new Date().toISOString(),
     });
 
     const item = await getSessionItem(
@@ -38,6 +39,7 @@ export default async function handler(
         sessionId: sessionId as string,
         data: referral,
         behaviour: "Referral By",
+        createdAt: new Date().toISOString(),
       });
       await increaseItem(game as string, item.ID, "score");
     }

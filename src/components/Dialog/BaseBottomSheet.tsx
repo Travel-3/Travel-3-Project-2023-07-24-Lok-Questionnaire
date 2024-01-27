@@ -1,7 +1,8 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import styled from "styled-components";
 import { IoCloseSharp } from "react-icons/io5";
+import { useLockedBody } from "usehooks-ts";
 
 const BottomSheetContainer = styled(m.div)`
   /* position: fixed;
@@ -81,6 +82,17 @@ export default function BaseBottomSheet({
   title,
   children,
 }: BaseBottomSheetProps) {
+  const [locked, setLocked] = useLockedBody(false, "root");
+
+  useEffect(() => {
+    if (isOpen && !locked) {
+      setLocked(true);
+    } else if (!isOpen && locked) {
+      setLocked(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, locked]);
+
   return (
     <LazyMotion features={domAnimation}>
       {isOpen && overlay && (

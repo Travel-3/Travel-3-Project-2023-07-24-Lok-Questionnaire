@@ -59,6 +59,7 @@ const getOrCreateScoreItem = async (
         sessionId,
         behaviour: "Score",
         score,
+        createdAt: new Date().toISOString(),
       });
 
       return {

@@ -254,15 +254,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { game, sessionId, behaviour, createdAt, userAgent, payload } =
-    req.query;
+  const { game, sessionId, behaviour, userAgent, payload } = req.query;
 
   await writeItem(game as string, {
     ID: uuid(),
     sessionId: sessionId as string,
     behaviour: "TRACK",
     action: behaviour as string,
-    createdAt: createdAt as string,
+    createdAt: new Date().toISOString(),
     userAgent: userAgent as string,
     payload: payload as string,
   });
