@@ -113,12 +113,14 @@ export default function SignUpForm({ onDone }: SignUpFormProps) {
         .then((res) => res.json())
         .then((res) => {
           if (res.ok) {
-            alert("報名成功");
+            alert("活動報名成功");
             onDone();
           } else {
-            alert("報名失敗");
+            alert("活動報名失敗！電話號碼已使用！");
           }
         });
+    } catch {
+      alert("活動報名失敗！未知錯誤，請聯絡活動聯絡人。");
     } finally {
       setIsLoading(false);
     }
