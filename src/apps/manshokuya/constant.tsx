@@ -51,7 +51,8 @@ export const Coupons = [
     ballOpened: "/images/manshokuya/Ball-Open-04.png",
     ballRatio: 2048 / 1997,
     avatar: "/images/manshokuya/Avatar-04.png",
-    description: "換領截止日期為2024年2月28日，每個手機號碼僅限換取一罐生可樂。",
+    description:
+      "換領截止日期為2024年2月28日，每個手機號碼僅限換取一罐生可樂。",
     auth: true,
   },
 ];

@@ -16,7 +16,7 @@ export default function GachaMachineStartButton() {
     }
 
     if (numOfOpportunitie <= 0) {
-      alert("您的抽獎機會已用完，你可以分享此活動獲得更多抽獎機會。")
+      alert("您的抽獎機會已用完，你可以分享此活動獲得更多抽獎機會。");
       return;
     }
 
