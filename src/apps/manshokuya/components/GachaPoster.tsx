@@ -71,8 +71,12 @@ export default function GachaPoster() {
 
   return (
     <>
-      <PosterContainer className="p-4 flex flex-col w-full min-h-screen">
-        <PosterContent className="pb-4 select-none " {...events} id="canvas">
+      <PosterContainer
+        className="p-4 flex flex-col w-full"
+        {...events}
+        id="canvas"
+      >
+        <PosterContent className="pb-4 select-none">
           <div
             className="mt-2"
             style={{
@@ -102,18 +106,16 @@ export default function GachaPoster() {
           <div className="px-2 mr-4 mt-4 flex-1">
             <div onClick={handleNavigateCode}>
               <AspectRatio ratio={2048 / 417}>
-                <NextImage
+                <Image
                   src="/images/manshokuya/Use-Coupon-Btn.png"
-                  fill
                   alt="Gocha Texture"
                 />
               </AspectRatio>
             </div>
             <div className="mt-3" onClick={take}>
               <AspectRatio ratio={2048 / 417}>
-                <NextImage
+                <Image
                   src="/images/manshokuya/Share-Poster-Btn.png"
-                  fill
                   alt="Gocha Texture"
                 />
               </AspectRatio>
@@ -121,9 +123,8 @@ export default function GachaPoster() {
             {/* <p className="mt-3 text-center">- 長按保存圖片 -</p> */}
             <div className="w-2/3 mx-auto mt-2">
               <AspectRatio ratio={326 / 33}>
-                <NextImage
-                  src="/images/manshokuya/Long-Press.svg"
-                  fill
+                <Image
+                  src="/images/manshokuya/Long-Press.png"
                   alt="Long Press"
                 />
               </AspectRatio>
@@ -131,9 +132,8 @@ export default function GachaPoster() {
           </div>
           <div style={{ width: "37%" }} className="-mt-1 relative">
             <AspectRatio ratio={2048 / 2256}>
-              <NextImage
-                src="/images/manshokuya/Poster-Qrcode.svg"
-                fill
+              <Image
+                src="/images/manshokuya/Poster-Qrcode.png"
                 alt="Gocha Texture"
               />
             </AspectRatio>
@@ -153,14 +153,15 @@ export default function GachaPoster() {
                   value={shareURL}
                   bgColor={`#00000000`}
                 />
-                <p className="mt-2 text-sm text-center">邀請碼</p>
+                <p className="mt-3 text-sm text-center font-m-plus">邀請碼</p>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="mt-6" id="code">
-          {codeVisible && (
+      </PosterContainer>
+      <PosterContainer className="flex flex-col p-4 pt-0 w-full">
+        {codeVisible && (
+          <div className="mt-6" id="code">
             <PosterContent className="py-3 font-m-plus">
               <p className="text-inherit text-center mb-2 font-bold">
                 優惠券代碼
@@ -169,8 +170,8 @@ export default function GachaPoster() {
                 {previewCoupon.code}
               </p>
             </PosterContent>
-          )}
-        </div>
+          </div>
+        )}
         <PosterContent className="my-4 ">
           <p className="p-4 ">{previewCoupon.description}</p>
         </PosterContent>
