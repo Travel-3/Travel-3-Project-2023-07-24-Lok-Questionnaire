@@ -31,6 +31,7 @@ export default function ShareToolBar() {
       (module) => module.default,
     );
     copy(shareUrl);
+    alert("已複製連結到剪貼簿");
   };
   const handleShare = async () => {
     try {

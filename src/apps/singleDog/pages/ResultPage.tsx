@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { AspectRatio } from "@/components/ui";
 import NextImage from "next/image";
 import styled from "styled-components";
@@ -65,13 +66,14 @@ export default function Page() {
   return (
     <>
       <ScreenshotProvider filename="123" isReady>
-        <div className="h-screen relative">
+        <div className="h-full relative">
           <Background className="h-full relative" id="canvas">
             <div className="absolute -top-4 -left-4 -right-4">
               <AspectRatio ratio={1169 / 313}>
                 <Image
                   src="/single-dog/images/top-cloud.png"
                   alt="Cloud"
+                  className="object-fit"
                   loading={"eager"}
                 />
               </AspectRatio>
@@ -82,26 +84,25 @@ export default function Page() {
                   <Image
                     src="/single-dog/images/travel3.png"
                     alt="Travel3"
+                    className="object-fit"
                     loading={"eager"}
                   />
                 </AspectRatio>
               </div>
             </div>
-            <div className="h-[10%]"></div>
+            <div className="h-[12vh]"></div>
             <div className="flex flex-col justify-center items-center">
               <div className="relative">
                 <div className="absolute top-0 left-0 right-0 z-10 flex justify-center -mt-4">
-                  <div className="w-2/3">
-                    <AspectRatio ratio={621 / 222}>
-                      <Image
-                        loading={"eager"}
-                        src={
-                          character?.title ||
-                          "/single-dog/images/dog-title-a.png"
-                        }
-                        alt="Travel3"
-                      />
-                    </AspectRatio>
+                  <div className="w-2/3 relative">
+                    <img
+                      loading={"eager"}
+                      className="object-fit"
+                      src={
+                        character?.title || "/single-dog/images/dog-title-a.png"
+                      }
+                      alt="Travel3"
+                    />
                   </div>
                 </div>
                 <div className="w-[83vw]">
@@ -110,6 +111,7 @@ export default function Page() {
                       src="/single-dog/images/big-dog-house.png"
                       loading={"eager"}
                       alt="Travel3"
+                      className="object-fit"
                     />
                   </AspectRatio>
                 </div>
@@ -117,6 +119,7 @@ export default function Page() {
                   <div className="w-[72vw]">
                     <AspectRatio ratio={1}>
                       <Image
+                        className="object-fit"
                         src={character?.image || "/single-dog/images/dog-a.png"}
                         alt="Dog"
                         loading={"eager"}
@@ -157,11 +160,12 @@ export default function Page() {
                 </div>
                 <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border-2 border-black bg-[#ff9dd3] "></div>
               </div>
+              <div className="h-[43vw]"></div>
             </div>
 
             <StarForeground className="absolute top-0 left-0 bottom-0 right-0 select-none z-0" />
           </Background>
-          <div className="absolute -bottom-4 -left-4 -right-4 z-10">
+          <div className="fixed -bottom-4 -left-4 -right-4 z-10">
             <AspectRatio ratio={1169 / 497}>
               <NextImage
                 src="/single-dog/svg/big-cloud.svg"

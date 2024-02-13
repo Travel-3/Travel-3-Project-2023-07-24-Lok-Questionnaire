@@ -10,6 +10,9 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import ShareButton from "@/apps/singleDog/components/ShareButton";
 import TrackLink from "@/components/Track/TrackLink";
+// import BaseBottomSheet from "@/components/Dialog/BaseBottomSheet";
+import { TC } from "@/apps/singleDog/constant";
+import useDisclosure from "@/hooks/useDisclosure";
 
 const SurverPage = dynamic(() => import("@/apps/singleDog/pages/SurveryPage"), {
   ssr: false,
@@ -17,6 +20,11 @@ const SurverPage = dynamic(() => import("@/apps/singleDog/pages/SurveryPage"), {
 const ResultPage = dynamic(() => import("@/apps/singleDog/pages/ResultPage"), {
   ssr: false,
 });
+
+const BaseBottomSheet = dynamic(
+  () => import("@/components/Dialog/BaseBottomSheet"),
+  { ssr: false },
+);
 
 const StarForeground = styled.div`
   background-image: url("/single-dog/svg/stars.svg");
@@ -40,10 +48,12 @@ const RuleBox = styled.div`
 function Page() {
   const { index, score, rank } = useProvider();
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   if (index >= 1 && index < MAX + 2) {
     return (
       <App>
-        <AzureBackground className="h-screen">
+        <AzureBackground className="min-h-screen">
           <SurverPage />
         </AzureBackground>
       </App>
@@ -53,7 +63,7 @@ function Page() {
   if (index >= MAX + 2) {
     return (
       <App>
-        <AzureBackground className="h-screen">
+        <AzureBackground className="min-h-screen">
           <ResultPage />
         </AzureBackground>
       </App>
@@ -243,6 +253,14 @@ function Page() {
                 </div>
               </div>
             </RuleBox>
+            <div className="relative flex-1 mt-6 mx-1 cursor-pointer">
+              <div className="z-10 relative rounded-full border-2 border-black bg-white text-center font-bold py-1">
+                <span className="text-black text-xl" onClick={onOpen}>
+                  terms and conditions
+                </span>
+              </div>
+              <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border-2 border-black bg-[#ff9dd3] "></div>
+            </div>
             <TrackLink href="https://travel3.app" game="2023Christmas">
               <div className="py-6 text-center">Powered by Travel3.app</div>
             </TrackLink>
@@ -261,6 +279,14 @@ function Page() {
           </div>
         </AzureBackground>
       </App>
+      <BaseBottomSheet title="" isOpen={isOpen} onClose={onClose}>
+        <div
+          className="text-sm "
+          dangerouslySetInnerHTML={{
+            __html: TC,
+          }}
+        ></div>
+      </BaseBottomSheet>
     </>
   );
 }
