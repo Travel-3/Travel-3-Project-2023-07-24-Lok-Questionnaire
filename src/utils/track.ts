@@ -1,7 +1,12 @@
 import { useDeviceIDState } from "@/hooks/useDeviceID";
 import axios from "axios";
 
-export type TrackBehaviour = "REDIRECT" | "ANSWER" | "FINISH" | "REFERRAL";
+export type TrackBehaviour =
+  | "REDIRECT"
+  | "ANSWER"
+  | "FINISH"
+  | "REFERRAL"
+  | "PLAY";
 
 export type TrackRedirectPayload = {
   ref?: string;
