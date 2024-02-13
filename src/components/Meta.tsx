@@ -17,7 +17,9 @@ export default function Meta({
   description,
   themeColor,
 }: MetaProps) {
-  const url = `https://www.travel3exp.xyz/${slug}`;
+  const url = (process.env.ENV = "development"
+    ? `https://ellen-crimes-com-message.trycloudflare.com/${slug}`
+    : `https://www.travel3exp.xyz/${slug}`);
   return (
     <Head>
       <title>{title}</title>

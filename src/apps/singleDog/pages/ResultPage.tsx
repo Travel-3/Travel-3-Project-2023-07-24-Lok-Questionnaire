@@ -10,6 +10,7 @@ import ScreenshotProvider from "@/components/Screenshot/ScreenshotProvider";
 import BaseBottomSheet from "@/components/Dialog/BaseBottomSheet";
 import SignUpForm from "../components/SignUpForm";
 import useDisclosure from "@/hooks/useDisclosure";
+import { QRCodeSVG } from "qrcode.react";
 
 const Background = styled.div`
   background: linear-gradient(
@@ -38,6 +39,7 @@ const StarForeground = styled.div`
 export default function Page() {
   const { gameScore, reset, user, register } = useProvider();
 
+  const shareUrl = `https://travel3exp.xyz/single-dog?referral=${user.id}&rel=qrcode`;
   const character = useMemo(() => {
     return CHARACTERS.find(
       (c) => c.score[0] <= gameScore * 1.75 && c.score[1] > gameScore * 1.75,
@@ -147,9 +149,22 @@ export default function Page() {
                 </AspectRatio>
               </div>
             </div>
-            <div className="h-6"></div>
+            <div className="h-3"></div>
+            <div className="w-24 mx-auto">
+              <div className="bg-white p-1 border border-black">
+                <QRCodeSVG
+                  width={"100%"}
+                  height={"100%"}
+                  level="M"
+                  value={shareUrl}
+                  bgColor={`#00000000`}
+                />
+              </div>
+              <p className="py-1 text-md text-center font-m-plus">邀請碼</p>
+            </div>
+            <div className="h-3"></div>
             <StarForeground className="absolute top-0 left-0 bottom-0 right-0 select-none z-0" />
-          </Background>{" "}
+          </Background>
           <div
             className="relative mx-6 mt-6 cursor-pointer"
             onClick={handleBack}
