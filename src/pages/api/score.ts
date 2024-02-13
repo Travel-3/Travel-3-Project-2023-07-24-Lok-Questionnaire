@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { v4 as uuid } from "uuid";
 import { getSessionItem, writeItem } from "./utils";
 
 export default async function handler(
@@ -51,11 +50,12 @@ const getOrCreateScoreItem = async (
   score: number,
 ) => {
   try {
+    const id = `Score/${sessionId}`;
     const item = await getSessionItem(game, sessionId, "Score");
 
     if (!item) {
       await writeItem(game, {
-        ID: uuid(),
+        ID: id,
         sessionId,
         behaviour: "Score",
         score,

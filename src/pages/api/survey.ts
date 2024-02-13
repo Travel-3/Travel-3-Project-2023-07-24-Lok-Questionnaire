@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSessionItem, increaseItem } from "./utils";
+import { getSessionItem, increaseItem, writeItem } from "./utils";
 import {
   UpdateItemCommand,
   UpdateItemCommandInput,
@@ -30,6 +30,20 @@ export default async function handler(
     return;
   }
 
+  const submitItem = await getSessionItem(
+    game as string,
+    sessionId as string,
+    "Submit",
+  );
+
+  console.log("submitItem", submitItem);
+  if (submitItem) {
+    res.status(200).json({
+      ok: false,
+      error: "Already submitted",
+    });
+  }
+
   try {
     const referralItem = await getSessionItem(
       game,
@@ -37,20 +51,23 @@ export default async function handler(
       "Referral By",
     );
     if (referralItem) {
-      const scoreItem = await getSessionItem(game, referralItem?.ID, "Score");
-      if (scoreItem) increaseItem(game as string, scoreItem.ID, "score", 5);
+      await increaseItem(
+        game as string,
+        `Score/${referralItem.data}`,
+        "score",
+        5,
+      );
+      // console.log("referralItem", referralItem);
     }
 
     const params: UpdateItemCommandInput = {
       TableName: game as string,
       Key: { ID: { S: item.ID } },
-      UpdateExpression: "SET #score = :score, #name = :name",
+      UpdateExpression: "SET #name = :name",
       ExpressionAttributeValues: {
-        ":score": { S: score?.toString() ?? "" },
         ":name": { S: name?.toString() ?? "" },
       },
       ExpressionAttributeNames: {
-        "#score": "score",
         "#name": "name",
       },
       ReturnValues: "ALL_NEW",
@@ -58,6 +75,15 @@ export default async function handler(
 
     const command = new UpdateItemCommand(params);
     await client.send(command);
+
+    await writeItem(game as string, {
+      ID: `Submit/${sessionId}`,
+      score: score,
+      name: name,
+      sessionId,
+      behaviour: "Submit",
+      createdAt: new Date().toISOString(),
+    });
 
     res.status(200).json({
       ok: true,

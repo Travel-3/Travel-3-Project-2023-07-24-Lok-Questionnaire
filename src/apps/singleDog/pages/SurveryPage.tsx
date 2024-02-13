@@ -16,7 +16,7 @@ function QuestionBox({ title, index }: { title: string; index: number }) {
   return (
     <div className="relative">
       <div
-        className="justify-center relative min-h-36 flex items-center border-2 border-black text-xl rounded-xl p-6 py-8 z-10 font-black text-center"
+        className="justify-center select-none relative min-h-36 flex items-center border-2 border-black text-xl rounded-xl p-6 py-8 z-10 font-black text-center"
         style={{
           background: "#F9E2C5",
         }}
@@ -66,7 +66,7 @@ export type AnswerBoxProps = {
 
 function AnswerBox({ onClick, option }: AnswerBoxProps) {
   return (
-    <div className="relative z-10" onClick={onClick}>
+    <div className="relative z-10 select-none" onClick={onClick}>
       <div
         className="relative border-2 border-black rounded-xl p-3 z-10 font-bold"
         style={{

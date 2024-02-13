@@ -11,6 +11,6 @@ export default function useUserScore(game: string, sessionId?: string) {
     enabled: !!sessionId,
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: true,
-    refetchInterval: 10_000,
+    refetchInterval: 30_000,
   });
 }

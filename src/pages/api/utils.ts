@@ -31,10 +31,6 @@ export const getSessionItem = async (
         TableName: tableName,
         FilterExpression:
           "sessionId = :sessionId_val And behaviour = :behaviour_val",
-        // ExpressionAttributeNames: {
-        //   "#sessionId": "sessionId",
-        //   "#behaviour": "behaviour",
-        // },
         ExpressionAttributeValues: {
           ":sessionId_val": sessionId,
           ":behaviour_val": behaviour,
@@ -49,6 +45,7 @@ export const getSessionItem = async (
         behaviour: string;
         score: number;
         phone: string | undefined;
+        data?: string;
       };
     }
 
@@ -109,6 +106,7 @@ export const increaseItem = async (
     const command = new UpdateItemCommand(params);
     return client.send(command);
   } catch (error) {
+    console.warn(error);
     return null;
   }
 };

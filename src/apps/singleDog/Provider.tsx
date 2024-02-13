@@ -13,6 +13,7 @@ import {
   useState,
 } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { QUESTIONS } from "./constant";
 
 export type User = {
   id: string;
@@ -136,12 +137,17 @@ export function useProvider() {
   } = useContext(Context);
 
   const answer = (option: { option: string; score: number }) => {
+    Track.track(GAME, "ANSWER", {
+      ref: user.id,
+      answer: option.option,
+      question: QUESTIONS[index - 1].question,
+    });
     setIndex?.((_index) => _index + 1);
     setGameScore?.((_score) => _score + option.score);
   };
 
   const play = () => {
-    Track.track("SingleDog", "PLAY", {
+    Track.track(GAME, "PLAY", {
       ref: user.id,
     });
     fireEvent("Play", {
@@ -159,16 +165,14 @@ export function useProvider() {
   };
 
   const finish = () => {
-    Track.track("SingleDog", "FINISH", {
+    Track.track(GAME, "FINISH", {
       ref: user.id,
-      score,
+      score: gameScore,
       name: user.name,
-      // phone,
-      // region,
     });
     fireEvent("Finish", {
       sessionId: user.id,
-      score,
+      score: gameScore,
       name: user.name,
     });
     setIndex?.(MAX + 2);

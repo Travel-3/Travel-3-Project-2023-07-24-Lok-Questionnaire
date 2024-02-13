@@ -87,9 +87,9 @@ export default class Track {
   }
 
   private sessionId() {
-    const user = localStorage.getItem("User/Manshokuya");
+    const user = localStorage.getItem(`User/${this.game}`);
     const id = user
-      ? JSON.parse(user)["ID"]
+      ? JSON.parse(user)["ID"] ?? JSON.parse(user)["id"]
       : useDeviceIDState.getState().deviceID;
     if (!id) throw new Error("Device ID not found");
 

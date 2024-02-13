@@ -1,7 +1,7 @@
 export const PRODUCTS = [
   {
     title: "小狗夜燈",
-    quantity: "03",
+    quantity: "01",
     href: "",
     image: "/single-dog/images/product-a.jpg",
   },
@@ -25,13 +25,13 @@ export const PRODUCTS = [
   },
   {
     title: "Solo journey",
-    quantity: "02",
+    quantity: "01",
     href: "",
     image: "/single-dog/images/product-e.jpg",
   },
   {
     title: "Solo Drink",
-    quantity: "02",
+    quantity: "01",
     href: "",
     image: "/single-dog/images/product-f.jpg",
   },
