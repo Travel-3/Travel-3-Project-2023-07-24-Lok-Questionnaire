@@ -141,14 +141,13 @@ export default function SignUpForm({
         若您未填寫手機號碼，你將無法收取獲獎信息。
       </div>
       <div
-        className="relative cursor-pointer"
+        className={clsx("relative cursor-pointer", isLoading && "opacity-50")}
         onClick={handleSubmit}
         // loading={isLoading}
       >
         <div
           className={clsx(
-            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5",
-            isLoading && "opacity-50",
+            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5"
           )}
         >
           <span

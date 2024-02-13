@@ -98,7 +98,7 @@ export default function SurverPage() {
     }
 
     return {
-      question: "請輸入你的角色性名",
+      question: "請輸入你的角色姓名",
       options: [],
     };
   }, [index]);
@@ -130,7 +130,7 @@ export default function SurverPage() {
             className="border-2 border-black text-lg rounded-lg py-3 px-2"
             maxLength={20}
             minLength={1}
-            placeholder="你的角色性名"
+            placeholder="你的角色姓名"
             onChange={handleNameChange}
           />
         )}

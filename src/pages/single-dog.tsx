@@ -15,10 +15,10 @@ import { TC } from "@/apps/singleDog/constant";
 import useDisclosure from "@/hooks/useDisclosure";
 
 const SurverPage = dynamic(() => import("@/apps/singleDog/pages/SurveryPage"), {
-  ssr: false,
+  ssr: true,
 });
 const ResultPage = dynamic(() => import("@/apps/singleDog/pages/ResultPage"), {
-  ssr: false,
+  ssr: true,
 });
 
 const BaseBottomSheet = dynamic(

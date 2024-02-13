@@ -19,7 +19,7 @@ export const ScreenshotContext = createContext<ScreenshotContextState>({
 });
 
 export type ScreenshotProviderProps = {
-  isReady: boolean;
+  // isReady: boolean;
   filename: string;
 } & PropsWithChildren;
 
@@ -44,25 +44,24 @@ export default function ScreenshotProvider({
         height: height,
         imageTimeout: 0,
         ignoreElements: function (e: Element) {
-          if (
-            e.tagName === "SCRIPT" ||
-            e.tagName === "A" ||
-            e.getAttribute("loading") === "lazy"
-          ) {
-            return true;
-          }
-          return false;
-          // console.log(e);
           // if (
-
-          //   // @ts-ignore-next-line
-          //   (e.tagName === "A" && e.host !== window.location.host) ||
+          //   e.tagName === "SCRIPT" ||
+          //   e.tagName === "A" ||
           //   e.getAttribute("loading") === "lazy"
           // ) {
           //   return true;
-          // } else {
-          //   return false;
           // }
+          // return false;
+          // console.log(e);
+          if (
+            // @ts-ignore-next-line
+            (e.tagName === "A" && e.host !== window.location.host) ||
+            e.getAttribute("loading") === "lazy"
+          ) {
+            return true;
+          } else {
+            return false;
+          }
         },
       });
       setBase64(canvas.toDataURL());

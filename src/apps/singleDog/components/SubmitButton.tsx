@@ -35,7 +35,8 @@ export default function SubmitButton() {
   const handlePlay = async () => {
     if (isPending) return;
 
-    if (!user.name) return alert("請填寫你的角色用户名");
+    if (!user.name || user.name.trim().length === 0)
+      return alert("請填寫你的角色用户名");
 
     try {
       await mutateAsync({

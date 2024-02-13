@@ -6,7 +6,7 @@ export type StepButtonProps = PropsWithChildren & {
   onClick?: () => void;
 };
 const StepButton = ({ children, onClick }: StepButtonProps) => (
-  <div className="relative flex-1" onClick={onClick}>
+  <div className="cursor-pointer relative flex-1" onClick={onClick}>
     <div className="font-m-plus z-10 relative rounded-full border border-black bg-[#8fadf5] text-white p-1  text-center font-black text-2xl">
       <span
         className="text-outlined"

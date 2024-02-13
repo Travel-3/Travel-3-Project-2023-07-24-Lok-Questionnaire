@@ -31,7 +31,7 @@ const Image = styled.img`
 `;
 
 const StarForeground = styled.div`
-  background-image: url("/single-dog/svg/stars-2.svg");
+  background-image: url("/single-dog/svg/stars-2.png");
   background-repeat: repeat-y;
 `;
 
@@ -40,7 +40,7 @@ export default function Page() {
 
   const character = useMemo(() => {
     return CHARACTERS.find(
-      (c) => c.score[0] <= gameScore * 1.75 && c.score[1] > gameScore * 1.75,
+      (c) => c.score[0] <= gameScore * 1.75 && c.score[1] > gameScore * 1.75
     );
   }, [gameScore]);
   const handleBack = () => {
@@ -65,7 +65,7 @@ export default function Page() {
 
   return (
     <>
-      <ScreenshotProvider filename="123" isReady>
+      <ScreenshotProvider filename="Travel3 X「Something Special」送您情人節禮物活動.png">
         <div className="h-full relative">
           <Background className="h-full relative" id="canvas">
             <div className="absolute -top-4 -left-4 -right-4">
@@ -73,7 +73,6 @@ export default function Page() {
                 <Image
                   src="/single-dog/images/top-cloud.png"
                   alt="Cloud"
-                  className="object-fit"
                   loading={"eager"}
                 />
               </AspectRatio>
@@ -84,7 +83,6 @@ export default function Page() {
                   <Image
                     src="/single-dog/images/travel3.png"
                     alt="Travel3"
-                    className="object-fit"
                     loading={"eager"}
                   />
                 </AspectRatio>
@@ -97,7 +95,6 @@ export default function Page() {
                   <div className="w-2/3 relative">
                     <img
                       loading={"eager"}
-                      className="object-fit"
                       src={
                         character?.title || "/single-dog/images/dog-title-a.png"
                       }
@@ -111,7 +108,6 @@ export default function Page() {
                       src="/single-dog/images/big-dog-house.png"
                       loading={"eager"}
                       alt="Travel3"
-                      className="object-fit"
                     />
                   </AspectRatio>
                 </div>
@@ -119,7 +115,6 @@ export default function Page() {
                   <div className="w-[72vw]">
                     <AspectRatio ratio={1}>
                       <Image
-                        className="object-fit"
                         src={character?.image || "/single-dog/images/dog-a.png"}
                         alt="Dog"
                         loading={"eager"}
@@ -151,20 +146,20 @@ export default function Page() {
                   />
                 </AspectRatio>
               </div>
-              <div
-                className="relative mx-1 mt-2 cursor-pointer"
-                onClick={handleBack}
-              >
-                <div className="z-10 relative rounded-full py-2 px-3 border-2 border-black bg-white text-center font-bold">
-                  <span className="text-black font-bold text-lg">回到首頁</span>
-                </div>
-                <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border-2 border-black bg-[#ff9dd3] "></div>
-              </div>
-              <div className="h-[43vw]"></div>
             </div>
-
+                    <div className="h-6"></div>
             <StarForeground className="absolute top-0 left-0 bottom-0 right-0 select-none z-0" />
-          </Background>
+          </Background>{" "}
+          <div
+            className="relative mx-6 mt-6 cursor-pointer"
+            onClick={handleBack}
+          >
+            <div className="z-10 relative rounded-full py-1 px-3 border-2 border-black bg-white text-center font-bold">
+              <span className="text-black font-bold text-lg">回到首頁</span>
+            </div>
+            <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border-2 border-black bg-[#ff9dd3] "></div>
+          </div>
+          <div className="h-[43vw]"></div>
           <div className="fixed -bottom-4 -left-4 -right-4 z-10">
             <AspectRatio ratio={1169 / 497}>
               <NextImage
