@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
+// import Debug from "./Debug/Debug";
 // import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 // const Debug = dynamic(() => import("./Debug/Debug"), {ssr: false});
 
@@ -22,9 +23,8 @@ export default function WithGame({ children }: WithGameProps) {
         }}
       > */}
       <QueryClientProvider client={cache}>
-        {/* <Debug>{children}</Debug> */}
-
         {children}
+        {/* {children} */}
       </QueryClientProvider>
       {/* </GoogleReCaptchaProvider> */}
     </>

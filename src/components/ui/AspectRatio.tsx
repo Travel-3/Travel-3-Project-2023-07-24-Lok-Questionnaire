@@ -3,6 +3,7 @@ import styled from "styled-components";
 type AspectRatioProps = {
   ratio: number;
   children: React.ReactNode;
+  className?: string;
 };
 
 const AspectRatioContainer = styled.div<AspectRatioProps>`
@@ -21,9 +22,13 @@ const AspectRatioContent = styled.div`
   height: 100%;
 `;
 
-export default function AspectRatio({ children, ratio }: AspectRatioProps) {
+export default function AspectRatio({
+  children,
+  ratio,
+  className,
+}: AspectRatioProps) {
   return (
-    <AspectRatioContainer ratio={ratio}>
+    <AspectRatioContainer ratio={ratio} className={className}>
       <AspectRatioContent>{children}</AspectRatioContent>
     </AspectRatioContainer>
   );

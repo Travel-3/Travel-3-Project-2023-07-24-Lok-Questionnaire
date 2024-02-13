@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const App = styled.div`
-  /* max-height: fit-content;
-  height: 100dvh; */
+export const _App = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
   position: relative;
@@ -10,8 +8,14 @@ export const App = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
-  background: #eee;
+  background: #fefefe;
 `;
 
-export type AppProps = React.ComponentPropsWithoutRef<typeof App>;
-export default App;
+export type AppProps = React.ComponentPropsWithoutRef<typeof _App>;
+export default function App({ ...props }: AppProps) {
+  return (
+    <_App {...props}>
+      <div className="max-w-screen-sm mx-auto relative">{props.children}</div>
+    </_App>
+  );
+}
