@@ -147,7 +147,7 @@ export default function SignUpForm({
       >
         <div
           className={clsx(
-            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5"
+            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5",
           )}
         >
           <span

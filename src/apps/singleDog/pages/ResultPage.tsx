@@ -40,7 +40,7 @@ export default function Page() {
 
   const character = useMemo(() => {
     return CHARACTERS.find(
-      (c) => c.score[0] <= gameScore * 1.75 && c.score[1] > gameScore * 1.75
+      (c) => c.score[0] <= gameScore * 1.75 && c.score[1] > gameScore * 1.75,
     );
   }, [gameScore]);
   const handleBack = () => {
@@ -147,7 +147,7 @@ export default function Page() {
                 </AspectRatio>
               </div>
             </div>
-                    <div className="h-6"></div>
+            <div className="h-6"></div>
             <StarForeground className="absolute top-0 left-0 bottom-0 right-0 select-none z-0" />
           </Background>{" "}
           <div

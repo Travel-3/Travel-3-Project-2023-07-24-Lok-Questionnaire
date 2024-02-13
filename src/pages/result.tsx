@@ -171,7 +171,7 @@ export default function Page() {
       </Head>
       <SplashScreen isLoaded={isLoaded}>
         <App>
-          <ScreenshotProvider isReady={isLoaded} filename="">
+          <ScreenshotProvider filename="">
             <div id="canvas">
               <RedBackground>
                 <CharacterContainer>
@@ -256,7 +256,7 @@ export default function Page() {
             </div>
             <HowToShow />
           </ScreenshotProvider>
-          <SignUpForm />
+          {/* <SignUpForm /> */}
         </App>
       </SplashScreen>
     </>
