@@ -1,61 +1,61 @@
 export const PRODUCTS = [
   {
     title: "小狗夜燈",
-    quantity: "00",
+    quantity: "03",
     href: "",
     image: "/single-dog/images/product-a.jpg",
   },
   {
-    title: "小狗夜燈",
-    quantity: "00",
+    title: "公仔面巾紙套紙巾盒",
+    quantity: "01",
     href: "",
     image: "/single-dog/images/product-b.jpg",
   },
   {
-    title: "小狗夜燈",
-    quantity: "00",
+    title: "訂製積木",
+    quantity: "01",
     href: "",
     image: "/single-dog/images/product-c.jpg",
   },
   {
-    title: "小狗夜燈",
-    quantity: "00",
+    title: "護唇膏",
+    quantity: "01",
     href: "",
     image: "/single-dog/images/product-d.jpg",
   },
   {
-    title: "小狗夜燈",
-    quantity: "00",
+    title: "Solo journey",
+    quantity: "02",
     href: "",
     image: "/single-dog/images/product-e.jpg",
   },
   {
-    title: "小狗夜燈",
-    quantity: "00",
+    title: "Solo Drink",
+    quantity: "02",
     href: "",
     image: "/single-dog/images/product-f.jpg",
   },
 ];
 
 export const QUESTIONS = [
-  {
-    question: "喺戀愛度過，你最常被指責嘅特點有咩？",
-    options: [
-      { option: "太二，總係搞笑出糗", score: 2 },
-      { option: "溫柔過份，俾人覺得好似中央空調咁", score: 3 },
-      { option: "外表一本正經，但內心卻藏住色情想法", score: 4 },
-      { option: "脾氣差，一言唔合就翻臉", score: 1 },
-    ],
-  },
-  {
-    question: "喺約會時，你最鍾意做嘅嘢係？",
-    options: [
-      { option: "跳舞或唱歌表演，展現自己嘅二次元魅力", score: 4 },
-      { option: "為對方準備一頓精心烹飪嘅晚餐，展現你嘅廚藝", score: 3 },
-      { option: "帶對方參觀藝術展覽或博物館，展現你嘅文化品味", score: 2 },
-      { option: "同對方一齊冒險，做啲刺激嘅活動，展現你嘅勇敢精神", score: 1 },
-    ],
-  },
+  // {
+  //   question: "喺戀愛度過，你最常被指責嘅特點有咩？",
+  //   options: [
+  //     { option: "太二，總係搞笑出糗", score: 2 },
+  //     { option: "溫柔過份，俾人覺得好似中央空調咁", score: 3 },
+  //     { option: "外表一本正經，但內心卻藏住色情想法", score: 4 },
+  //     { option: "脾氣差，一言唔合就翻臉", score: 1 },
+  //   ],
+  // },
+  // {
+  //   question: "喺約會時，你最鍾意做嘅嘢係？",
+  //   options: [
+  //     { option: "跳舞或唱歌表演，展現自己嘅二次元魅力", score: 4 },
+  //     { option: "為對方準備一頓精心烹飪嘅晚餐，展現你嘅廚藝", score: 3 },
+  //     { option: "帶對方參觀藝術展覽或博物館，展現你嘅文化品味", score: 2 },
+  //     { option: "同對方一齊冒險，做啲刺激嘅活動，展現你嘅勇敢精神", score: 1 },
+  //   ],
+  // },
   {
     question: "喺感情度過，你最看重嘅係咩品質？",
     options: [
@@ -65,15 +65,15 @@ export const QUESTIONS = [
       { option: "忍耐力，可以接受你嘅情緒起伏同埋脾氣", score: 1 },
     ],
   },
-  {
-    question: "你最鍾意嘅約會地點係邊度？",
-    options: [
-      { option: "動物園或寵物咖啡廳，同可愛嘅生物一齊度過時光", score: 3 },
-      { option: "浪漫嘅海灘或湖邊，享受大自然嘅美景", score: 4 },
-      { option: "藝術館或音樂會，欣賞文化藝術嘅魅力", score: 2 },
-      { option: "遊樂園或極限運動場，尋找刺激同埋冒險嘅感覺", score: 1 },
-    ],
-  },
+  // {
+  //   question: "你最鍾意嘅約會地點係邊度？",
+  //   options: [
+  //     { option: "動物園或寵物咖啡廳，同可愛嘅生物一齊度過時光", score: 3 },
+  //     { option: "浪漫嘅海灘或湖邊，享受大自然嘅美景", score: 4 },
+  //     { option: "藝術館或音樂會，欣賞文化藝術嘅魅力", score: 2 },
+  //     { option: "遊樂園或極限運動場，尋找刺激同埋冒險嘅感覺", score: 1 },
+  //   ],
+  // },
   {
     question: "你認為戀愛中最重要嘅係咩？",
     options: [
@@ -83,15 +83,15 @@ export const QUESTIONS = [
       { option: "和平同和諧，避免爭吵同衝突", score: 2 },
     ],
   },
-  {
-    question: "你鍾意喺週末做咩？",
-    options: [
-      { option: "宅喺屋企睇電影或玩遊戲", score: 2 },
-      { option: "同朋友出去聚餐或參加活動", score: 3 },
-      { option: "去戶外運動或旅行", score: 4 },
-      { option: "去咖啡店閱讀或寫作", score: 1 },
-    ],
-  },
+  // {
+  //   question: "你鍾意喺週末做咩？",
+  //   options: [
+  //     { option: "宅喺屋企睇電影或玩遊戲", score: 2 },
+  //     { option: "同朋友出去聚餐或參加活動", score: 3 },
+  //     { option: "去戶外運動或旅行", score: 4 },
+  //     { option: "去咖啡店閱讀或寫作", score: 1 },
+  //   ],
+  // },
   {
     question: "你對於戀愛嘅期望係咩？",
     options: [
@@ -101,15 +101,15 @@ export const QUESTIONS = [
       { option: "隨緣，不強求", score: 1 },
     ],
   },
-  {
-    question: "你對於伴侶嘅外貌重視程度係？",
-    options: [
-      { option: "外貌唔係最重要嘅，我更注重內在", score: 3 },
-      { option: "外貌重要，但唔係唯一嘅考量因素", score: 2 },
-      { option: "外貌好重要，我希望有相貌出眾嘅伴侶", score: 4 },
-      { option: "外貌對我嚟講唔重要", score: 1 },
-    ],
-  },
+  // {
+  //   question: "你對於伴侶嘅外貌重視程度係？",
+  //   options: [
+  //     { option: "外貌唔係最重要嘅，我更注重內在", score: 3 },
+  //     { option: "外貌重要，但唔係唯一嘅考量因素", score: 2 },
+  //     { option: "外貌好重要，我希望有相貌出眾嘅伴侶", score: 4 },
+  //     { option: "外貌對我嚟講唔重要", score: 1 },
+  //   ],
+  // },
   {
     question: "你對於相處模式嘅偏好係？",
     options: [

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDeviceID } from "./useDeviceID";
 
-export default function useNewUser(game: string) {
+export default function useNewUser(game: string, isNewUser: boolean) {
   const sessionId = useDeviceID();
   return useQuery({
     queryKey: ["User", game, sessionId],
@@ -18,7 +18,7 @@ export default function useNewUser(game: string) {
         return res.json();
       });
     },
-    enabled: !!sessionId,
+    enabled: !!sessionId && isNewUser,
     refetchIntervalInBackground: false,
     refetchOnWindowFocus: false,
   });

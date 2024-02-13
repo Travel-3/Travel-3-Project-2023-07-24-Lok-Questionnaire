@@ -1,4 +1,4 @@
-import { Provider, useProvider } from "@/apps/singleDog/Provider";
+import { MAX, Provider, useProvider } from "@/apps/singleDog/Provider";
 import RewardBox from "@/apps/singleDog/components/RewardBox";
 import StartButton from "@/apps/singleDog/components/StartButton";
 import App from "@/components/App";
@@ -9,6 +9,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import ShareButton from "@/apps/singleDog/components/ShareButton";
+import TrackLink from "@/components/Track/TrackLink";
 
 const SurverPage = dynamic(() => import("@/apps/singleDog/pages/SurveryPage"), {
   ssr: false,
@@ -39,7 +40,7 @@ const RuleBox = styled.div`
 function Page() {
   const { index, score, rank } = useProvider();
 
-  if (index >= 1 && index < 12) {
+  if (index >= 1 && index < MAX + 2) {
     return (
       <App>
         <AzureBackground className="h-screen">
@@ -49,7 +50,7 @@ function Page() {
     );
   }
 
-  if (index >= 12) {
+  if (index >= MAX + 2) {
     return (
       <App>
         <AzureBackground className="h-screen">
@@ -61,10 +62,10 @@ function Page() {
   return (
     <>
       <Meta
-        slug="manshokuya"
-        title="玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 "
-        description="玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 "
-        themeColor="#FACD00"
+        slug="single-dog"
+        title="Travel3 X「Something Special」送您情人節禮物活動"
+        description="Travel3 X「Something Special」送您情人節禮物活動"
+        themeColor="#FF96D5"
       />
       <App>
         <PinkBackground className="relative">
@@ -185,7 +186,29 @@ function Page() {
                     </div>
                   </div>
                   <p className="text-left text-sm font-bold pt-4">
-                    1.
+                    Travel Buddy 同 「Something
+                    Special」送您情人節禮物（無論你是單身狗還是有情人都可以玩喔😆
+                    <br />
+                    <br />
+                    如何參加抽獎 ?<br />
+                    <br />
+                    ------------
+                    <br />
+                    ------------
+                    <br />
+                    ------------
+                    <br />
+                    <br />
+                    1. 參與有趣的Q&A遊戲。
+                    <br />
+                    2. 成功完成遊戲後，您將獲得一個專屬的「單身狗」貓貓形象。
+                    <br />
+                    3.
+                    將您的專屬貓貓結果分享到您的Facebook和Instagram帳戶上，讓您的朋友們也參與其中。
+                    <br />
+                    4.
+                    每一位朋友因為您的專屬貓貓而進入遊戲的，都會為你增加分數，分數排名最高的用戶將會得到獎品。
+                    {/* 1.
                     閣下可按照自己的意願，在本公司的遊戲（「本網站」）提供閣下的電郵地址及其他個人資料（「個人資料」）。
                     <br />
                     <br />
@@ -215,11 +238,14 @@ function Page() {
                     <br />
                     <br />
                     6.
-                    若閣下不同意上述任何條款及條件，閣下不應向本公司提供個人資料。
+                    若閣下不同意上述任何條款及條件，閣下不應向本公司提供個人資料。 */}
                   </p>
                 </div>
               </div>
             </RuleBox>
+            <TrackLink href="https://travel3.app" game="2023Christmas">
+              <div className="py-6 text-center">Powered by Travel3.app</div>
+            </TrackLink>
           </div>
           <div>
             {/* Footer */}

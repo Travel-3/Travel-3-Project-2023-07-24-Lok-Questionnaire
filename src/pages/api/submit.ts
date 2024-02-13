@@ -78,14 +78,6 @@ export default async function handler(
     const scoreItem = await getSessionItem(game, sessionId, "Score");
     if (scoreItem) increaseItem(game as string, scoreItem.ID, "score");
 
-    // const to = `+${region.trim()}${phone.trim()}`;
-
-    // const response = await SMS.build().send(to, SMS_MESSAGE);
-
-    // response.ok
-    //   ? res.status(200).json(response)
-    //   : res.status(404).json(response);
-
     res.status(200).json({
       ok: true,
       data: {

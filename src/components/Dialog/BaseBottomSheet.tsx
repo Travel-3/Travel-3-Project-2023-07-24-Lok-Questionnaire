@@ -1,8 +1,11 @@
 import React, { PropsWithChildren, useEffect } from "react";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { LazyMotion, m } from "framer-motion";
 import styled from "styled-components";
 import { IoCloseSharp } from "react-icons/io5";
 import { useLockedBody } from "usehooks-ts";
+
+const domAnimation = () =>
+  import("@/utils/motion").then((mod) => mod.domAnimation);
 
 const BottomSheetContainer = styled(m.div)`
   /* position: fixed;

@@ -12,6 +12,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 export type User = {
   id: string;
@@ -49,27 +50,41 @@ const Context = createContext<TContext>({
   rank: 999,
 });
 
-const GAME = "SingleDog";
+export const GAME = "SingleDog";
+export const MAX = 5;
 
 export function Provider({ children }: PropsWithChildren) {
   const [index, setIndex] = useState(0);
   // const [score, setScore] = useState(0);
   const [gameScore, setGameScore] = useState(0);
-  const [user, setUser] = useState<User>({
+  // const [user, setUser] = useState<User>({
+  //   id: "",
+  //   score: 0,
+  //   phone: "",
+  //   region: "",
+  //   name: "",
+  // });
+  const [user, setUser] = useLocalStorage<{
+    id: string;
+    score: number;
+    phone: string;
+    region: string;
+    name: string;
+  }>(`User/${GAME}`, {
     id: "",
     score: 0,
     phone: "",
     region: "",
     name: "",
   });
-  const { data } = useNewUser(GAME);
+  const { data } = useNewUser(GAME, !user.id);
   const { data: scoreData } = useUserScore(GAME, user.id);
 
   const { data: rankData } = useQuery({
     queryKey: [GAME, "Ranking", user.id],
     queryFn: async () => {
       const res = await fetch(
-        `/api/ranking?sessionId=${user.id}&game=${GAME}`,
+        `/api/ranking?sessionId=${user?.id}&game=${GAME}`,
         {},
       );
       return res.json();
@@ -87,6 +102,7 @@ export function Provider({ children }: PropsWithChildren) {
         name: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
@@ -138,6 +154,10 @@ export function useProvider() {
     setUser?.((_user) => ({ ..._user, name }));
   };
 
+  const register = (phone: string, region: string) => {
+    setUser?.((_user) => ({ ..._user, phone, region }));
+  };
+
   const finish = () => {
     Track.track("SingleDog", "FINISH", {
       ref: user.id,
@@ -151,7 +171,7 @@ export function useProvider() {
       score,
       name: user.name,
     });
-    setIndex?.(12);
+    setIndex?.(MAX + 2);
   };
 
   const reset = () => {
@@ -170,5 +190,6 @@ export function useProvider() {
     finish,
     reset,
     rank,
+    register,
   };
 }

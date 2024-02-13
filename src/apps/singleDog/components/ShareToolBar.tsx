@@ -6,20 +6,20 @@ export type StepButtonProps = PropsWithChildren & {
   onClick?: () => void;
 };
 const StepButton = ({ children, onClick }: StepButtonProps) => (
-<div className="relative flex-1" onClick={onClick}>
+  <div className="relative flex-1" onClick={onClick}>
     <div className="font-m-plus z-10 relative rounded-full border border-black bg-[#8fadf5] text-white p-1  text-center font-black text-2xl">
-        <span
-            className="text-outlined"
-            style={{
-                "--stroke-width": "1px",
-                "--stroke-color": "black",
-            }}
-        >
-            {children}
-        </span>
+      <span
+        className="text-outlined"
+        style={{
+          "--stroke-width": "1px",
+          "--stroke-color": "black",
+        }}
+      >
+        {children}
+      </span>
     </div>
     <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border border-black bg-[#ff9dd3] "></div>
-</div>
+  </div>
 );
 
 export default function ShareToolBar() {
@@ -46,7 +46,7 @@ export default function ShareToolBar() {
       );
       copy(shareUrl);
       alert(
-        "將您的專屬聖誕貓貓結果分享到您的Facebook和Instagram帳戶上，讓您的朋友們也參與其中。",
+        "將您的貓貓結果分享到您的Facebook和Instagram帳戶上，讓您的朋友們也參與其中。",
       );
     }
   };

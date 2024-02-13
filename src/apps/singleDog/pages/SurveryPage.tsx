@@ -2,7 +2,7 @@ import { AspectRatio } from "@/components/ui";
 import ProgressBar from "../components/ProgressBar";
 import Image from "next/image";
 import styled from "styled-components";
-import { useProvider } from "../Provider";
+import { MAX, useProvider } from "../Provider";
 import { useMemo } from "react";
 import { QUESTIONS } from "../constant";
 import SubmitButton from "../components/SubmitButton";
@@ -12,7 +12,7 @@ const StarForeground = styled.div`
   background-repeat: repeat-y;
 `;
 
-function QuestionBox({ title }: { title: string }) {
+function QuestionBox({ title, index }: { title: string; index: number }) {
   return (
     <div className="relative">
       <div
@@ -36,9 +36,11 @@ function QuestionBox({ title }: { title: string }) {
       <div className="absolute left-0 right-0 top-0 z-10">
         <div className="flex justify-center w-full -translate-y-1/2">
           <div className="w-1/5">
-            <AspectRatio ratio={185 / 136}>
-              <Image src="/single-dog/svg/Q1.svg" alt="Q1" fill />
-            </AspectRatio>
+            {index < 6 && (
+              <AspectRatio ratio={185 / 136}>
+                <Image src={`/single-dog/svg/Q${index}.svg`} alt="Q1" fill />
+              </AspectRatio>
+            )}
           </div>
         </div>
       </div>
@@ -91,7 +93,7 @@ export default function SurverPage() {
   const { index, answer, setName } = useProvider();
 
   const question = useMemo(() => {
-    if (index < 11) {
+    if (index < MAX + 1) {
       return index > 0 ? QUESTIONS[index - 1] : null;
     }
 
@@ -108,13 +110,13 @@ export default function SurverPage() {
   return (
     <div className="min-h-screen p-4">
       <div className="p-4">
-        <ProgressBar value={((index - 1) / 10) * 100} />
+        <ProgressBar value={((index - 1) / MAX) * 100} />
       </div>
       <div className="mx-3 mb-6 mt-12">
-        <QuestionBox title={question?.question ?? ""} />
+        <QuestionBox index={index} title={question?.question ?? ""} />
       </div>
       <div className="flex flex-col gap-3 mx-6 relative z-50">
-        {index < 11 ? (
+        {index < MAX + 1 ? (
           question?.options.map((option, index) => (
             <AnswerBox
               key={option.option}
@@ -132,7 +134,7 @@ export default function SurverPage() {
             onChange={handleNameChange}
           />
         )}
-        {index >= 11 && <SubmitButton />}
+        {index >= MAX + 1 && <SubmitButton />}
       </div>
       <div
         className="absolute bottom-0 right-0 z-10"

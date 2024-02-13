@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-export default function useUserScore(game: string, sessionId: string) {
+export default function useUserScore(game: string, sessionId?: string) {
   return useQuery({
     queryKey: ["User", game, sessionId, "Score"],
     queryFn: () => {

@@ -9,7 +9,7 @@ export default function SubmitButton() {
     mutationFn: ({
       game,
       sessionId,
-      score,
+      // score,
       name,
     }: {
       game: string;
@@ -34,8 +34,8 @@ export default function SubmitButton() {
 
   const handlePlay = async () => {
     if (isPending) return;
-    console.log("play");
-    if (!user.name) alert("請填寫你的角色用户名");
+
+    if (!user.name) return alert("請填寫你的角色用户名");
 
     try {
       await mutateAsync({

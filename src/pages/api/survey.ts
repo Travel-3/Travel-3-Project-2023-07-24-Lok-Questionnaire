@@ -38,7 +38,7 @@ export default async function handler(
     );
     if (referralItem) {
       const scoreItem = await getSessionItem(game, referralItem?.ID, "Score");
-      if (scoreItem) increaseItem(game as string, scoreItem.ID, "score");
+      if (scoreItem) increaseItem(game as string, scoreItem.ID, "score", 5);
     }
 
     const params: UpdateItemCommandInput = {

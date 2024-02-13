@@ -90,6 +90,7 @@ export const increaseItem = async (
   tableName: string,
   id: string,
   key: string,
+  value: number | `${number}` = 1,
 ) => {
   try {
     const params: UpdateItemCommandInput = {
@@ -97,7 +98,7 @@ export const increaseItem = async (
       Key: { ID: { S: id } },
       UpdateExpression: "SET #key = #key + :value",
       ExpressionAttributeValues: {
-        ":value": { N: "1" },
+        ":value": { N: `${value}` },
       },
       ExpressionAttributeNames: {
         "#key": key,

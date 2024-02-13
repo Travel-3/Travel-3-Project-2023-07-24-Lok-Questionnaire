@@ -7,11 +7,12 @@ export type RewardBoxItemProps = {
   title: string;
   href: string;
   image: string;
+  quantity: string;
 };
 
-function RewardBoxItem({ title, href, image }: RewardBoxItemProps) {
+function RewardBoxItem({ title, quantity, image }: RewardBoxItemProps) {
   return (
-    <div className="w-full bg-white border-2 border-black rounded-full text-center">
+    <div className="relative flex flex-col w-full bg-white border-2 border-black rounded-full text-center">
       <div className="relative ">
         <AspectRatio ratio={1} className="-ml-1 relative z-10 -mt-1">
           <div
@@ -38,24 +39,26 @@ function RewardBoxItem({ title, href, image }: RewardBoxItemProps) {
           }}
         ></div>
       </div>
-      <div className="py-3">
-        <p
-          className="font-black text-[#FFDC20] text-outlined text-xl font-m-plus"
-          style={{
-            "--stroke-width": "1px",
-            "--stroke-color": "black",
-          }}
-        >
-          {title}
-        </p>
-        <p className="text-xs font-bold">限量00份</p>
-        <div className="flex justify-center">
+      <div className="h-full flex flex-col pt-3 pb-6">
+        <div className="flex-1">
+          <p
+            className="font-black text-[#FFDC20] text-outlined text-lg font-m-plus"
+            style={{
+              "--stroke-width": "1px",
+              "--stroke-color": "black",
+            }}
+          >
+            {title}
+          </p>
+          <p className="text-xs font-bold">限量{quantity}份</p>
+        </div>
+        <div className="flex justify-center mt-3">
           <TrackLink
             game="SingleDog"
             href={"https://somethingspecialgiftbox.com/"}
           >
             <div
-              className="my-3 rounded-full font-bold px-1"
+              className="rounded-full font-bold px-1"
               style={{
                 background: "#97DAFC",
               }}
@@ -89,11 +92,9 @@ export default function RewardBox() {
             title={product.title}
             href={product.href}
             image={product.image}
+            quantity={product.quantity}
           />
         ))}
-
-        {/* <RewardBoxItem />
-        <RewardBoxItem /> */}
       </div>
     </div>
   );
