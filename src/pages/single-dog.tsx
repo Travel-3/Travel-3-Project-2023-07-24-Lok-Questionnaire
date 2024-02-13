@@ -95,7 +95,7 @@ function Page() {
             <div className="relative">
               <AspectRatio ratio={2048 / 1664}>
                 <Image
-                  src={"/single-dog/images/gift-box.png"}
+                  src={"/single-dog/images/big-gift.png"}
                   alt="heart"
                   fill
                   priority
