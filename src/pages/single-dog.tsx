@@ -76,6 +76,7 @@ function Page() {
         title="Travel3 X「Something Special」送您情人節禮物活動"
         description="Travel3 X「Something Special」送您情人節禮物活動"
         themeColor="#FF96D5"
+        image="/single-dog/images/opengraph-image.png"
       />
       <App>
         <PinkBackground className="relative">
