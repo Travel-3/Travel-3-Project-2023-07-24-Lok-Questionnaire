@@ -23,6 +23,7 @@ export default async function handler(
       ID: uuid(),
       sessionId: sessionId as string,
       score: 0,
+      // gameScore: 0,
       behaviour: "New User",
       createdAt: new Date().toISOString(),
     });

@@ -5,8 +5,8 @@ import {
   UpdateItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
 import { client, document } from "@/utils/db";
-import SMS from "@/services/sms";
-import { SMS_MESSAGE } from "@/apps/manshokuya/constant";
+// import SMS from "@/services/sms";
+// import { SMS_MESSAGE } from "@/apps/manshokuya/constant";
 
 export default async function handler(
   req: NextApiRequest,
