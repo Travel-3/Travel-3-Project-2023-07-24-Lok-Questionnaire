@@ -1,7 +1,7 @@
 export const PRODUCTS = [
   {
     title: "小狗夜燈",
-    quantity: "01",
+    quantity: "03",
     href: "",
     image: "/single-dog/images/product-a.jpg",
   },
@@ -25,13 +25,13 @@ export const PRODUCTS = [
   },
   {
     title: "訂製行李牌",
-    quantity: "01",
+    quantity: "02",
     href: "",
     image: "/single-dog/images/product-e.jpg",
   },
   {
     title: "訂製杯墊",
-    quantity: "01",
+    quantity: "02",
     href: "",
     image: "/single-dog/images/product-f.jpg",
   },
