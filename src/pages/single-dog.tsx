@@ -122,7 +122,7 @@ function Page() {
                   />
                 </AspectRatio>
               </div>
-              <div className="absolute bottom-[12%] left-0 right-0 font-black text-white text-4xl text-center">
+              <div className="font-staatliches absolute bottom-[12%] left-0 right-0 font-black text-white text-4xl text-center">
                 {score}
               </div>
             </div>
@@ -152,7 +152,7 @@ function Page() {
                 />
               </AspectRatio>
               <div className="absolute flex-col top-0 pt-[8%] left-0 right-0 bottom-0 flex justify-center items-center">
-                <p className="font-black text-5xl">#{rank}</p>
+                <p className="font-black text-5xl font-staatliches">#{rank}</p>
                 <p className="text-center text-md font-black pb-3">
                   通過邀請提升排名
                 </p>
@@ -256,9 +256,9 @@ function Page() {
             </RuleBox>
             <div className="relative flex-1 mt-6 mx-1 cursor-pointer">
               <div className="z-10 relative rounded-full border-2 border-black bg-white text-center font-bold py-1">
-                <span className="text-black text-xl" onClick={onOpen}>
+                <div className="text-black text-xl -mt-1" onClick={onOpen}>
                   terms and conditions
-                </span>
+                </div>
               </div>
               <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border-2 border-black bg-[#ff9dd3] "></div>
             </div>

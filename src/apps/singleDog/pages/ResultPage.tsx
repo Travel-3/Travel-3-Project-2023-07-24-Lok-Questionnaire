@@ -113,6 +113,9 @@ export default function Page() {
                     />
                   </AspectRatio>
                 </div>
+                <div className="absolute top-[22vw] left-0 right-0 flex justify-center">
+                  <p className="text-sm">{user.name}</p>
+                </div>
                 <div className="flex justify-center absolute left-0 right-0 -bottom-[8%]">
                   <div className="w-[72vw]">
                     <AspectRatio ratio={1}>

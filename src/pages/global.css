@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&family=Staatliches&display=swap");
-
 .font-m-plus {
   font-family: "M PLUS Rounded 1c", sans-serif;
 }
@@ -54,7 +52,6 @@
 
 * {
   font-family:
-    "Noto Sans JP",
     "LINE",
     ui-sans-serif,
     system-ui,
@@ -76,13 +73,13 @@
 html {
     font-family: 'LINE', sans-serif;
 } */
-
+/* 
 @font-face {
   font-family: "LINE";
   font-style: normal;
   font-weight: 300;
   src: url("/fonts/line/LINESeedSans_W_Th.woff2") format("truetype");
-}
+} */
 
 @font-face {
   font-family: "LINE";
@@ -91,12 +88,12 @@ html {
   src: url("/fonts/line/LINESeedSans_W_Rg.woff2") format("truetype");
 }
 
-@font-face {
+/* @font-face {
   font-family: "LINE";
   font-style: normal;
   font-weight: 500;
   src: url("/fonts/line/LINESeedSans_W_He.woff2") format("truetype");
-}
+} */
 
 @font-face {
   font-family: "LINE";

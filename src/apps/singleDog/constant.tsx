@@ -24,13 +24,13 @@ export const PRODUCTS = [
     image: "/single-dog/images/product-d.jpg",
   },
   {
-    title: "Solo journey",
+    title: "訂製行李牌",
     quantity: "01",
     href: "",
     image: "/single-dog/images/product-e.jpg",
   },
   {
-    title: "Solo Drink",
+    title: "訂製杯墊",
     quantity: "01",
     href: "",
     image: "/single-dog/images/product-f.jpg",

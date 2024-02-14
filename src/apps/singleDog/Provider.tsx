@@ -56,15 +56,7 @@ export const MAX = 5;
 
 export function Provider({ children }: PropsWithChildren) {
   const [index, setIndex] = useState(0);
-  // const [score, setScore] = useState(0);
   const [gameScore, setGameScore] = useState(0);
-  // const [user, setUser] = useState<User>({
-  //   id: "",
-  //   score: 0,
-  //   phone: "",
-  //   region: "",
-  //   name: "",
-  // });
   const [user, setUser] = useLocalStorage<{
     id: string;
     score: number;
@@ -162,6 +154,11 @@ export function useProvider() {
 
   const register = (phone: string, region: string) => {
     setUser?.((_user) => ({ ..._user, phone, region }));
+    fireEvent("Register", {
+      sessionId: user.id,
+      phone,
+      region,
+    });
   };
 
   const finish = () => {
