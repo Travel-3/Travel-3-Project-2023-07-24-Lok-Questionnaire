@@ -10,13 +10,13 @@ import { client, document } from "@/utils/db";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ) {
-  const { game, sessionId, phone, region } = req.body;
+  const { game, sessionId, phone, region, email } = req.body;
   const item = await getSessionItem(
     game as string,
     sessionId as string,
-    "New User",
+    "New User"
   );
 
   if (!item) {
@@ -35,38 +35,75 @@ export default async function handler(
     return;
   }
 
-  const { Items } = await document.scan({
-    TableName: game as string,
-    FilterExpression: "#phone = :phone And #region = :region",
-    ExpressionAttributeValues: {
-      ":phone": phone?.toString() ?? "",
-      ":region": region?.toString() ?? "",
-    },
-    ExpressionAttributeNames: {
-      "#phone": "phone",
-      "#region": "region",
-    },
-  });
-
-  if (Items && Items.length) {
+  if (item.email) {
     res.status(400).json({
       ok: false,
-      error: "Phone and region already used.",
+      error: "Email already set",
     });
     return;
+  }
+
+  let Items: Record<string, any>[] | undefined = [];
+
+  if (phone && phone.length) {
+    const { Items: items } = await document.scan({
+      TableName: game as string,
+      FilterExpression: "#phone = :phone And #region = :region",
+      ExpressionAttributeValues: {
+        ":phone": phone?.toString() ?? "",
+        ":region": region?.toString() ?? "",
+      },
+      ExpressionAttributeNames: {
+        "#phone": "phone",
+        "#region": "region",
+      },
+    });
+    Items = items;
+
+    if (Items && Items.length) {
+      res.status(400).json({
+        ok: false,
+        error: "Phone and region already used.",
+      });
+      return;
+    }
+  } else {
+    const { Items: items } = await document.scan({
+      TableName: game as string,
+      FilterExpression: "#email = :email",
+      ExpressionAttributeValues: {
+        ":email": email?.toString() ?? "",
+      },
+      ExpressionAttributeNames: {
+        "#email": "email",
+      },
+    });
+    Items = items;
+
+    console.log(123, items, email);
+
+    if (Items && Items.length) {
+      res.status(400).json({
+        ok: false,
+        error: "Email already used.",
+      });
+      return;
+    }
   }
 
   const params: UpdateItemCommandInput = {
     TableName: game as string,
     Key: { ID: { S: item.ID } },
-    UpdateExpression: "SET #phone = :phone, #region = :region",
+    UpdateExpression: "SET #phone = :phone, #region = :region, #email = :email",
     ExpressionAttributeValues: {
       ":phone": { S: phone?.toString() ?? "" },
       ":region": { S: region?.toString() ?? "" },
+      ":email": { S: email?.toString() ?? "" },
     },
     ExpressionAttributeNames: {
       "#phone": "phone",
       "#region": "region",
+      "#email": "email",
     },
     ReturnValues: "ALL_NEW",
   };

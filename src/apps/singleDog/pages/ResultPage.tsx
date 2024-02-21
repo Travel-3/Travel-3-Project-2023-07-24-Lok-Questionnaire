@@ -209,7 +209,11 @@ export default function Page() {
         overlay
         onClose={onAsk4PhoneClose}
       >
-        <SignUpForm game="SingleDog" onDone={handleDone} defaultRegion="852" />
+        <SignUpForm
+          game="Single-Dog-Dev"
+          onDone={handleDone}
+          defaultRegion="852"
+        />
       </BaseBottomSheet>
     </>
   );

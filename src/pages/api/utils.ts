@@ -46,6 +46,7 @@ export const getSessionItem = async (
         score: number;
         phone: string | undefined;
         data?: string;
+        email: string | undefined;
       };
     }
 

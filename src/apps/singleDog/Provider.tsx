@@ -18,6 +18,7 @@ import { QUESTIONS } from "./constant";
 export type User = {
   id: string;
   score: number;
+  email: string;
   phone: string;
   region: string;
   name: string;
@@ -43,6 +44,7 @@ const Context = createContext<TContext>({
     score: 0,
     phone: "",
     region: "",
+    email: "",
     name: "",
   },
   setUser: null,
@@ -51,7 +53,7 @@ const Context = createContext<TContext>({
   rank: 999,
 });
 
-export const GAME = "SingleDog";
+export const GAME = "Single-Dog-Dev";
 export const MAX = 5;
 
 export function Provider({ children }: PropsWithChildren) {
@@ -61,12 +63,14 @@ export function Provider({ children }: PropsWithChildren) {
     id: string;
     score: number;
     phone: string;
+    email: string;
     region: string;
     name: string;
   }>(`User/${GAME}`, {
     id: "",
     score: 0,
     phone: "",
+    email: "",
     region: "",
     name: "",
   });
@@ -92,6 +96,7 @@ export function Provider({ children }: PropsWithChildren) {
         score: 0,
         phone: "",
         region: "",
+        email: "",
         name: "",
       });
     }

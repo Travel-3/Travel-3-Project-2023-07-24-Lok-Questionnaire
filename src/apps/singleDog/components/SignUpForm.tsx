@@ -54,14 +54,16 @@ export type SignUpFormProps = {
 export default function SignUpForm({
   onDone,
   game,
-  defaultRegion = "853",
+  defaultRegion = "852",
 }: SignUpFormProps) {
   const ref = useRef<HTMLInputElement>(null);
   const { user } = useProvider();
+  const [isEmail, setIsEmail] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     region: defaultRegion,
     phone: "",
+    email: "",
   });
 
   useEffect(() => {
@@ -75,9 +77,18 @@ export default function SignUpForm({
     }));
   };
 
+  const handleSwitchEmail = () => {
+    setIsEmail((prev) => !prev);
+  };
+
   const handleSubmit = async () => {
     if (isLoading) return;
-    if (form.phone.length < 8) return alert("請輸入正確的電話號碼");
+    if (isEmail) {
+      if (!form.email.length) return alert("請輸入正確的電子郵件");
+    } else {
+      if (!form.phone.length) return alert("請輸入正確的電話號碼");
+    }
+
     if (!user.id) return alert("請先登入");
 
     setIsLoading(true);
@@ -85,7 +96,9 @@ export default function SignUpForm({
     try {
       fireEvent("Register", {
         userId: user.id,
-        ...form,
+        ...(isEmail
+          ? { email: form.email }
+          : { phone: form.phone, region: form.region }),
       });
       await fetch("/api/submit", {
         method: "POST",
@@ -93,7 +106,9 @@ export default function SignUpForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...form,
+          ...(isEmail
+            ? { email: form.email }
+            : { phone: form.phone, region: form.region }),
           sessionId: user.id,
           game,
         }),
@@ -104,7 +119,8 @@ export default function SignUpForm({
             alert("活動報名成功");
             onDone(form);
           } else {
-            alert("活動報名失敗！電話號碼已使用！");
+            if (isEmail) alert("活動報名失敗！電子郵件已使用！");
+            else alert("活動報名失敗！電話號碼已使用！");
           }
         });
     } catch {
@@ -116,26 +132,38 @@ export default function SignUpForm({
 
   return (
     <>
-      <InputContainer className="pb-3">
-        <div>
-          <Select
-            className="bg-gray-100"
-            defaultValue='852'
-            onChange={(e) => updateForm("region", e.target.value)}
-          >
-            <option value="853">853</option>
-            <option value="852">852</option>
-            <option value="86">86</option>
-          </Select>
-        </div>
-        <Input
-          ref={ref}
-          className="bg-gray-50"
-          type="text"
-          onChange={(e) => updateForm("phone", e.target.value)}
-          placeholder="輸入電話號碼"
-        />
-      </InputContainer>
+      {!isEmail ? (
+        <InputContainer className="pb-3">
+          <div>
+            <Select
+              className="bg-gray-100"
+              defaultValue={defaultRegion}
+              onChange={(e) => updateForm("region", e.target.value)}
+            >
+              <option value="853">853</option>
+              <option value="852">852</option>
+              <option value="86">86</option>
+            </Select>
+          </div>
+          <Input
+            ref={ref}
+            className="bg-gray-50"
+            type="text"
+            onChange={(e) => updateForm("phone", e.target.value)}
+            placeholder="輸入電話號碼"
+          />
+        </InputContainer>
+      ) : (
+        <InputContainer className="pb-3">
+          <Input
+            ref={ref}
+            className="bg-gray-50"
+            type="email"
+            onChange={(e) => updateForm("email", e.target.value)}
+            placeholder="輸入電子郵件"
+          />
+        </InputContainer>
+      )}
       <div className="mb-3">
         您提供的電話號碼將被妥善保密僅用於活動聯絡之用。
         <br />
@@ -143,12 +171,33 @@ export default function SignUpForm({
       </div>
       <div
         className={clsx("relative cursor-pointer", isLoading && "opacity-50")}
-        onClick={handleSubmit}
-        // loading={isLoading}
+        onClick={handleSwitchEmail}
       >
         <div
           className={clsx(
-            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5",
+            "z-10 relative rounded-full border border-black bg-gray-100 text-[#FFDC20] text-center font-bold px-3 py-0.5 mb-3"
+          )}
+        >
+          <span
+            className="font-m-plus text-2xl text-outlined flex justify-center items-center"
+            style={{
+              "--stroke-width": "1px",
+              "--stroke-color": "#000",
+            }}
+          >
+            {isEmail ? "使用手機號碼登記" : "使用電子郵件登記"}
+          </span>
+        </div>
+        <div className="absolute top-1 left-1 -right-1 rounded-full -bottom-1 border-2 border-black bg-[#ff9dd3] "></div>
+      </div>
+
+      <div
+        className={clsx("relative cursor-pointer", isLoading && "opacity-50")}
+        onClick={handleSubmit}
+      >
+        <div
+          className={clsx(
+            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5"
           )}
         >
           <span
