@@ -120,6 +120,7 @@ export default function SignUpForm({
         <div>
           <Select
             className="bg-gray-100"
+            defaultValue='852'
             onChange={(e) => updateForm("region", e.target.value)}
           >
             <option value="853">853</option>
