@@ -53,7 +53,7 @@ const Context = createContext<TContext>({
   rank: 999,
 });
 
-export const GAME = "Single-Dog-Dev";
+export const GAME = "SingleDog";
 export const MAX = 5;
 
 export function Provider({ children }: PropsWithChildren) {

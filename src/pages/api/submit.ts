@@ -10,13 +10,13 @@ import { client, document } from "@/utils/db";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { game, sessionId, phone, region, email } = req.body;
   const item = await getSessionItem(
     game as string,
     sessionId as string,
-    "New User"
+    "New User",
   );
 
   if (!item) {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { fireEvent } from "@/services/pixel";
 import { useProvider } from "../Provider";
 import clsx from "clsx";
+import { z } from "zod";
 
 const InputContainer = styled.div`
   position: relative;
@@ -85,6 +86,9 @@ export default function SignUpForm({
     if (isLoading) return;
     if (isEmail) {
       if (!form.email.length) return alert("請輸入正確的電子郵件");
+
+      const { success } = z.string().email().safeParse(form.email);
+      if (!success) return alert("請輸入正確的電子郵件");
     } else {
       if (!form.phone.length) return alert("請輸入正確的電話號碼");
     }
@@ -175,7 +179,7 @@ export default function SignUpForm({
       >
         <div
           className={clsx(
-            "z-10 relative rounded-full border border-black bg-gray-100 text-[#FFDC20] text-center font-bold px-3 py-0.5 mb-3"
+            "z-10 relative rounded-full border border-black bg-gray-100 text-[#FFDC20] text-center font-bold px-3 py-0.5 mb-3",
           )}
         >
           <span
@@ -197,7 +201,7 @@ export default function SignUpForm({
       >
         <div
           className={clsx(
-            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5"
+            "z-10 relative rounded-full border border-black bg-[#FFDC20] text-white text-center font-bold px-3 py-0.5",
           )}
         >
           <span
