@@ -5,8 +5,6 @@ export const Business = {
   description: "玩扭蛋遊戲送您「萬食屋折扣優惠」和生可樂 ",
   url: "https://manshokuya.com",
   image: "https://manshokuya.com/images/ogp.png",
-  // address: "台北市大安區忠孝東路四段181巷3號",
-  // period: "2021/10/01 ~ 2021/10/31",
 };
 
 export const ThemeColor = "#FCCF00";
@@ -14,18 +12,19 @@ export const ThemeColor = "#FCCF00";
 export const Coupons = [
   {
     id: 1,
-    name: "7折萬食屋優惠劵",
+    name: '價值$200 "精選炸物拼盤"一份',
     poster: "/images/manshokuya/Poster-01.png",
     avatar: "/images/manshokuya/Avatar-01.png",
     ball: "/images/manshokuya/Ball-01.png",
     ballOpened: "/images/manshokuya/Ball-Open-01.png",
     ballRatio: 2048 / 1831,
-    description: "優惠劵使用截止日期 2024年2月28日。",
-    auth: true,
+    description:
+      '價值$200 "精選炸物拼盤"一份，"精選炸物拼盤"，價值$200，內容物有日式炸雞10件、手作芝士薯波20個、日式炸蝦8件、日式炸餃子10件，以及日式吉列蠔8件。活動截止日期 2024年7月31日。',
+    // auth: true,
   },
   {
     id: 2,
-    name: "9折萬食屋優惠劵",
+    name: "$180-$40折價券",
     poster: "/images/manshokuya/Poster-02.png",
     ball: "/images/manshokuya/Ball-02.png",
     ballOpened: "/images/manshokuya/Ball-Open-02.png",
@@ -35,7 +34,7 @@ export const Coupons = [
   },
   {
     id: 3,
-    name: "95折萬食屋優惠劵",
+    name: "$100-$10折價券",
     poster: "/images/manshokuya/Poster-03.png",
     ball: "/images/manshokuya/Ball-03.png",
     ballOpened: "/images/manshokuya/Ball-Open-03.png",
@@ -53,7 +52,7 @@ export const Coupons = [
     avatar: "/images/manshokuya/Avatar-04.png",
     description:
       "換領截止日期為2024年2月28日，每個手機號碼僅限換取一罐生可樂。",
-    auth: true,
+    // auth: true,
   },
 ];
 

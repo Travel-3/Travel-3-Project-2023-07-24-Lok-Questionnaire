@@ -10,7 +10,6 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import ShareButton from "@/apps/singleDog/components/ShareButton";
 import TrackLink from "@/components/Track/TrackLink";
-// import BaseBottomSheet from "@/components/Dialog/BaseBottomSheet";
 import { TC } from "@/apps/singleDog/constant";
 import useDisclosure from "@/hooks/useDisclosure";
 

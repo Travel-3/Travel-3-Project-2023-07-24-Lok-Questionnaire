@@ -1,6 +1,6 @@
 import GameButton from "@/components/2023/Christmas/GameButton";
 import HowToShow from "@/components/2023/Christmas/HowToShow";
-import SignUpForm from "@/components/2023/Christmas/SignUpForm";
+// import SignUpForm from "@/components/2023/Christmas/SignUpForm";
 import SplashScreen from "@/components/2023/Christmas/SplashScreen";
 import SuggestPartner from "@/components/2023/Christmas/SuggestPartner";
 import App from "@/components/App";
@@ -12,7 +12,6 @@ import useParams from "@/hooks/useParams";
 import colors from "@/tokens/2023/Christmas/colors";
 import { blue, green, red, white } from "@/tokens/2023/Christmas/results";
 import Head from "next/head";
-// import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";

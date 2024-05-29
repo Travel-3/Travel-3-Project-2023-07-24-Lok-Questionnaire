@@ -137,21 +137,21 @@ function Page() {
     return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
   }, [userId]);
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: Business.title,
-          text: `${Business.description}. 活動網址：${shareURL}`,
-          url: shareURL,
-        })
-        .then(() => console.log("成功分享!"));
-    } else {
-      const copy = (await import("copy-to-clipboard")).default;
-      copy(shareURL);
-      alert("複製鏈結成功！");
-    }
-  };
+  // const handleShare = async () => {
+  //   if (navigator.share) {
+  //     navigator
+  //       .share({
+  //         title: Business.title,
+  //         text: `${Business.description}. 活動網址：${shareURL}`,
+  //         url: shareURL,
+  //       })
+  //       .then(() => console.log("成功分享!"));
+  //   } else {
+  //     const copy = (await import("copy-to-clipboard")).default;
+  //     copy(shareURL);
+  //     alert("複製鏈結成功！");
+  //   }
+  // };
 
   return (
     <>
@@ -199,7 +199,7 @@ function Page() {
             </div>
           </div>
           {/*  */}
-          <div className="min-h-20 h-[15vh]" />
+          <div className="min-h-20 h-[10vh]" />
           {/* <div className="mx-6 mb-0">
             <div className="pt-2">
               <ShareButton
@@ -320,12 +320,15 @@ function Page() {
               </div>
             </div>
 
-            <GachaCard className="mb-12 md:mb-16">
+            <GachaCard className="mb-12 md:mb-24">
               <div className="text-center p-4 text-sm md:text-lg">
                 首次參加活動時，您將獲得一次扭蛋機會。隨後您可以將活動圖片和鏈結分享到社交媒體上。
                 <br />
                 <br />
                 每位新用戶參與活動後，您將獲得額外的一次扭蛋機會。
+                <br />
+                <br />
+                活動截止日期 2024年7月31日。
               </div>
             </GachaCard>
 
@@ -380,18 +383,31 @@ function Page() {
             </div>
             <GachaCard>
               <div className="text-center p-4 text-sm md:text-lg">
-                當您獲得大獎時，您將透過簡訊收到獲獎通知。
-                通知中會包含一個獨特的折扣代碼，您可以將代碼展示給參與活動的商家以享受折扣優惠。
-                商家可能要求您在結帳時出示通知或提供折扣代碼以驗證您的資格，並將相應的折扣應用於您的購買。
+                使用條款和條件：
                 <br />
                 <br />
-                對於其他獎品，您可以在領獎頁面上找到折扣代碼。
-                一旦您點擊並查看扭蛋，您將看到您所獲得獎品的詳細信息，包括折扣代碼和相關使用說明。
-                您可以按照指示使用折扣代碼，在參與活動的商家享受相應的折扣優惠。
+                參加資格：此活動開放給年滿18歲或法定成年年齡的參與者。參與者必須遵守當地法律法規。
                 <br />
                 <br />
-                請注意，每個折扣代碼通常只能在一次購買中使用，並且可能有特定的有效期限。
-                因此，請確保在使用折扣之前閱讀並理解相關的使用條款和條件。
+                扭蛋遊戲：在活動期間，參與者可以進入網頁扭蛋遊戲並參與抽獎。每個參與者只能參加一次抽獎。
+                <br />
+                <br />
+                獎品贈送：參與者在抽獎後，將根據運氣獲得不同的獎品。獎品將通過領獎頁面或簡訊通知發送給參與者。
+                <br />
+                <br />
+                折扣代碼：當參與者獲得大獎時，將收到一則簡訊通知，其中包含一個獨特的折扣代碼。這個代碼可以在參與活動的商家處使用，以享受折扣優惠。請注意，每個折扣代碼僅限使用一次。
+                <br />
+                <br />
+                使用條款：參與者在使用折扣代碼時，應遵守商家的使用條款和條件。商家可能會要求參與者在結帳時出示獲獎通知或提供折扣代碼及電話號碼以驗證資格。折扣代碼可能有特定的有效期限，請在使用之前仔細閱讀並理解相關的使用條款和條件。
+                <br />
+                <br />
+                責任限制：主辦方不對參與者在活動期間的技術問題、網路連接問題或其他不可抗力因素導致的任何損失或損害負責。
+                <br />
+                <br />
+                活動變更或終止：主辦方保留隨時根據需要更改或終止活動的權利，並且對此不承擔任何責任。任何變更或終止的通知將在網頁上公告或通過適當的方式通知參與者。
+                <br />
+                <br />
+                請在參與活動之前仔細閱讀並理解這些使用條款和條件。參與活動即表示您同意遵守這些條款和條件。祝您好運，盡情享受這個扭蛋活動帶來的樂趣和驚喜！
               </div>
             </GachaCard>
             <TrackLink

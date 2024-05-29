@@ -46,9 +46,13 @@ export default function GachaMachineStartButton() {
             />
           </AspectRatio>
         </m.div>
-        <div className="font-m-plus flex flex-col absolute top-0 left-0 right-0 bottom-0 justify-center items-center text-xs font-bold">
-          <div className="mb-1.5">開</div>
-          <div className="mt-1.5">始</div>
+        <div className="py-[10%] flex flex-col absolute top-0 left-0 right-0 bottom-0 items-center justify-center">
+          <div className="mb-1.5 md:mb-6 md:text-xl font-medium">開</div>
+          <div className="mt-1.5 md:mt-6 md:text-xl font-medium">始</div>
+          {/* <div className="h-[80%] font-m-plus flex flex-col absolute top-0 left-0 right-0 bottom-0 justify-center items-center text-xs font-bold">
+          <div className="mb-1.5 md:mb-2 md:text-xl">開</div>
+          <div className="mt-1.5 md:mt-2 md:text-xl">始</div>
+        </div> */}
         </div>
       </div>
     </LazyMotion>

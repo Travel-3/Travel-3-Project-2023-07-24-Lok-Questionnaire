@@ -15,7 +15,9 @@ export type AppProps = React.ComponentPropsWithoutRef<typeof _App>;
 export default function App({ ...props }: AppProps) {
   return (
     <_App {...props}>
-      <div className="max-w-screen-sm mx-auto relative">{props.children}</div>
+      <div className="max-w-screen-lg mx-auto relative border-black border overflow-hidden">
+        {props.children}
+      </div>
     </_App>
   );
 }

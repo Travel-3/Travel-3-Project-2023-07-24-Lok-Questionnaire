@@ -62,8 +62,8 @@ export function MyGachaBallCard({
           alt="Gocha Ball Card"
         />
       </AspectRatio>
-      <div className="absolute left-0 top-0 bottom-0 right-0 flex items-center pl-2 pr-3 pb-1">
-        <div className="w-16">
+      <div className="absolute left-0 top-0 bottom-0 right-0 flex items-center pl-2 pr-3 pb-1 md:pl-4 md:pr-6 md:pb-2">
+        <div className="w-16 md:w-24">
           <AspectRatio ratio={2048 / 1835}>
             <Image
               src={coupon?.avatar ?? ""}
@@ -75,11 +75,11 @@ export function MyGachaBallCard({
         </div>
         {/* <div className="h-12 mx-1 border-r border-black "></div> */}
         <div className="flex-1 ml-1">
-          <div className="text-md">{coupon?.name}</div>
+          <div className="text-md md:text-2xl">{coupon?.name}</div>
           {/* <div className="text-xs">{coupon?.description}</div> */}
         </div>
         <CardButton
-          className="px-3 py-1.5 font-bold text-xs"
+          className="px-3 py-1.5 font-bold text-xs md:px-6 md:py-3 md:text-xl"
           onClick={handleView}
         >
           查看內容
@@ -120,7 +120,7 @@ export default function MyGachaBallList({ data }: MyGachaBallListProps) {
         </div>
         <div>
           {(!data || data.length === 0) && (
-            <p className="text-center text-lg">請進行遊戲獲得。</p>
+            <p className="text-center text-lg md:text-2xl">請進行遊戲獲得。</p>
           )}
           {data?.map((item) => (
             <MyGachaBallCard
