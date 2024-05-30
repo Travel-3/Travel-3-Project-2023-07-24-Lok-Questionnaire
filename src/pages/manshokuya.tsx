@@ -20,6 +20,7 @@ import {
   FacebookButton,
   InstagramButton,
 } from "@/apps/manshokuya/components/Buttons";
+import QRCode from "qrcode.react";
 
 const BaseBottomSheet = dynamic(
   () => import("@/components/Dialog/BaseBottomSheet"),
@@ -49,15 +50,15 @@ const SignUpForm = dynamic(
   },
 );
 
-const ShareButton = styled.div`
-  border: 2px solid #241716;
-  box-shadow: 0px 4px 0px #241716;
-  background-color: #ec1827;
-  color: #fff;
-  border-radius: 8px;
-  --stroke-width: 2px;
-  --stroke-color: #241716;
-`;
+// const ShareButton = styled.div`
+//   border: 2px solid #241716;
+//   box-shadow: 0px 4px 0px #241716;
+//   background-color: #ec1827;
+//   color: #fff;
+//   border-radius: 8px;
+//   --stroke-width: 2px;
+//   --stroke-color: #241716;
+// `;
 
 const StickyButton = styled.div`
   border: 2px solid #241716;
@@ -102,6 +103,12 @@ function Page() {
     refetchInterval: 10_000,
     enabled: !!userId,
   });
+  //   const data:{
+  //     code: string;
+  //     discount: string;
+  //     status: string;
+  //     couponId: number;
+  // }[] = [];
 
   useEffect(() => {
     if (reward.id) {
@@ -133,25 +140,25 @@ function Page() {
     });
   };
 
-  const shareURL = useMemo(() => {
-    return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
-  }, [userId]);
+  // const shareURL = useMemo(() => {
+  //   return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
+  // }, [userId]);
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: Business.title,
-          text: `${Business.description}. 活動網址：${shareURL}`,
-          url: shareURL,
-        })
-        .then(() => console.log("成功分享!"));
-    } else {
-      const copy = (await import("copy-to-clipboard")).default;
-      copy(shareURL);
-      alert("複製鏈結成功！");
-    }
-  };
+  // const handleShare = async () => {
+  //   if (navigator.share) {
+  //     navigator
+  //       .share({
+  //         title: Business.title,
+  //         text: `${Business.description}. 活動網址：${shareURL}`,
+  //         url: shareURL,
+  //       })
+  //       .then(() => console.log("成功分享!"));
+  //   } else {
+  //     const copy = (await import("copy-to-clipboard")).default;
+  //     copy(shareURL);
+  //     alert("複製鏈結成功！");
+  //   }
+  // };
 
   return (
     <>
@@ -320,7 +327,7 @@ function Page() {
               </div>
             </div>
 
-            <GachaCard className="mb-12 md:mb-16">
+            <GachaCard className="mb-12 md:mb-24">
               <div className="text-center p-4 text-sm md:text-lg">
                 首次參加活動時，您將獲得一次扭蛋機會。隨後您可以將活動圖片和鏈結分享到社交媒體上。
                 <br />
@@ -330,7 +337,7 @@ function Page() {
             </GachaCard>
 
             {/*  */}
-            <MyGachaBallList data={data} />
+            <MyGachaBallList data={data.slice(0, 6)} />
             {/* New Line */}
 
             <div className="mt-8 flex flex-col items-center" id="shareRule">
@@ -398,7 +405,7 @@ function Page() {
               game="Manshokuya"
               href="https://www.facebook.com/manshokuya"
             >
-              <FacebookButton className="text-center mt-6 py-1 text-lg font-bold text-outlined">
+              <FacebookButton className="text-center mt-6 py-1 text-lg font-bold text-outlined cursor-pointer">
                 萬食屋 Facebook 專頁
               </FacebookButton>
             </TrackLink>
@@ -406,7 +413,7 @@ function Page() {
               game="Manshokuya"
               href="https://www.instagram.com/manshokuya"
             >
-              <InstagramButton className="text-center mt-3 py-1 text-lg font-bold text-outlined">
+              <InstagramButton className="text-center mt-3 py-1 text-lg font-bold text-outlined cursor-pointer">
                 萬食屋 Instagram 專頁
               </InstagramButton>
             </TrackLink>
@@ -434,7 +441,16 @@ function Page() {
           overlay
           onClose={onAsk4PhoneClose}
         >
-          <SignUpForm onDone={onAsk4PhoneClose} />
+          <div className="flex items-center justify-center flex-col">
+            <QRCode
+              value={`https://travel3exp.xyz/manshokuya?sessionId=${userId}`}
+              size={256}
+            />
+            <p className="text-xl py-3">
+              https://travel3exp.xyz/manshokuya?sessionId={userId}
+            </p>
+          </div>
+          {/* <SignUpForm onDone={onAsk4PhoneClose} /> */}
         </BaseBottomSheet>
         <BaseBottomSheet
           isOpen={isGiftOpen}
@@ -457,6 +473,9 @@ function Page() {
         <GachaRewardDialog isOpen={isRewardOpen} onClose={handleRewardClose} />
         <GachaPosterDialog />
       </SplashScreen>
+      <div className="fixed right-0 bottom-0 hidden sm:block sm:text-lg md:text-2xl">
+        {userId}
+      </div>
     </>
   );
 }

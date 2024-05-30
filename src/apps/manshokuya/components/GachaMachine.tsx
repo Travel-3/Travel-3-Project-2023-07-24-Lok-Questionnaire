@@ -67,7 +67,6 @@ const ChanceLabel = styled.div`
 export default function GachaMachine() {
   const panelRef = useRef<HTMLDivElement>(null);
   const { numOfOpportunitie, reward } = useManshokuya();
-  // const y = useMotionValue(-100)
   const y = useSpring(panelRef.current?.offsetHeight || 0);
 
   const handleNavigateReward = () => {
@@ -140,7 +139,8 @@ export default function GachaMachine() {
               <div className="flex flex-col flex-1 pr-1">
                 <div className="flex">
                   <ChanceLabel className="font-m-plus flex justify-center relative bg-gray-200 border-2 text-sm rounded-md w-full text-center mb-1 font-bold lg:text-3xl">
-                    剩餘<div className="w-6">{numOfOpportunitie}</div>次機會
+                    剩餘<div className="w-6 md:w-8">{numOfOpportunitie}</div>
+                    次機會
                   </ChanceLabel>
                 </div>
                 <div className="relative">

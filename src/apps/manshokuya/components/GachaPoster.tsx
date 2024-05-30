@@ -173,7 +173,7 @@ export default function GachaPoster() {
           </div>
         )}
         <PosterContent className="my-4 ">
-          <p className="p-4 ">{previewCoupon.description}</p>
+          <p className="p-4 md:text-xl ">{previewCoupon.description}</p>
         </PosterContent>
         <div className="mt-1">
           <TrackLink

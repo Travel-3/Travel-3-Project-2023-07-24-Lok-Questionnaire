@@ -33,16 +33,20 @@ export const getDeviceID = () => {
   return useDeviceIDState.getState().deviceID;
 };
 
-export const useDeviceID = () => {
+export const useDeviceID = (defaultId?: string) => {
   const { deviceID, setDeviceID } = useDeviceIDState();
 
   useEffect(() => {
-    if (!deviceID) {
+    // console.log("defaultId", defaultId)
+    if (defaultId) {
+      setDeviceID(defaultId);
+    } else if (!deviceID) {
       const newDeviceID = `${generateRandomString()}`;
       setDeviceID(newDeviceID);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [defaultId]);
 
+  // console.log("deviceID", deviceID, defaultId)
   return deviceID;
 };

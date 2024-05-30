@@ -2,7 +2,7 @@ import { useDeviceID } from "@/hooks/useDeviceID";
 import { useQuery } from "@tanstack/react-query";
 import {
   Dispatch,
-  FC,
+  // FC,
   PropsWithChildren,
   SetStateAction,
   createContext,
@@ -13,6 +13,7 @@ import {
 } from "react";
 import { useUser } from "./hooks";
 import useDisclosure from "@/hooks/useDisclosure";
+import { useRouter } from "next/router";
 
 export type ManshokuyaContextState = {
   numOfOpportunitie: number;
@@ -45,7 +46,10 @@ export const ManshokuyaContext = createContext<ManshokuyaContextState>({
 export type ManshokuyaProviderProps = PropsWithChildren;
 
 export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
+  const router = useRouter();
   const { setUser, userId } = useUser();
+  const sessionId = useDeviceID(router.query.sessionId as string);
+
   const {
     isOpen: isAsk4PhoneOpen,
     onOpen: onAsk4PhoneOpen,
@@ -62,8 +66,7 @@ export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
     code: null,
   });
 
-  const sessionId = useDeviceID();
-  const {} = useQuery({
+  const { refetch } = useQuery({
     queryKey: ["User", sessionId],
     queryFn: () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -88,6 +91,11 @@ export const ManshokuyaProvider = ({ children }: ManshokuyaProviderProps) => {
     refetchIntervalInBackground: false,
     refetchOnWindowFocus: false,
   });
+
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId]);
 
   const { data } = useQuery({
     queryKey: ["User", userId, "Score"],

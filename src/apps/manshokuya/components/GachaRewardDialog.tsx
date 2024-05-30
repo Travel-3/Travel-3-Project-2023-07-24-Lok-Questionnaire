@@ -36,7 +36,7 @@ export const GachaRewardWrapper = styled(m.div)`
   background-image: url("/images/manshokuya/Background.png");
   background-size: cover;
   background-repeat: repeat;
-  min-height: 50vh;
+  min-height: 45vh;
 `;
 
 const GachaRewardCloseButton = styled.div`
@@ -88,7 +88,7 @@ export default function GachaRewardDialog({
           <div
             className="relative w-full max-w-lg mx-auto"
             style={{
-              marginTop: "calc(100vw * 0.41845703125 * 0.5)",
+              marginTop: "calc(100vw * 0.41845703125 * 0.25)",
             }}
           >
             <GachaRewardHeader>
