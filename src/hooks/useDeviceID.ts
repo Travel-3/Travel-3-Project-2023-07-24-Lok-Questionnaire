@@ -20,7 +20,7 @@ export const useDeviceIDState = create(
   ),
 );
 
-function generateRandomString() {
+export function generateRandomString() {
   const randomCharA = String.fromCharCode(65 + Math.floor(Math.random() * 26));
   const randomCharB = String.fromCharCode(65 + Math.floor(Math.random() * 26));
   const randomNumber = Math.floor(Math.random() * 1000000)

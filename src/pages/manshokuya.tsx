@@ -13,7 +13,7 @@ import Meta from "@/components/Meta";
 import GachaCard from "@/apps/manshokuya/components/GachaCard";
 import SplashScreen from "@/apps/manshokuya/components/SplashScreen";
 import styled from "styled-components";
-import { Business, Coupons, TC } from "@/apps/manshokuya/constant";
+import { Coupons, TC } from "@/apps/manshokuya/constant";
 import dynamic from "next/dynamic";
 import { BaseGachaBall } from "@/apps/manshokuya/components/GachaBall";
 import {
@@ -21,6 +21,7 @@ import {
   InstagramButton,
 } from "@/apps/manshokuya/components/Buttons";
 import QRCode from "qrcode.react";
+// import Reset from "@/apps/manshokuya/components/Reset";
 
 const BaseBottomSheet = dynamic(
   () => import("@/components/Dialog/BaseBottomSheet"),
@@ -43,12 +44,12 @@ const GachaPosterDialog = dynamic(
   },
 );
 
-const SignUpForm = dynamic(
-  () => import("@/apps/manshokuya/components/SignUpForm"),
-  {
-    ssr: false,
-  },
-);
+// const SignUpForm = dynamic(
+//   () => import("@/apps/manshokuya/components/SignUpForm"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 // const ShareButton = styled.div`
 //   border: 2px solid #241716;
@@ -442,11 +443,15 @@ function Page() {
           onClose={onAsk4PhoneClose}
         >
           <div className="flex items-center justify-center flex-col">
+            <p className="text-xl mb-4">
+              Scan this QR code or visit the website to access your game
+              account.
+            </p>
             <QRCode
               value={`https://travel3exp.xyz/manshokuya?sessionId=${userId}`}
               size={256}
             />
-            <p className="text-xl py-3">
+            <p className="text-xl py-3 text-green-800">
               https://travel3exp.xyz/manshokuya?sessionId={userId}
             </p>
           </div>

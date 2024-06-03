@@ -6,6 +6,7 @@ import GachaBall, { BaseGachaBall } from "./GachaBall";
 import GachaMachineStartButton from "./GachaMachineStartButton";
 import { useManshokuya } from "../Provider";
 import { useSpring } from "framer-motion";
+import Reset from "./Reset";
 
 export const GachaMachinePanelContainer = styled.div`
   position: absolute;
@@ -144,15 +145,17 @@ export default function GachaMachine() {
                   </ChanceLabel>
                 </div>
                 <div className="relative">
-                  <AspectRatio ratio={2048 / 1218}>
-                    <Image
-                      src="/images/manshokuya/Coin-Machine.png"
-                      fill
-                      quality={90}
-                      priority
-                      alt="Gocha Texture"
-                    />
-                  </AspectRatio>
+                  <Reset>
+                    <AspectRatio ratio={2048 / 1218}>
+                      <Image
+                        src="/images/manshokuya/Coin-Machine.png"
+                        fill
+                        quality={90}
+                        priority
+                        alt="Gocha Texture"
+                      />
+                    </AspectRatio>
+                  </Reset>
                   <div
                     className="absolute top-0 right-0 bottom-0"
                     style={{
