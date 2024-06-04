@@ -235,7 +235,7 @@ function Page() {
                   paddingRight: "9.86%",
                 }}
               >
-                <TrackLink
+                {/* <TrackLink
                   game="Manshokuya"
                   href="https://www.facebook.com/manshokuya/posts/pfbid0ckDKfR18mxA97FCX2sXjJPdHXRc8kuzystM7sjpJ4x3rjxPQqkzHSnf7XuFqvvEol"
                 >
@@ -246,12 +246,14 @@ function Page() {
                       alt={"Game Rule"}
                     />
                   </AspectRatio>
-                </TrackLink>
+                </TrackLink> */}
                 <div
-                  className="flex w-full items-center"
-                  style={{
-                    paddingTop: "3%",
-                  }}
+                  className="flex w-full items-center pb-12 md:pb-24"
+                  style={
+                    {
+                      // paddingTop: "3%",
+                    }
+                  }
                 >
                   <div
                     className="flex-1"
@@ -330,10 +332,7 @@ function Page() {
 
             <GachaCard className="mb-12 md:mb-24">
               <div className="text-center p-4 text-sm md:text-lg">
-                首次參加活動時，您將獲得一次扭蛋機會。隨後您可以將活動圖片和鏈結分享到社交媒體上。
-                <br />
-                <br />
-                每位新用戶參與活動後，您將獲得額外的一次扭蛋機會。
+                每人有一次參加扭蛋的機會，扭蛋完結後可拍照記錄下已獲得的獎品的優惠碼。
               </div>
             </GachaCard>
 
@@ -388,14 +387,10 @@ function Page() {
             </div>
             <GachaCard>
               <div className="text-center p-4 text-sm md:text-lg">
-                當您獲得大獎時，您將透過簡訊收到獲獎通知。
-                通知中會包含一個獨特的折扣代碼，您可以將代碼展示給參與活動的商家以享受折扣優惠。
+                扭蛋完結後可拍照記錄下已獲得的獎品的優惠碼，您可以將代碼展示給參與活動的商家以享受折扣優惠。
+                <br />
+                <br />
                 商家可能要求您在結帳時出示通知或提供折扣代碼以驗證您的資格，並將相應的折扣應用於您的購買。
-                <br />
-                <br />
-                對於其他獎品，您可以在領獎頁面上找到折扣代碼。
-                一旦您點擊並查看扭蛋，您將看到您所獲得獎品的詳細信息，包括折扣代碼和相關使用說明。
-                您可以按照指示使用折扣代碼，在參與活動的商家享受相應的折扣優惠。
                 <br />
                 <br />
                 請注意，每個折扣代碼通常只能在一次購買中使用，並且可能有特定的有效期限。
@@ -407,7 +402,7 @@ function Page() {
               href="https://www.facebook.com/manshokuya"
             >
               <FacebookButton className="text-center mt-6 py-1 text-lg font-bold text-outlined cursor-pointer">
-                萬食屋 Facebook 專頁
+                商家 Facebook 專頁
               </FacebookButton>
             </TrackLink>
             <TrackLink
@@ -415,7 +410,7 @@ function Page() {
               href="https://www.instagram.com/manshokuya"
             >
               <InstagramButton className="text-center mt-3 py-1 text-lg font-bold text-outlined cursor-pointer">
-                萬食屋 Instagram 專頁
+                商家 Instagram 專頁
               </InstagramButton>
             </TrackLink>
             <div className="text-center pb-12 mt-4">
@@ -442,17 +437,19 @@ function Page() {
           overlay
           onClose={onAsk4PhoneClose}
         >
-          <div className="flex items-center justify-center flex-col">
-            <p className="text-xl mb-4">
-              Scan this QR code or visit the website to access your game
-              account.
+          <div className="flex items-center justify-center flex-col max-w-screen-lg mx-auto gap-6">
+            <p className="text-xl py-3">
+              https://travel3exp.xyz/manshokuya?sessionId={userId}
             </p>
             <QRCode
               value={`https://travel3exp.xyz/manshokuya?sessionId=${userId}`}
               size={256}
             />
-            <p className="text-xl py-3 text-green-800">
-              https://travel3exp.xyz/manshokuya?sessionId={userId}
+            <p className="text-xl mb-4">
+              扭蛋完結後可拍照記錄下已獲得的獎品的優惠碼，您可以將代碼展示給參與活動的商家以享受折扣優惠。
+              商家可能要求您在結帳時出示通知或提供折扣代碼以驗證您的資格，並將相應的折扣應用於您的購買。
+              請注意，每個折扣代碼通常只能在一次購買中使用，並且可能有特定的有效期限。
+              因此，請確保在使用折扣之前閱讀並理解相關的使用條款和條件。
             </p>
           </div>
           {/* <SignUpForm onDone={onAsk4PhoneClose} /> */}

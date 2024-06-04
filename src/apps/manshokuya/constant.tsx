@@ -19,7 +19,7 @@ export const Coupons = [
     ballOpened: "/images/manshokuya/Ball-Open-01.png",
     ballRatio: 2048 / 1831,
     description:
-      '價值$200 "精選炸物拼盤"一份，"精選炸物拼盤"，價值$200，內容物有日式炸雞10件、手作芝士薯波20個、日式炸蝦8件、日式炸餃子10件，以及日式吉列蠔8件。活動截止日期 2024年7月31日。',
+      '價值$200 "精選炸物拼盤"一份，"精選炸物拼盤"，價值$200，內容物有日式炸雞10件、手作芝士薯波20個、日式炸蝦8件、日式炸餃子10件，以及日式吉列蠔8件。活動截止日期 2024年6月5日。',
     // auth: true,
   },
   {
@@ -30,7 +30,7 @@ export const Coupons = [
     ballOpened: "/images/manshokuya/Ball-Open-02.png",
     ballRatio: 2048 / 1997,
     avatar: "/images/manshokuya/Avatar-02.png",
-    description: "優惠劵使用截止日期 2024年2月28日。",
+    description: "優惠劵使用截止日期 2024年6月5日。",
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ export const Coupons = [
     ballOpened: "/images/manshokuya/Ball-Open-03.png",
     ballRatio: 2048 / 1997,
     avatar: "/images/manshokuya/Avatar-03.png",
-    description: "優惠劵使用截止日期 2024年2月28日。",
+    description: "優惠劵使用截止日期 2024年6月5日。",
   },
   {
     id: 4,
@@ -50,8 +50,7 @@ export const Coupons = [
     ballOpened: "/images/manshokuya/Ball-Open-04.png",
     ballRatio: 2048 / 1997,
     avatar: "/images/manshokuya/Avatar-04.png",
-    description:
-      "換領截止日期為2024年2月28日，每個手機號碼僅限換取一罐生可樂。",
+    description: "換領截止日期為2024年6月5日，每個手機號碼僅限換取一罐生可樂。",
     // auth: true,
   },
 ];
