@@ -13,7 +13,7 @@ import Meta from "@/components/Meta";
 import GachaCard from "@/apps/manshokuya/components/GachaCard";
 import SplashScreen from "@/apps/manshokuya/components/SplashScreen";
 import styled from "styled-components";
-import { Business, Coupons, TC } from "@/apps/manshokuya/constant";
+import { Coupons, TC } from "@/apps/manshokuya/constant";
 import dynamic from "next/dynamic";
 import { BaseGachaBall } from "@/apps/manshokuya/components/GachaBall";
 import {
@@ -133,9 +133,9 @@ function Page() {
     });
   };
 
-  const shareURL = useMemo(() => {
-    return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
-  }, [userId]);
+  // const shareURL = useMemo(() => {
+  //   return `https://travel3exp.xyz/manshokuya?referral=${userId}`;
+  // }, [userId]);
 
   // const handleShare = async () => {
   //   if (navigator.share) {
