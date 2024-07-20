@@ -10,6 +10,9 @@ const nextConfig = {
     deviceSizes: [768],
     imageSizes: [96],
   },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
   async headers() {
     return [
       {

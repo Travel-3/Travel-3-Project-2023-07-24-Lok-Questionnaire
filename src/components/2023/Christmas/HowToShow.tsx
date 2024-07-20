@@ -73,6 +73,7 @@ function HowToShare() {
   const handleCopy = useCallback(() => {
     copy(shareUrl);
     updateStatus("isCopied", true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shareUrl]);
 
   const handleShare = useCallback(async () => {
@@ -88,6 +89,7 @@ function HowToShare() {
         "將您的專屬聖誕貓貓結果分享到您的Facebook和Instagram帳戶上，讓您的朋友們也參與其中。",
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shareUrl]);
 
   return (

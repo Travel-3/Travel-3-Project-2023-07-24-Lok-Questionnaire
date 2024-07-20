@@ -43,43 +43,12 @@ const Input = styled.input`
 const Hint = styled.div`
   font-size: 14px;
   margin-bottom: 4px;
-  /* font-weight: 700; */
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Helvetica Neue,
-    Arial,
-    Noto Sans,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
 `;
 
 const PolicyLink = styled.div`
   font-size: 14px;
   margin-bottom: 10px;
   text-decoration: underline;
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Helvetica Neue,
-    Arial,
-    Noto Sans,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
 `;
 
 export default function SignUpForm() {
@@ -107,9 +76,9 @@ export default function SignUpForm() {
   const handleSubmit = useCallback(() => {
     if (phone.length === 0) return alert("請輸入電話號碼");
 
-    const referral = localStorage.getItem("referral") || "";
+    // const referral = localStorage.getItem("referral") || "";
     Track.track("Demo", "FINISH", {
-      ref: referral ?? undefined,
+      // ref: referral ?? undefined,
       score,
       name,
       phone,
@@ -118,7 +87,7 @@ export default function SignUpForm() {
     localStorage.setItem("done", "true");
     alert("參與成功");
     setIsOpen(false);
-  }, [phone, region]);
+  }, [name, phone, region, score]);
 
   return (
     <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>

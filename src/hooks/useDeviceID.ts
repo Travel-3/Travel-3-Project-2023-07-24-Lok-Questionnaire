@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-// import { nanoid } from "nanoid";
 import { useEffect } from "react";
 
 type State = {
@@ -21,7 +20,7 @@ export const useDeviceIDState = create(
   ),
 );
 
-function generateRandomString() {
+export function generateRandomString() {
   const randomCharA = String.fromCharCode(65 + Math.floor(Math.random() * 26));
   const randomCharB = String.fromCharCode(65 + Math.floor(Math.random() * 26));
   const randomNumber = Math.floor(Math.random() * 1000000)
@@ -30,16 +29,24 @@ function generateRandomString() {
   return randomCharA + randomCharB + randomNumber;
 }
 
-export const useDeviceID = () => {
+export const getDeviceID = () => {
+  return useDeviceIDState.getState().deviceID;
+};
+
+export const useDeviceID = (defaultId?: string) => {
   const { deviceID, setDeviceID } = useDeviceIDState();
 
   useEffect(() => {
-    if (!deviceID) {
+    // console.log("defaultId", defaultId)
+    if (defaultId) {
+      setDeviceID(defaultId);
+    } else if (!deviceID) {
       const newDeviceID = `${generateRandomString()}`;
       setDeviceID(newDeviceID);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [defaultId]);
 
+  // console.log("deviceID", deviceID, defaultId)
   return deviceID;
 };

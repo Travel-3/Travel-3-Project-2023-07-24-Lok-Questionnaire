@@ -1,8 +1,58 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Staatliches&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-m-plus {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+.font-staatliches {
+  font-family: "Staatliches", sans-serif;
+}
+
+.font-line {
+  font-family: "LINE", sans-serif;
+}
+
+.text-outlined {
+  text-shadow:
+    calc(var(--stroke-width) * 1) calc(var(--stroke-width) * 0) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * 0.3827) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.7071) calc(var(--stroke-width) * 0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.3827) calc(var(--stroke-width) * 0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0) calc(var(--stroke-width) * 1) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.3827) calc(var(--stroke-width) * 0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.7071) calc(var(--stroke-width) * 0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.9239) calc(var(--stroke-width) * 0.3827) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -1) calc(var(--stroke-width) * 0) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.9239) calc(var(--stroke-width) * -0.3827) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.7071) calc(var(--stroke-width) * -0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.3827) calc(var(--stroke-width) * -0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0) calc(var(--stroke-width) * -1) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.3827) calc(var(--stroke-width) * -0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.7071) calc(var(--stroke-width) * -0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * -0.3827) 0
+      var(--stroke-color);
+}
 
 * {
   font-family:
-    "Noto Sans JP",
+    "LINE",
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -19,11 +69,46 @@
     Noto Color Emoji;
 }
 
-body,
+/* body,
 html {
-  max-height: -webkit-fill-available;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+    font-family: 'LINE', sans-serif;
+} */
+/* 
+@font-face {
+  font-family: "LINE";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/line/LINESeedSans_W_Th.woff2") format("truetype");
+} */
+
+@font-face {
+  font-family: "LINE";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/line/LINESeedSans_W_Rg.woff2") format("truetype");
+}
+
+/* @font-face {
+  font-family: "LINE";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/line/LINESeedSans_W_He.woff2") format("truetype");
+} */
+
+@font-face {
+  font-family: "LINE";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/line/LINESeedSans_W_Bd.woff2") format("truetype");
+}
+
+.spinner {
+  --spinner-width: 2rem;
+  --spinner-height: 2rem;
+  --spinner-vertical-align: -0.125em;
+  --spinner-border-width: 0.25em;
+  --spinner-animation-speed: 0.75s;
+  --spinner-animation-name: spinner-border;
+  animation: var(--spinner-animation-speed) linear infinite
+    var(--spinner-animation-name);
 }

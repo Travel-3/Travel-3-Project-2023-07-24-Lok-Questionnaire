@@ -2,21 +2,17 @@
 import { AppProps } from "next/app";
 import Script from "next/script";
 import "./global.css";
-import "normalize.css";
-import {
-  QueryClient,
-  QueryClientProvider,
-  // useQuery,
-} from "@tanstack/react-query";
-
-const cache = new QueryClient();
+// import "normalize.css";
+import FacebookPixel from "@/components/FacebookPixel";
+import WithGame from "@/components/WithGame";
 
 function MyApp({ Component }: AppProps) {
   return (
     <>
-      <QueryClientProvider client={cache}>
+      <WithGame>
         <Component />
-      </QueryClientProvider>
+      </WithGame>
+      <FacebookPixel />
       <Script
         strategy="lazyOnload"
         src="https://www.googletagmanager.com/gtag/js?id=G-C8GGC13NV6"
